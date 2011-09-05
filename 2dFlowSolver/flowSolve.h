@@ -1,0 +1,15 @@
+vector< vector<double> > solve(int                                ref_it,
+                               double                             &lift,
+                               double                             &drag,
+                               vector< vector<double> >           &node,
+                               vector< vector<double> >           &node_ImPrt,
+                               vector< vector<int> >              &edge,
+                               vector<int>                        &info,
+                               vector<int>                        &int_input,
+                               vector<double>                     &dub_input,
+                               vector<double>                     &Qfree,
+                               vector<int>                        &node_list,
+                               vector< vector<double> >           &lambda,
+                               int                                lambdaFlag,
+                               vector< vector<double> >           &RHS_B
+                               );
