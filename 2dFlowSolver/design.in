@@ -10,7 +10,7 @@ DFlag     0       // Derefinement Flag: 1-derefine, 0-don't derefine
 SFlag     2       // Smooth Flag: 0-don't smooth, 1-winslow smooth, 2-Complex Winslow
 p         2       // Adaptation length parameter
 restart   0       // Restart Flag: 0-start from freestream, 1-start from restart file
-AgFlag    0       // Aggressive refinement: 0-regular refinement, 1-aggressive 
+dummy     0       // Dummy variable
 mach      0.95    // Mach Number
 AoA       1.25    // angle of attack (in degrees) for the flow solver
 gamma     1.4     // ratio of specific heats

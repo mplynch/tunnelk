@@ -51,7 +51,7 @@ int cost(vector< vector<double> > &Q,
   lift_B = liftdrag_B[0];
   drag_B = liftdrag_B[1];
 
-#if 1
+#if 0
   w_lift = 1.0;
   w_drag = 0.0;
   lift_t = 0.106331;
@@ -62,17 +62,6 @@ int cost(vector< vector<double> > &Q,
 
   cost_B =  2.0*w_lift*(lift - lift_t)*lift_B
           + 2.0*w_drag*(drag - drag_t)*drag_B;
-
-#if 0
-  printf(" Lift        = %21.12e\n",lift);
-  printf(" target Lift = %21.12e\n",lift_t);
-  printf(" lift_B      = %21.12e\n",lift_B);
-  printf(" Drag        = %21.12e\n",drag);
-  printf(" target Drag = %21.12e\n",drag_t);
-  printf(" Drag_B      = %21.12e\n",drag_B);
-  printf(" Cost        = %21.12e\n",cost);
-  printf(" Cost_B      = %21.12e\n",cost_B);
-#endif
 
   sprintf(filename, "cost_b.txt");
   printf("\n Printing dirivative of cost to File: <%s>\n",filename);

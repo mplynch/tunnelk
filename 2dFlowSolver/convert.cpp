@@ -37,7 +37,7 @@ void convert(vector< vector<double> >        &node,
 
   vector<int> b_check(nn);
   
-  printf("\n\n Converting from .mesh format to eptr format");
+  printf("\n\n Converting from .mesh format to eptr (edge-pointer) format");
   printf("\n  Number of Nodes     = %d",nn);
   printf("\n  Number of Triangles = %d",nt);
 

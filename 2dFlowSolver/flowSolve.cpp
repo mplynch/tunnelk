@@ -1406,11 +1406,11 @@ vector< vector<double> > solve(int                                ref_it,
     if(it == 1 || it%100 == 0)
     {
       printf("\nOuter  Inner");
-      printf("\nLoop   Loops  CFL#     RMS_RHS       RMSdelQ");
+      printf("\nLoop   Loop   CFL#     RMS_RHS       RMSdelQ");
     }
  
     if(it%10 == 0)
-      printf("\n%4d %4d   %9.5f %13.6e %13.6e",it,lin_it-1,CFL,RMSout,RMSdelQ);
+      printf("\n%4d  %4d   %8.4f %13.6e %13.6e",it,lin_it-1,CFL,RMSout,RMSdelQ);
     fflush(stdout);
 
     lin_it = 1;   
@@ -1425,7 +1425,7 @@ vector< vector<double> > solve(int                                ref_it,
     kickwayout = kickout * 10.0;
   }while(it<=maxOutIt && RMSout>kickout);
   //--- End of Outer Loop ----------------------------------------------------80
-  printf("\n%4d %4d   %9.5f %13.6e %13.6e",it,lin_it-1,CFL,RMSout,RMSdelQ);
+  printf("\n%4d         %8.4f %13.6e %13.6e",it,CFL,RMSout,RMSdelQ);
   
   //--- Write Binary Restart File --------------------------------------------80
 
