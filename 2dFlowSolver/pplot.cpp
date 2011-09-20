@@ -16,11 +16,8 @@ vector<double> pplot(const char*              filename,
                      double                   alpha,
                      vector<int>              surf_node,
                      vector< vector<double> > &node,
-                     vector< vector<double> > &node_B,
                      vector< vector<double> > &Q,
-                     vector< vector<double> > &Q_B,
-                     vector<double>           &Qfree,
-                     vector<double>           &liftdrag_B) //comes in empty
+                     vector<double>           &Qfree)
 {
   printf("\nPressure Coefficient Filename = <%s>\n",filename);
 
@@ -49,14 +46,7 @@ vector<double> pplot(const char*              filename,
   double lift_pert;   // the lift from a perturbed mesh
   double drag_pert;   // the drag from a perturbed mesh
   double deltaBeta;   // the perturbation of the design variable
-  double L_B;         // dLift/dBeta (forward mode differential)
   double dLdB;        // dLift/dBeta (finite difference)
-  double spd2_B;      // derivative of speed squared w.r.t. Beta
-
-  vector<double> x_B;   // derivative of x coordinate w.r.t. Beta
-  vector<double> y_B;   // derivative of y coordinate w.r.t. Beta
-  vector<double> p_B;   // derivative of pressure w.r.t. Beta
-  vector<double> cp_B;  // derivative of pressure coefficient w.r.t. Beta
 
   snum = surf_node.size();
 
@@ -72,24 +62,15 @@ vector<double> pplot(const char*              filename,
   {
     x.push_back(node[surf_node[n]][0]);
     y.push_back(node[surf_node[n]][1]);
-
-    x_B.push_back(node_B[surf_node[n]][0]);
-    y_B.push_back(node_B[surf_node[n]][1]);
   }
 
   // IMPORTANT NOTE: n and surf_node[n] are the same in this case
   // this is not true generally
   for(n=0; n<snum; n++)
   {
-    //spd2 = (pow(Q[n][1],2) + pow(Q[n][2],2))/pow(Q[n][0],2);
     spd2 = pow(Q[n][1]/Q[n][0],2) + pow(Q[n][2]/Q[n][0],2);
     p.push_back( (gamma-1.0)*(Q[n][3]-0.5*Q[n][0]*spd2) );
     cp.push_back( (p[n] - p_inf)/(0.5*rho_inf*spd2_inf));
-
-    spd2_B = 2.0*(Q[n][1]/Q[n][0])*(Q_B[n][1]/Q[n][0] - (Q[n][1]*Q_B[n][0])/(Q[n][0]*Q[n][0]))
-           + 2.0*(Q[n][2]/Q[n][0])*(Q_B[n][2]/Q[n][0] - (Q[n][2]*Q_B[n][0])/(Q[n][0]*Q[n][0]));
-    p_B.push_back( (gamma-1.0)*(Q_B[n][3]-0.5*(Q_B[n][0]*spd2 + Q[n][0]*spd2_B)) );
-    cp_B.push_back( p_B[n] / (0.5*rho_inf*spd2_inf) );
   }
 
   if ((fp = fopen(filename,"w")) == 0)
@@ -112,26 +93,10 @@ vector<double> pplot(const char*              filename,
                               // liftdrag[0] = lift;
                               // liftdrag[1] = drag;
 
-  //--- Derivatives w.r.t. Beta ---
-  double xPlus_B, yPlus_B;  
-  double xMinus_B, yMinus_B;
-  double xHat_B, yHat_B;   
-  double xnoHat_B, ynoHat_B;   
-  double len_B;           
-  double force_B;        
-
-  vector<double> drag_B(snum);
-  vector<double> lift_B(snum);
-  //vector<double> liftdrag_B(2); // this is now an input
-  liftdrag_B.push_back(0.0);
-  liftdrag_B.push_back(0.0);
- 
   printf("\n alpha = %f degrees (%f radians)",alpha*180.0/pi,alpha);
   printf("\n Lift and Drag calculated on %d points\n",snum-1);
   liftdrag[0] = 0.0;
   liftdrag[1] = 0.0;
-  liftdrag_B[0] = 0.0;
-  liftdrag_B[1] = 0.0;
 
   for(n=1; n<snum; n++)
   {
@@ -140,17 +105,11 @@ vector<double> pplot(const char*              filename,
     {
       xPlus = (x[0]+x[n])/2.0;
       yPlus = (y[0]+y[n])/2.0;
-
-      xPlus_B = (x_B[0]+x_B[n])/2.0;
-      yPlus_B = (y_B[0]+y_B[n])/2.0;
     }
     else
     {
       xPlus = (x[n+1]+x[n])/2.0;
       yPlus = (y[n+1]+y[n])/2.0;
-
-      xPlus_B = (x_B[n+1]+x_B[n])/2.0;
-      yPlus_B = (y_B[n+1]+y_B[n])/2.0;
     }
     xMinus = (x[n]+x[n-1])/2.0;
     yMinus = (y[n]+y[n-1])/2.0;
@@ -162,137 +121,14 @@ vector<double> pplot(const char*              filename,
     yHat  = ynoHat / len;
     force = cp[n] * len;
 
-    xMinus_B = (x_B[n]+x_B[n-1])/2.0;
-    yMinus_B = (y_B[n]+y_B[n-1])/2.0;
-    xnoHat_B =   yPlus_B - yMinus_B;
-    ynoHat_B = -(xPlus_B - xMinus_B);
-    len_B = 0.5/sqrt(xnoHat*xnoHat + ynoHat*ynoHat) * (2.0*xnoHat*xnoHat_B + 2.0*ynoHat*ynoHat_B);
-
-    xHat_B  = xnoHat_B/len - (xnoHat*len_B)/(len*len);
-    yHat_B  = ynoHat_B/len - (ynoHat*len_B)/(len*len);
-    force_B = cp_B[n]*len + cp[n]*len_B;
-
-#if 0
-// This section prints out additional information for looking at finite difference
-if(n == 42)
-{
-  printf("\n");
-  printf("\nx%d    = %17.10e",n,x[n]);
-  printf("\ny%d    = %17.10e",n,y[n]);
-
-  printf("\nQ%d_0  = %17.10e",n,Q[n][0]);
-  printf("\nQ%d_1  = %17.10e",n,Q[n][1]);
-  printf("\nQ%d_2  = %17.10e",n,Q[n][2]);
-  printf("\nQ%d_3  = %17.10e",n,Q[n][3]);
-
-  printf("\np%d    = %17.10e",n,p[n]);
-  printf("\ncp%d   = %17.10e",n,cp[n]);
-
-  printf("\nxPlus  = %17.10e",xPlus);
-  printf("\nyPlus  = %17.10e",yPlus);
-  printf("\nxMinus = %17.10e",xMinus);
-  printf("\nyMinus = %17.10e",yMinus);
-  printf("\nxHat   = %17.10e",xHat);
-  printf("\nyHat   = %17.10e",yHat);
-  printf("\nlen    = %17.10e",len);
-  printf("\nforce  = %17.10e",force);
-
-  printf("\n");
-  printf("\n--- Derivatives ---");
-  printf("\nx_B%d  = %17.10e",n,x_B[n]);
-  printf("\ny_B%d  = %17.10e",n,y_B[n]);
-
-  printf("\nQ_B%d_0  = %17.10e",n,Q_B[n][0]);
-  printf("\nQ_B%d_1  = %17.10e",n,Q_B[n][1]);
-  printf("\nQ_B%d_2  = %17.10e",n,Q_B[n][2]);
-  printf("\nQ_B%d_3  = %17.10e",n,Q_B[n][3]);
-
-  printf("\np_B%d    = %17.10e",n,p_B[n]);
-  printf("\ncp_B%d   = %17.10e",n,cp_B[n]);
-
-  printf("\nxPlus_B  = %17.10e",xPlus_B);
-  printf("\nyPlus_B  = %17.10e",yPlus_B);
-  printf("\nxMinus_B = %17.10e",xMinus_B);
-  printf("\nyMinus_B = %17.10e",yMinus_B);
-  printf("\nxHat_B   = %17.10e",xHat_B);
-  printf("\nyHat_B   = %17.10e",yHat_B);
-  printf("\nlen_B    = %17.10e",len_B);
-  printf("\nforce_B  = %17.10e",force_B);
-}
-#endif
-
-  //--- Lift ---
+    //--- Lift ---
     lift[n] = -force*xHat*sin(alpha) + force*yHat*cos(alpha);
     liftdrag[0] += lift[n];
 
-    lift_B[n] = -(force_B*xHat*sin(alpha) + force*xHat_B*sin(alpha))
-               + (force_B*yHat*cos(alpha) + force*yHat_B*cos(alpha));
-    liftdrag_B[0] += lift_B[n];
-
-  //--- Drag ---
+    //--- Drag ---
     drag[n] = force*xHat*cos(alpha) + force*yHat*sin(alpha);
     liftdrag[1] += drag[n];
-
-    drag_B[n] =  (force_B*xHat*cos(alpha) + force*xHat_B*cos(alpha))
-               + (force_B*yHat*sin(alpha) + force*yHat_B*sin(alpha));
-    liftdrag_B[1] += drag_B[n];
   }
-
-#if 0
-// This section prints out additional information for looking at forward mode
-// differentials of lift and drag
-  printf("\n node  lift");
-  for(n=0; n<snum; n++)
-  {
-    //printf("\n %3d   %17.10e",n,lift[n]);
-  }
-  printf("\n");
-
-  printf("\n lift[42]   = %17.10e",lift[42]);
-  printf("\n lift[43]   = %17.10e",lift[43]);
-  printf("\n lift[44]   = %17.10e",lift[44]);
-  printf("\n Total Lift = %17.10e",liftdrag[0]);
-  printf("\n");
-  
-  printf("\n lift_B[42]   = %17.10e",lift_B[42]);
-  printf("\n lift_B[43]   = %17.10e",lift_B[43]);
-  printf("\n lift_B[44]   = %17.10e",lift_B[44]);
-  printf("\n TotalLift_B  = %17.10e",liftdrag_B[0]);
-  printf("\n");
-  printf("\n");
-
-  lift_pert = 1.5355456977e-01;
-  deltaBeta = 1.0e-7;
-  dLdB = (lift_pert - liftdrag[0]) / deltaBeta;
-
-  printf("\n");
-  printf("\n Original Lift                   = %17.10e",liftdrag[0]);
-  printf("\n Perturbed Lift                  = %17.10e",lift_pert);
-  printf("\n DL/DB (finite difference)       = %10.3e",dLdB);
-  printf("\n DL/DB (forward mode difference) = %10.3e",liftdrag_B[0]);
-  printf("\n");
-
-  printf("\n Original Drag = %17.10e",liftdrag[1]);
-  printf("\n");
-  printf("\n");
-#endif
-
-#if 0
-// Print out Qs
-printf("\n");
-for(i=0; i<4; i++)
-  printf("\n Q42_%d = %20.13e",i,Q[42][i]);
-printf("\n");
-for(i=0; i<4; i++)
-  printf("\n Q43_%d = %20.13e",i,Q[43][i]);
-printf("\n");
-for(i=0; i<4; i++)
-  printf("\n Q44_%d = %20.13e",i,Q[44][i]);
-
-printf("\n");
-exit(0);
-
-#endif
 
   //--- Plot Cp on the airfoil surfaces --------------------------------------80
   dist = 0.0;

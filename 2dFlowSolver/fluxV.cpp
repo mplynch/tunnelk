@@ -1,3 +1,7 @@
+//----------------------------------------------------------------------------80
+// Subroutine fluxV returns the viscous flux
+//----------------------------------------------------------------------------80
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -8,7 +12,6 @@ using namespace std;
  
 #include "area.h"
 
-// Subroutine fluxV returns the viscous flux
 vector<double> fluxV(int n1, int n2, int n3,
                      vector< vector<double> > &node,
                      vector< vector<double> > &Q,
@@ -54,9 +57,11 @@ vector<double> fluxV(int n1, int n2, int n3,
   u1 = Q[n1][1]/Q[n1][0]; v1 = Q[n1][2]/Q[n1][0];
   u2 = Q[n2][1]/Q[n2][0]; v2 = Q[n2][2]/Q[n2][0];
   u3 = Q[n3][1]/Q[n3][0]; v3 = Q[n3][2]/Q[n3][0];
+
   p1 = (Q[n1][3]-0.5*Q[n1][0]*(u1*u1 + v1*v1))*(gamma-1.0); 
   p2 = (Q[n2][3]-0.5*Q[n2][0]*(u2*u2 + v2*v2))*(gamma-1.0); 
   p3 = (Q[n3][3]-0.5*Q[n3][0]*(u3*u3 + v3*v3))*(gamma-1.0); 
+
   a2_1 = gamma*p1/Q[n1][0];
   a2_2 = gamma*p2/Q[n2][0];
   a2_3 = gamma*p3/Q[n3][0];

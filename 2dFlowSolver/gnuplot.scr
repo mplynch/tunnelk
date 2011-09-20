@@ -1,0 +1,10 @@
+set term post enhanced color solid "Helvetica-Bold" 14
+set output "mesh.ps"
+
+set title "{/Times-Roman=22 }" 0.0
+
+set size ratio 1.0 # y/x
+set xrange[ 0.99 : 1.01]
+set yrange[-0.01 : 0.01]
+plot "mesh_eptr.gnu" w l
+  

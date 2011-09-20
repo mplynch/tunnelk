@@ -4,6 +4,7 @@
 // Discription:
 //  Code for optimizing an airfoil
 //----------------------------------------------------------------------------80
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -21,11 +22,13 @@ using namespace std;
 #include "plot.h"
 #include "convert.h"
 #include "flowSolve.h"
+#include "designFlowSolve.h"
 #include "dCostdQ.h"
 #include "dCostdX.h"
 #include "transpose.h"
 #include "multipliers.h"
 #include "reverseMode.h"
+#include "optimization.h"
 
 double walltime()
 {
@@ -42,8 +45,6 @@ int main(int argcs, char* pArgs[])
   double start = walltime();
 
   //--- Variables ------------------------------------------------------------80
-  const double pi = 3.141592653589793;
-
   FILE *fp;
   char filename[32];
   char gnufilename[32];
@@ -60,37 +61,42 @@ int main(int argcs, char* pArgs[])
   int nn, nt, nb;       // Number of nodes, triangles and boundaries
   int nbe;              // Number of boundary edges
   int ref_it = 0;       // Refinement iteration number
-  int dnum;             // number of design variables
-  int smoothmax;        // maximum number of outer itterations for Winslow Smoother
-  int restart;          // Restart Flag:      1-use restart file, 0-start from Freestream
+  int restart;          // Restart Flag: 1-use restart file, 0-start from Freestream
+  int lambdaFlag = 1;   // Flag that specifies whether or not to calculate lambda
+  int design;           // Design flag: if 0, don't calculate design variables
 
   double x,y;           // coordinates
   double drag;          // drag on the airfoil (calculated in pplot)
   double lift;          // drag on the airfoil (calculated in pplot)
-  double baselineCost;  // The cost before the mesh is moved 
 
-  vector<int>              v0;   //generic 1D int vector
-  vector< vector<int> >    v00;  //generic 2D int vector
-  vector<double>           dv0;  //generic 1D double vector
-  vector< vector<double> > dv00; //generic 2D double vector
+  vector<int> v0;        // generic 1D int vector
+  vector<int> node_list; // list of boundary condition for each node
+  vector<int> info;      // info for the solver nn, ne, tri (including external), nbe
+  vector<int> int_input; // integer input
 
-  vector<int>    info;         // info for the solver nn, ne, tri (including external), nbe
-  vector<double> xvec;         // x coordinates of the nodes
-  vector<double> yvec;         // y coordinates of the nodes
-  vector<int>    int_input;    // integer input
-  vector<double> dub_input;    // integer input
-  vector<double> deltacost(2); // dI in the dI/dB sensitivity derivative
+  vector<double> dv0;   // generic 1D double vector
+  vector<double> Qfree; // Freestream state vector
 
-  vector< vector<int> >    tri;        // tri[nt][3]
-  vector< vector<int> >    quad;       // quads (not currently used)
-  vector< vector<int> >    edge;       // edge[ne][4] - node1, node2, tri-to-left, tri-to-right
+  vector<double> dub_input; // integer input
+  vector<double> xvec;      // x coordinates of the nodes
+  vector<double> yvec;      // y coordinates of the nodes
+
+  vector< vector<int> >    v00;  // generic 2D int vector
+  vector< vector<int> >    tri;  // tri[nt][3]
+  vector< vector<int> >    quad; // quads (not currently used)
+  vector< vector<int> >    edge; // edge[ne][4] - node1, node2, tri-to-left, tri-to-right
+
+  vector< vector<double> > dv00;       // generic 2D double vector
   vector< vector<double> > node;       // real part of node[nn][2]
   vector< vector<double> > node_ImPrt; // imaginary part of node[nn][2]
   vector< vector<double> > Q;          // state vector Q[nn][4]
   vector< vector<double> > smoothnode; // coordinates after smoothing
+  vector< vector<double> > lambda;     // Lagrange Multipliers
+  vector< vector<double> > lambda00;   // dummy Lagrange Multipliers
+  vector< vector<double> > RHS_B;      // derivtive of the Residual
+  vector< vector<double> > newxy;      // New x and y coordinates of all the nodes
 
   vector< vector< vector<int> > > bound; // boundeary information
-  vector< vector<double> >        newxy; // New x and y coordinates of all the nodes
 
   //--- Check for correct number of arguments --------------------------------80
   if (argcs != 2)
@@ -121,6 +127,12 @@ int main(int argcs, char* pArgs[])
   else
     printf("\n Starting from Restart File\n");
 
+  design = int_input[10];
+  if(design == 0)
+    printf("\n Code will not calculate design variables\n");
+  else
+    printf("\n Code will calculate design variables\n");
+
   //--- Read in 2D Mesh File in .mesh or .cmesh Format ---------------------80
   meshfile = pArgs[1];
   if(meshfile[ strlen(meshfile)-5  ] == 'c')
@@ -150,106 +162,27 @@ int main(int argcs, char* pArgs[])
   sprintf(gnufilename, "mesh_eptr.gnu");
   gplot(gnufilename, node, tri);
 
-  //--- Perform CFD on new  mesh -------------------------------------------80
-  double alpha;                        // angle of attack in degrees
-  int lambdaFlag = 1;                  // Flag that specifies whether or not to calculate lambda
-  vector<double> Qfree;                // Freestream state vector
-  vector<int> node_list;               // list of boundary condition for each node
-  vector< vector< double > > lambda;   // Lagrange Multipliers
-  vector< vector< double > > lambda00; // dummy Lagrange Multipliers
-  vector< vector<double> > RHS_B;      // derivtive of the Residual
-
-  vector< vector<double> > node_B(nn,vector<double>(2));  // derivatives of the mesh coordinates
-
-  Q = solve(ref_it, lift, drag, node, node_ImPrt, edge, info, int_input, dub_input,
-            Qfree,node_list,lambda,lambdaFlag,RHS_B);
-
-  //--- get kickout value ----------------------------------------------------80
-  double kickout;
-  sprintf(filename, "kickout.txt");
-  if((fp=fopen(filename,"r")) == NULL)
+  //--- Perform CFD and Design Optimization ----------------------------------80
+  if(design)
   {
-    printf("\nCould not open file: <%s>\n",filename); exit(0);
+    printf("\nERROR: Current version is not compiled to handle desing optimization\n\n");
+    exit(0);
+    //Q = designSolve(ref_it, lift, drag, node, node_ImPrt, edge, info, int_input, dub_input,
+    //                Qfree,node_list,lambda,lambdaFlag,RHS_B);
+    //opt01(dub_input[1]);
   }
-  fgets(buff, bdim, fp);
-  kickout = atof(buff);
-  fclose(fp);
-
-  if(kickout < 1.0e-17)
+  //--- Perform CFD only -----------------------------------------------------80
+  else
   {
-    // --- Calculate dI/dQ for the adjoint equation --------------------------80
-    printf("\n Calculating Design Derivatives using Reverse Mode");
-    int adjoint = 1;
-    if(adjoint)
-    {
-      int nDV = 3;  // number of design variables
-      int nodeNum;  // the node number
-  
-      alpha  = dub_input[1];
-      alpha = alpha*pi/180.0;
-  
-      vector< vector< double > >           I_Q;      // dI/dQ 
-      vector< double >                     I_X(nDV); // dI/dB, Q FIXED
-      vector< double >                     I_B(nDV); // dI/dB, Q FIXED
-  
-      I_Q = dCostdQ(alpha, node_list, node, Q, Qfree);
-      for(i=0; i<nDV; i++)
-      {
-        nodeNum = 42+i;
-        sprintf(filename, "naca%02d.cmesh",nodeNum);
-        node.clear();
-        node_ImPrt.clear();
-        tri.clear();
-        quad.clear();
-        bound.clear();
-        readCmplxmesh(filename, node, node_ImPrt, tri, quad, bound);
-  
-        edge.clear();
-        info.clear();
-        convert(node, tri, bound, edge, info);
-        ref_it=0;
-        Qfree.clear();
-        node_list.clear();
-        RHS_B.clear();
-  
-        lambdaFlag = 0;
-        Q = solve(ref_it, lift, drag, node, node_ImPrt, edge, info, int_input, dub_input,
-                  Qfree,node_list,lambda00,lambdaFlag,RHS_B);
-   
-        for(n=0; n<node_ImPrt.size(); n++)
-          for(j=0; j<2; j++)
-            node_B[n][j] = node_ImPrt[n][j] / 1.0e-7; // HARD CODED DELTA BETA
-  
-        I_X[i] = dCostdX(alpha, node_list, node, node_B, Q, Qfree);
-        I_B[i] = reverseMode(I_X[i], RHS_B, lambda);
-      }
-  
-      sprintf(filename, "cost_b.txt");
-      printf("\n Printing dirivative of cost to File: <%s>\n",filename);
-      if ((fp = fopen(filename,"w+")) == 0)
-      {
-        printf("\nError opening file <%s>\n",filename);
-        return(1);
-      }
-      rewind(fp);
-      printf("\n");
-      for(i=0; i<nDV; i++)
-      {
-        nodeNum = 42+i;
-        printf("\nReverse Mode Derivative for node %d = %17.10e",nodeNum,I_B[i]);
-        fprintf(fp,"%21.12e\n",I_B[i]);
-      }
-      fclose(fp);
-  
-      printf("\n");
-    }
+    Q = solve(ref_it, lift, drag, node, node_ImPrt, edge, info, int_input, dub_input,
+              Qfree,node_list);
   }
 
   fflush(stdout);
   //--- Get End Time ---------------------------------------------------------80
   double stop = walltime();
 
-  //printf("\n Total time in seconds = %12.5e\n",stop-start);
+  printf("\n Total time in seconds = %12.5e\n",stop-start);
   printf("\n");
 
   return 0;

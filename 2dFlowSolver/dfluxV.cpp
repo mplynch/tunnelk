@@ -1,3 +1,8 @@
+//----------------------------------------------------------------------------80
+// Subroutine dfluxV returns the viscous flux Jacobians with respect to the 
+// three verticies of the triangle (dvisc1, dvisc2, dvisc3)
+//----------------------------------------------------------------------------80
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -8,8 +13,6 @@ using namespace std;
  
 #include "area.h"
 
-// Subroutine dfluxV returns the viscous flux Jacobians with respect to the 
-// three verticies of the triangle (dvisc1, dvisc2, dvisc3)
 void dfluxV(int n1, int n2, int n3,
             vector< vector<double> > &node,
             vector< vector<double> > &Q,

@@ -8,8 +8,4 @@ vector< vector<double> > solve(int                                ref_it,
                                vector<int>                        &int_input,
                                vector<double>                     &dub_input,
                                vector<double>                     &Qfree,
-                               vector<int>                        &node_list,
-                               vector< vector<double> >           &lambda,
-                               int                                lambdaFlag,
-                               vector< vector<double> >           &RHS_B
-                               );
+                               vector<int>                        &node_list);

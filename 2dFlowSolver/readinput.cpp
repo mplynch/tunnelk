@@ -21,7 +21,7 @@ dub_input.clear();
   int ival;
   double val=999;
 
-  sprintf(infile, "design.in");
+  sprintf(infile, "input.in");
 
   //--- Open input file for reading -------------------------------------------80
   if((fp=fopen(infile,"r")) == NULL)

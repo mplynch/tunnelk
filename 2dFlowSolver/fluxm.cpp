@@ -1,3 +1,7 @@
+//----------------------------------------------------------------------------80
+// Subroutine fluxm returns f_minus
+//----------------------------------------------------------------------------80
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -6,7 +10,6 @@
  
 using namespace std;
 
-// Subroutine fluxm returns f_minus
 vector<double> fluxm(vector<double> Q,double nx, double ny, double len)
 {
   double rho, u, v, e, p, gamma, c, Ubar;
