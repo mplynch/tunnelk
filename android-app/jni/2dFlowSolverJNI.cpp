@@ -9,6 +9,8 @@ extern "C" {
 
 JNIEXPORT int JNICALL Java_com_googlecode_tunnelk_FlowSolver2d_init(JNIEnv* env, jobject obj, jint arg)
 {
+   extern int run();
+   run();
    return arg+42;
 }
 
