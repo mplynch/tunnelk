@@ -38,7 +38,7 @@ double walltime()
          (double)(tp.tv_sec)+(double)(tp.tv_usec)*1.0e-6 : 0.0;
 }
 
-int main(int argcs, char* pArgs[])
+int run()
 { 
   printf("\n ------ Starting solve.exe ------ \n");
   //--- Get Start Time -------------------------------------------------------80
@@ -98,16 +98,6 @@ int main(int argcs, char* pArgs[])
 
   vector< vector< vector<int> > > bound; // boundeary information
 
-  //--- Check for correct number of arguments --------------------------------80
-  if (argcs != 2)
-  {
-    printf("\nUsage:");
-    printf("\nrefine.exe  2D_Mesh_Filer \n\n");
-    exit(0);
-  }
-
-  fflush(stdout);
-
   //--- Read in information from design.in -----------------------------------80
   readinput(int_input, dub_input);
 
@@ -134,7 +124,7 @@ int main(int argcs, char* pArgs[])
     printf("\n Code will calculate design variables\n");
 
   //--- Read in 2D Mesh File in .mesh or .cmesh Format ---------------------80
-  meshfile = pArgs[1];
+  meshfile = "naca0012.mesh";
   if(meshfile[ strlen(meshfile)-5  ] == 'c')
   {
     printf("\n Reading in COMPLEX mesh \n");
