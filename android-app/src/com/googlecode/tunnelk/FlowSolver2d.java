@@ -2,7 +2,7 @@ package com.googlecode.tunnelk;
 
 public class FlowSolver2d
 {
-    public native int init(int arg);
+    public native int init(int arg, String filename, long offset, long fileSize);
 
     public native String getmsg();
     

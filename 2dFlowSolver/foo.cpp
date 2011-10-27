@@ -2,16 +2,14 @@
 #include <stdlib.h>
 #include <string.h>
 
-int foo(int bar, char** message)
+int foo(int bar, const char* filename, long offset, long length, char** message)
 {
 	const int BUFFSIZE = 100;
 	static char buffer[BUFFSIZE] = { "ERROR: Throw me down." };
 
-	if (FILE* fp = fopen("input.in", "r")) {
-
-		while(!feof(fp)) {
-			fgets(buffer, BUFFSIZE, fp);
-		}
+	if (FILE* fp = fopen(filename, "r")) {
+                fseek(fp,offset,SEEK_SET);
+		fgets(buffer, BUFFSIZE, fp);
 
 		fclose(fp);
 	}
