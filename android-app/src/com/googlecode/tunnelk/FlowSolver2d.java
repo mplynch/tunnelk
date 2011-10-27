@@ -4,6 +4,8 @@ public class FlowSolver2d
 {
     public native int init(int arg);
 
+    public native String getmsg();
+    
     public native int step();
 
     static {

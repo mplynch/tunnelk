@@ -16,6 +16,7 @@ public class TunnelkInitialActivity extends Activity
         
         FlowSolver2d solver = new FlowSolver2d();
         message = "init = " + Integer.toString(solver.init(42));
+        message += "\nmsg = " + solver.getmsg();
         message += "\nstep = " + Integer.toString(solver.step());
         message += "\nstep = " + Integer.toString(solver.step());
         message += "\nstep = " + Integer.toString(solver.step());
