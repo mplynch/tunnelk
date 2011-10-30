@@ -100,6 +100,9 @@ int run()
 
   //--- Read in information from design.in -----------------------------------80
   readinput(int_input, dub_input);
+  extern char* msg;
+  msg = "there";
+  //return 0;
 
   if(int_input[0] == 1)
     printf("\n Case is first order accurate");
@@ -124,8 +127,10 @@ int run()
     printf("\n Code will calculate design variables\n");
 
   //--- Read in 2D Mesh File in .mesh or .cmesh Format ---------------------80
-  meshfile = "naca0012.mesh";
-  if(meshfile[ strlen(meshfile)-5  ] == 'c')
+  //meshfile = "naca0012.mesh";
+  extern const char* mesh_filename;
+  meshfile = (char*)mesh_filename;
+  if(false && meshfile[ strlen(meshfile)-5  ] == 'c')
   {
     printf("\n Reading in COMPLEX mesh \n");
     readCmplxmesh(meshfile, node, node_ImPrt, tri, quad, bound);
@@ -141,6 +146,9 @@ int run()
       node_ImPrt.push_back(dv0);
   }
 
+  msg = "everywhere";
+  //return 0;
+
   nn = node.size();
   nt = tri.size();
   nb = bound.size();
@@ -155,6 +163,9 @@ int run()
   gplot(gnufilename, node, tri);
 #endif
 // </tunnelk modification>
+
+  msg = "almost there";
+  //return 0;
 
   //--- Perform CFD and Design Optimization ----------------------------------80
   if(design)
@@ -178,6 +189,8 @@ int run()
 
   printf("\n Total time in seconds = %12.5e\n",stop-start);
   printf("\n");
+
+  msg = "done!";
 
   return 0;
 }

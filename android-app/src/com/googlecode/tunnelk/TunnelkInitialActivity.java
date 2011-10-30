@@ -34,7 +34,7 @@ public class TunnelkInitialActivity extends Activity
         // Get the offset and length for the file that is in the assets folder
         AssetManager assetManager = getAssets();
         try {
-            AssetFileDescriptor assFD = assetManager.openFd( "input.in.png" );
+            AssetFileDescriptor assFD = assetManager.openFd( "naca0012.mesh.png" );
             if( assFD != null ) {
                 offset = assFD.getStartOffset();
                 fileSize = assFD.getLength();

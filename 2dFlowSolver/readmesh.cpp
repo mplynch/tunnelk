@@ -41,6 +41,9 @@ void readmesh(char* filename,
   }
   printf(" Reading Mesh File: %s",filename);
 
+  extern long mesh_offset;
+  fseek(fp, mesh_offset, SEEK_SET);
+
   //--- Read in Nodes --------------------------------------------------------80
   fgets(buff,bdim,fp); // Node Header text from file
   fgets(buff,bdim,fp); // Line containing number of grid points
