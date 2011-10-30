@@ -54,6 +54,7 @@ public class TunnelkInitialActivity extends Activity
         message += "\noffset = " + Long.toString(offset);
         
         TextView tv = new TextView(this);
+        tv.setHorizontallyScrolling(true);
         tv.setText(message);
         setContentView(tv);
     }
