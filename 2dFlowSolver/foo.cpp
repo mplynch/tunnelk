@@ -3,21 +3,6 @@
 #include <string.h>
 #include <string>
 
-char* msg = 0;
-const char* mesh_filename = 0;
-long mesh_offset = 0;
-
-int foo(int bar, const char* filename, long offset, long length, std::string& message)
-{
-	message = "here";
-	mesh_filename = filename;
-	mesh_offset = offset;
-	extern int run();
-	run();
-	if (msg) message = msg;
-}
-
-/*
 int foo(int bar, const char* filename, long offset, long length, std::string& message)
 {
 	const int BUFFSIZE = 128;
@@ -39,7 +24,6 @@ int foo(int bar, const char* filename, long offset, long length, std::string& me
 
 	return bar+3;
 }
-*/
 
 /*
 int main()

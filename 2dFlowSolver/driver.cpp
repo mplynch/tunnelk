@@ -100,9 +100,6 @@ int run()
 
   //--- Read in information from design.in -----------------------------------80
   readinput(int_input, dub_input);
-  extern char* msg;
-  msg = "there";
-  //return 0;
 
   if(int_input[0] == 1)
     printf("\n Case is first order accurate");
@@ -146,9 +143,6 @@ int run()
       node_ImPrt.push_back(dv0);
   }
 
-  msg = "everywhere";
-  //return 0;
-
   nn = node.size();
   nt = tri.size();
   nb = bound.size();
@@ -164,9 +158,6 @@ int run()
 #endif
 // </tunnelk modification>
 
-  msg = "almost there";
-  //return 0;
-
   //--- Perform CFD and Design Optimization ----------------------------------80
   if(design)
   {
@@ -179,8 +170,8 @@ int run()
   //--- Perform CFD only -----------------------------------------------------80
   else
   {
-    Q = solve(ref_it, lift, drag, node, node_ImPrt, edge, info, int_input, dub_input,
-              Qfree,node_list);
+//    Q = solve(ref_it, lift, drag, node, node_ImPrt, edge, info, int_input, dub_input,
+//              Qfree,node_list);
   }
 
   fflush(stdout);
@@ -190,7 +181,9 @@ int run()
   printf("\n Total time in seconds = %12.5e\n",stop-start);
   printf("\n");
 
-  msg = "done!";
+  extern std::string message;
+  message = "ran through driver.cpp, w/o actually\n"
+            "calling solve()";
 
   return 0;
 }

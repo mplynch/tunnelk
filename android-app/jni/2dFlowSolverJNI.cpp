@@ -10,15 +10,22 @@ extern "C" {
    JNIEXPORT int JNICALL Java_com_googlecode_tunnelk_FlowSolver2d_step(JNIEnv* env, jobject obj);
 };
 
-static std::string message;
+std::string message;
+const char* mesh_filename = 0;
+long mesh_offset = 0;
 
 JNIEXPORT int JNICALL Java_com_googlecode_tunnelk_FlowSolver2d_init(JNIEnv* env, jobject obj, jint arg,
                                                                     jstring filename, jlong offset, jlong length)
 {
-   extern int foo(int, const char*, long, long, std::string&);
    jboolean iscopy;
-   const char *mfile = env->GetStringUTFChars(filename,&iscopy);
-   return foo(arg, mfile, offset, length, message);
+
+   mesh_filename = env->GetStringUTFChars(filename, &iscopy);
+   mesh_offset = offset;
+
+   extern int run();
+   run();
+
+   return 0;
 }
 
 JNIEXPORT jstring Java_com_googlecode_tunnelk_FlowSolver2d_getmsg(JNIEnv* env, jobject obj)
