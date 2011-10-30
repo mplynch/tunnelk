@@ -150,7 +150,11 @@ int run()
   //--- Create Gnuplot File of mesh ---
   printf("\n Generting Gnuplot File to verify convertion");
   sprintf(gnufilename, "mesh_eptr.gnu");
+// <tunnelk modification>
+#if 0
   gplot(gnufilename, node, tri);
+#endif
+// </tunnelk modification>
 
   //--- Perform CFD and Design Optimization ----------------------------------80
   if(design)

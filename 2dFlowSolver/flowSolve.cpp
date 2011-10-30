@@ -414,6 +414,8 @@ printf("\n\n GOODBYE \n\n"); CHECKPT; exit(1);
       Q.push_back(v1d);
     v1d.clear();
   
+// <tunnelk modification>
+#if 0
     sprintf(filename, "smoothConverged.dat");
     if((fp=fopen(filename,"rb")) == NULL)
     {
@@ -427,6 +429,8 @@ printf("\n\n GOODBYE \n\n"); CHECKPT; exit(1);
   
     fclose(fp);
     printf("\n Restart file: <%s>\n",filename);
+#endif
+// </tunnelk modification>
   }
   else
   {
@@ -1163,6 +1167,8 @@ printf("\n\n GOODBYE \n\n"); CHECKPT; exit(1);
   printf("\n");
   printf("\n writing out restart file: <%s>\n",filename);
 
+// <tunnelk modification>
+#if 0
   fp=fopen(filename,"wb"); //"wb" - write binary
 
   for(n=0; n<nn; n++)
@@ -1170,11 +1176,17 @@ printf("\n\n GOODBYE \n\n"); CHECKPT; exit(1);
       fwrite(&Q[n][i], sizeof(double), 1, fp);
   
   fclose(fp);
+#endif
+// </tunnelk modification>
 
   //--- Generate Tecplot file with grid and solution -------------------------80
   char tplotfile[32];
   sprintf(tplotfile, "solution.dat");
+// <tunnelk modification>
+#if 0
   tplot(tplotfile, xvec, yvec, Q, intri);
+#endif
+// </tunnelk modification>
 
   //--- Generate Plot of Pressure Coeficients on the Solid Surface -----------80
   vector< vector<double> > surf_node; // x,y coordinates of nodes on a solid surface
