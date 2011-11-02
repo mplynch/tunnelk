@@ -30,19 +30,17 @@
 	        android:layout_below="@id/setAirfoilShape"
 	        android:text="Rotate Shape"
 	    />
+		<Button
+	        android:id="@+id/simulate"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:text="Simulate"
+	    />
     </LinearLayout>
     <TextView
         android:id="@+id/solverOutput"
         android:layout_toRightOf="@id/mainButtonLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-    />
-    <Button
-        android:id="@+id/simulate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/solverOutput"
-        android:layout_centerHorizontal="true"
-        android:text="Simulate"
     />
 </RelativeLayout>
