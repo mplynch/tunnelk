@@ -170,8 +170,8 @@ int run()
   //--- Perform CFD only -----------------------------------------------------80
   else
   {
-//    Q = solve(ref_it, lift, drag, node, node_ImPrt, edge, info, int_input, dub_input,
-//              Qfree,node_list);
+    Q = solve(ref_it, lift, drag, node, node_ImPrt, edge, info, int_input, dub_input,
+              Qfree,node_list);
   }
 
   fflush(stdout);
