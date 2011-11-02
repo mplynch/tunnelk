@@ -53,9 +53,9 @@ public class TunnelkInitialActivity extends Activity
         message += "\n\nlength = " + Long.toString(fileSize);
         message += "\noffset = " + Long.toString(offset);
         
-        TextView tv = new TextView(this);
+        setContentView(R.layout.main);
+        TextView tv = (TextView) findViewById(R.id.solverOutput);
         tv.setHorizontallyScrolling(true);
         tv.setText(message);
-        setContentView(tv);
     }
 }
