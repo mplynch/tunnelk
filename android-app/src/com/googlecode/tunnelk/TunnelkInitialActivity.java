@@ -1,16 +1,10 @@
 package com.googlecode.tunnelk;
 
-import java.io.IOException;
-
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
-import android.content.res.AssetFileDescriptor;
-import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.widget.TextView;
@@ -24,47 +18,12 @@ public class TunnelkInitialActivity extends Activity
     {
         super.onCreate(savedInstanceState);
 
-        String message;
-        String apkFilePath = null;
-        long offset = -1;
-        long fileSize = -1;
-        ApplicationInfo appInfo = null;
-        PackageManager packMgmr = getPackageManager();
-        try
-        {
-            appInfo = packMgmr.getApplicationInfo( "com.googlecode.tunnelk", 0 );
-            apkFilePath = appInfo.sourceDir;
-        }
-        catch( PackageManager.NameNotFoundException e){
-        }
-        // Get the offset and length for the file that is in the assets folder
-        AssetManager assetManager = getAssets();
-        try {
-            AssetFileDescriptor assFD = assetManager.openFd( "naca0012.mesh.png" );
-            if( assFD != null ) {
-                offset = assFD.getStartOffset();
-                fileSize = assFD.getLength();
-                assFD.close();
-            }
-        }
-        catch( IOException e) {}
-
-        FlowSolver2d solver = new FlowSolver2d();
-        message = "init = " + Integer.toString(solver.init(42,apkFilePath,offset,fileSize));
-        message += "\nmsg = " + solver.getmsg();
-        message += "\nstep = " + Integer.toString(solver.step());
-        message += "\nstep = " + Integer.toString(solver.step());
-        message += "\nstep = " + Integer.toString(solver.step());
-
-        message += "\n\nlength = " + Long.toString(fileSize);
-        message += "\noffset = " + Long.toString(offset);
-
         doBindService();
         
         setContentView(R.layout.main);
         TextView tv = (TextView) findViewById(R.id.solverOutput);
         tv.setHorizontallyScrolling(true);
-        tv.setText(message);
+        tv.setText("service technology");
     }
     
     @SuppressWarnings("unused")

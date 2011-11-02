@@ -1,10 +1,16 @@
 package com.googlecode.tunnelk;
 
+import java.io.IOException;
+
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.content.res.AssetFileDescriptor;
+import android.content.res.AssetManager;
 import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
@@ -40,7 +46,45 @@ public class LocalService extends Service {
 			@Override
 			public void run() {
 
-				showSolverCompletedNotification();
+				String message;
+				String apkFilePath = null;
+				long offset = -1;
+				long fileSize = -1;
+				ApplicationInfo appInfo = null;
+				PackageManager packMgmr = getPackageManager();
+				try {
+					appInfo = packMgmr.getApplicationInfo(
+							"com.googlecode.tunnelk", 0);
+					apkFilePath = appInfo.sourceDir;
+				} catch (PackageManager.NameNotFoundException e) {
+				}
+				// Get the offset and length for the file that is in the assets
+				// folder
+				AssetManager assetManager = getAssets();
+				try {
+					AssetFileDescriptor assFD = assetManager
+							.openFd("naca0012.mesh.png");
+					if (assFD != null) {
+						offset = assFD.getStartOffset();
+						fileSize = assFD.getLength();
+						assFD.close();
+					}
+				} catch (IOException e) {
+				}
+
+				FlowSolver2d solver = new FlowSolver2d();
+				message = "init = "
+						+ Integer.toString(solver.init(42, apkFilePath, offset,
+								fileSize));
+				message += "\nmsg = " + solver.getmsg();
+				message += "\nstep = " + Integer.toString(solver.step());
+				message += "\nstep = " + Integer.toString(solver.step());
+				message += "\nstep = " + Integer.toString(solver.step());
+
+				message += "\n\nlength = " + Long.toString(fileSize);
+				message += "\noffset = " + Long.toString(offset);
+
+				showSolverCompletedNotification(message);
 			}
 		};
 
@@ -102,7 +146,7 @@ public class LocalService extends Service {
 	/**
 	 * Show a notification while this service is running.
 	 */
-	private void showSolverCompletedNotification() {
+	private void showSolverCompletedNotification(String message) {
 		// In this sample, we'll use the same text for the ticker and the
 		// expanded notification
 		CharSequence text = "Solver Completed."; // getText(R.string.local_service_started);
@@ -117,7 +161,7 @@ public class LocalService extends Service {
 				new Intent(this, TunnelkInitialActivity.class), 0);
 
 		// Set the info for the views that show in the notification panel.
-		notification.setLatestEventInfo(this, "Testing 4, 5, 6", text,
+		notification.setLatestEventInfo(this, message, text,
 				contentIntent);
 
 		// Send the notification.
