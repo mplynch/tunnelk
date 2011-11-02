@@ -17,6 +17,8 @@ public class LocalService extends Service {
 	// We use it on Notification start, and to cancel it.
 	private int NOTIFICATION = 42; // R.string.local_service_started;
 
+	private Thread solverThread = null;
+
 	/**
 	 * Class for clients to access. Because we know this service always runs in
 	 * the same process as its clients, we don't need to deal with IPC.
@@ -34,6 +36,15 @@ public class LocalService extends Service {
 		// Display a notification about us starting. We put an icon in the
 		// status bar.
 		showNotification();
+		solverThread = new Thread() {
+			@Override
+			public void run() {
+
+				showSolverCompletedNotification();
+			}
+		};
+
+		solverThread.start();
 	}
 
 	@Override
@@ -73,7 +84,7 @@ public class LocalService extends Service {
 
 		// Set the icon, scrolling text and timestamp
 		Notification notification = new Notification(R.drawable.stat_sample,
-		text, System.currentTimeMillis());
+				text, System.currentTimeMillis());
 
 		// The PendingIntent to launch our activity if the user selects this
 		// notification
@@ -82,6 +93,31 @@ public class LocalService extends Service {
 
 		// Set the info for the views that show in the notification panel.
 		notification.setLatestEventInfo(this, "Testing 1, 2, 3", text,
+				contentIntent);
+
+		// Send the notification.
+		mNM.notify(NOTIFICATION, notification);
+	}
+
+	/**
+	 * Show a notification while this service is running.
+	 */
+	private void showSolverCompletedNotification() {
+		// In this sample, we'll use the same text for the ticker and the
+		// expanded notification
+		CharSequence text = "Solver Completed."; // getText(R.string.local_service_started);
+
+		// Set the icon, scrolling text and timestamp
+		Notification notification = new Notification(R.drawable.stat_sample,
+				text, System.currentTimeMillis());
+
+		// The PendingIntent to launch our activity if the user selects this
+		// notification
+		PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
+				new Intent(this, TunnelkInitialActivity.class), 0);
+
+		// Set the info for the views that show in the notification panel.
+		notification.setLatestEventInfo(this, "Testing 4, 5, 6", text,
 				contentIntent);
 
 		// Send the notification.
