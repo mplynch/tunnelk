@@ -1,12 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mainLayout"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_height="wrap_content"
     >
-    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/mainButtonLayout"
+        >
+	    <Button
+	        android:id="@+id/setTunnelConditions"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:text="Set Tunnel Conditions"
+	    />
+	    <Button
+	        android:id="@+id/setAirfoilShape"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@id/setTunnelConditions"
+	        android:text="Set Airfoil Shape"
+	    />
+	    <Button
+	        android:id="@+id/rotateShape"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@id/setAirfoilShape"
+	        android:text="Rotate Shape"
+	    />
+    </LinearLayout>
+    <TextView
         android:id="@+id/solverOutput"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_toRightOf="@id/mainButtonLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
     />
-</LinearLayout>
+    <Button
+        android:id="@+id/simulate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/solverOutput"
+        android:layout_centerHorizontal="true"
+        android:text="Simulate"
+    />
+</RelativeLayout>
