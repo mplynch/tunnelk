@@ -1,12 +1,19 @@
 package com.googlecode.tunnelk;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.SystemClock;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -21,14 +28,38 @@ public class TunnelkInitialActivity extends Activity
         super.onCreate(savedInstanceState);
         
         setContentView(R.layout.main);
-        TextView tv = (TextView) findViewById(R.id.solverOutput);
-        tv.setHorizontallyScrolling(true);
-        tv.setText("service technology");
+        final TextView tv = (TextView) findViewById(R.id.solverOutput);
+
+        final Handler mHandler = new Handler();
+
+        final Runnable readFileTask = new Runnable() {
+            public void run() {
+               File outputDir = getDir("output",Context.MODE_WORLD_READABLE);
+               File solverFile = new File(outputDir,"2dflowsolver_output.txt");
+               StringBuilder text = new StringBuilder();
+               try {
+                    BufferedReader br = new BufferedReader(new FileReader(solverFile));
+                    String line;
+
+                    while ((line = br.readLine()) != null) {
+                        text.append(line);
+                        text.append('\n');
+                    }
+                }
+                catch (IOException e) {
+                    //You'll need to add proper error handling here
+               }
+               tv.setText(text);
+               mHandler.postAtTime(this,SystemClock.uptimeMillis()+5000);
+            }
+        };
 
         final Button simulateButton = (Button) findViewById(R.id.simulate);
         simulateButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 doBindService();
+                mHandler.removeCallbacks(readFileTask);
+                mHandler.postDelayed(readFileTask, 5000);
             }
         });
     }
