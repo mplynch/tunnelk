@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,13 +19,18 @@ public class TunnelkInitialActivity extends Activity
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-
-        doBindService();
         
         setContentView(R.layout.main);
         TextView tv = (TextView) findViewById(R.id.solverOutput);
         tv.setHorizontallyScrolling(true);
         tv.setText("service technology");
+
+        final Button simulateButton = (Button) findViewById(R.id.simulate);
+        simulateButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                doBindService();
+            }
+        });
     }
     
     @SuppressWarnings("unused")
