@@ -40,6 +40,10 @@ double walltime()
 
 int run()
 { 
+  extern const char* stdout_filename;
+  freopen(stdout_filename,"w",stdout);
+  freopen(stdout_filename,"w",stderr);
+
   printf("\n ------ Starting solve.exe ------ \n");
   //--- Get Start Time -------------------------------------------------------80
   double start = walltime();

@@ -1,11 +1,13 @@
 package com.googlecode.tunnelk;
 
 import java.io.IOException;
+import java.io.File;
 
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
@@ -71,11 +73,12 @@ public class LocalService extends Service {
 					}
 				} catch (IOException e) {
 				}
-
+                File outputDir = getDir("output",Context.MODE_WORLD_READABLE);
+                File outputFile = new File(outputDir,"2dflowsolver_output.txt");
 				FlowSolver2d solver = new FlowSolver2d();
 				message = "init = "
-						+ Integer.toString(solver.init(42, apkFilePath, offset,
-								fileSize));
+						+ Integer.toString(solver.init(42, apkFilePath,
+								outputFile.getAbsolutePath(), offset,fileSize));
 				message += "\nmsg = " + solver.getmsg();
 				message += "\nstep = " + Integer.toString(solver.step());
 				message += "\nstep = " + Integer.toString(solver.step());
