@@ -23,6 +23,7 @@
 	        android:layout_height="wrap_content"
 	        android:layout_below="@id/setTunnelConditions"
 	        android:text="Set Airfoil Shape"
+	        android:onClick="setAirfoilShapeClicked"
 	    />
 	    <Button
 	        android:id="@+id/rotateShape"

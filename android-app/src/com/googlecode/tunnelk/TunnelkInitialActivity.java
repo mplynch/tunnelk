@@ -63,12 +63,19 @@ public class TunnelkInitialActivity extends Activity
             }
         });
     }
+
     public void setTunnelConditionsClicked(View v){
         Intent intent = new Intent();
         intent.setClass(this,SetTunnelConditionsActivity.class);
         startActivity(intent);
     }
-    
+
+    public void setAirfoilShapeClicked(View v){
+        Intent intent = new Intent();
+        intent.setClass(this,SetAirfoilShapeActivity.class);
+        startActivity(intent);
+    }
+
     @SuppressWarnings("unused")
 	private LocalService mBoundService;
 
