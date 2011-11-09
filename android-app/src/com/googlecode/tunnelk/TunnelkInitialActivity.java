@@ -76,6 +76,12 @@ public class TunnelkInitialActivity extends Activity
         startActivity(intent);
     }
 
+    public void rotateShapeClicked(View v){
+        Intent intent = new Intent();
+        intent.setClass(this,RotateShapeActivity.class);
+        startActivity(intent);
+    }
+
     @SuppressWarnings("unused")
 	private LocalService mBoundService;
 
