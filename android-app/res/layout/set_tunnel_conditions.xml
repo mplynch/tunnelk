@@ -92,4 +92,15 @@
 	        android:text="High"
 	    />
     </TableRow>
+    <TableRow>
+        <Button
+            android:id="@+id/setTunnelConditionsNextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_span="4"
+            android:onClick="nextClicked"
+            android:text="Next &gt;&gt;"
+        />
+    </TableRow>
 </TableLayout>

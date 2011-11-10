@@ -1,7 +1,9 @@
 package com.googlecode.tunnelk;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 public class SetTunnelConditionsActivity extends Activity
 {
@@ -12,5 +14,10 @@ public class SetTunnelConditionsActivity extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.set_tunnel_conditions);
 
+    }
+    public void nextClicked(View v){
+        Intent intent = new Intent();
+        intent.setClass(this,SetAirfoilShapeActivity.class);
+        startActivity(intent);
     }
 }

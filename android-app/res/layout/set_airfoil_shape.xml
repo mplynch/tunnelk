@@ -54,4 +54,15 @@
 	        android:text="Shape6"
 	    />
     </TableRow>
+    <TableRow>
+        <Button
+            android:id="@+id/setAirfoilShapeNextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_span="3"
+            android:onClick="nextClicked"
+            android:text="Next &gt;&gt;"
+        />
+    </TableRow>
 </TableLayout>
