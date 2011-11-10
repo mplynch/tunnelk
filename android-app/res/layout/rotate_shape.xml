@@ -5,6 +5,16 @@
     android:layout_height="wrap_content"
     >
     <TableRow>
+        <TextView
+            android:id="@+id/rotateShapeLabel"
+            android:text="Rotate Shape"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_span="2"
+        />
+    </TableRow>
+    <TableRow>
 	    <Button
 	        android:id="@+id/rotateCCWButton"
 	        android:layout_width="wrap_content"
