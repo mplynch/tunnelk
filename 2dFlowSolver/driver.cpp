@@ -38,8 +38,12 @@ double walltime()
          (double)(tp.tv_sec)+(double)(tp.tv_usec)*1.0e-6 : 0.0;
 }
 
-int main(int argcs, char* pArgs[])
+int run()
 { 
+  extern const char* stdout_filename;
+  freopen(stdout_filename,"w",stdout);
+  freopen(stdout_filename,"w",stderr);
+
   printf("\n ------ Starting solve.exe ------ \n");
   //--- Get Start Time -------------------------------------------------------80
   double start = walltime();
@@ -98,16 +102,6 @@ int main(int argcs, char* pArgs[])
 
   vector< vector< vector<int> > > bound; // boundeary information
 
-  //--- Check for correct number of arguments --------------------------------80
-  if (argcs != 2)
-  {
-    printf("\nUsage:");
-    printf("\nrefine.exe  2D_Mesh_Filer \n\n");
-    exit(0);
-  }
-
-  fflush(stdout);
-
   //--- Read in information from design.in -----------------------------------80
   readinput(int_input, dub_input);
 
@@ -134,8 +128,10 @@ int main(int argcs, char* pArgs[])
     printf("\n Code will calculate design variables\n");
 
   //--- Read in 2D Mesh File in .mesh or .cmesh Format ---------------------80
-  meshfile = pArgs[1];
-  if(meshfile[ strlen(meshfile)-5  ] == 'c')
+  //meshfile = "naca0012.mesh";
+  extern const char* mesh_filename;
+  meshfile = (char*)mesh_filename;
+  if(false && meshfile[ strlen(meshfile)-5  ] == 'c')
   {
     printf("\n Reading in COMPLEX mesh \n");
     readCmplxmesh(meshfile, node, node_ImPrt, tri, quad, bound);
@@ -160,7 +156,11 @@ int main(int argcs, char* pArgs[])
   //--- Create Gnuplot File of mesh ---
   printf("\n Generting Gnuplot File to verify convertion");
   sprintf(gnufilename, "mesh_eptr.gnu");
+// <tunnelk modification>
+#if 0
   gplot(gnufilename, node, tri);
+#endif
+// </tunnelk modification>
 
   //--- Perform CFD and Design Optimization ----------------------------------80
   if(design)
@@ -184,6 +184,10 @@ int main(int argcs, char* pArgs[])
 
   printf("\n Total time in seconds = %12.5e\n",stop-start);
   printf("\n");
+
+  extern std::string message;
+  message = "ran through driver.cpp, w/o actually\n"
+            "calling solve()";
 
   return 0;
 }

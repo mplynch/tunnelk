@@ -1,0 +1,32 @@
+This document describes how to build the Android application.
+
+Dependencies
+------------
+TODO
+
+Using Apache Ant 1.8 or newer
+-----------------------------
+
+- Put android-sdk-linux/tools and android-ndk-version in your path environment
+  variable
+
+  For csh/tcsh:
+
+  $ set path = ( /path/to/android-sdk-linux/tools /path/to/local/android-ndk-r6b $path ) 
+
+  or, bash:
+
+  $ export PATH=/path/to/android-sdk-linux/tools:/path/to/local/android-ndk-r6b:$PATH
+
+- Generate local.properties, et al
+
+  $ android update project --subprojects --path /path/to/tunnelk/android-app
+
+- Press the big red button
+
+  $ cd /path/to/tunnelk/android-app
+  $ ant debug
+
+  or:
+
+  $ ant -f /path/to/tunnelk/android-app/build.xml debug

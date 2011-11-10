@@ -23,7 +23,11 @@ vector<double> pplot(const char*              filename,
 
   const double pi = 3.141592653589793;
 
+// <tunnelk modification>
+#if 0
   FILE *fp;
+#endif
+// </tunnelk modification>
   int i;
   int n, bn;          // node number on top and bottom surface
   int snum;           // number of surface nodes
@@ -73,11 +77,15 @@ vector<double> pplot(const char*              filename,
     cp.push_back( (p[n] - p_inf)/(0.5*rho_inf*spd2_inf));
   }
 
+// <tunnelk modification>
+#if 0
   if ((fp = fopen(filename,"w")) == 0)
   {
     printf("\nError opening file <%s>.",filename);
     exit(0);
   }
+#endif
+// </tunnelk modification>
 
   //--- Calculate Lift and Drag and lift_B and drag_B ------------------------80
   double xPlus, yPlus;   // the x and y values at n+1/2
@@ -134,20 +142,32 @@ vector<double> pplot(const char*              filename,
   dist = 0.0;
   i = 1;
   // cp at the nose
+// <tunnelk modification>
+#if 0
   fprintf(fp,"%10.6f %19.10e %19.10e\n",dist,cp[31],cp[31]);
+#endif
+// </tunnelk modification>
   // cp on the top surface
   for (n=32; n<62 ; n++)
   {
     dist += sqrt( pow(x[n]-x[n-1],2) + pow(y[n]-y[n-1],2) );
   
     bn = n-2*i;
+// <tunnelk modification>
+#if 0
     fprintf(fp,"%10.6f %19.10e %19.10e\n",dist,cp[n],cp[bn]);
+#endif
+// </tunnelk modification>
     i++;
   }
   dist += sqrt( pow(x[0]-x[61],2) + pow(y[0]-y[61],2) );
+// <tunnelk modification>
+#if 0
   fprintf(fp,"%10.6f %19.10e %19.10e\n",dist,cp[0],cp[0]); //cp at the tail
 
   fclose(fp);
+#endif
+// </tunnelk modification>
 
   return liftdrag;
 }
