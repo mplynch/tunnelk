@@ -6,16 +6,6 @@
     >
     <TableRow>
         <TextView
-            android:id="@+id/setTunnelConditionsLabel"
-            android:text="Set Tunnel Conditions"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:layout_span="4"
-        />
-    </TableRow>
-    <TableRow>
-        <TextView
             android:id="@+id/windSpeedLabel"
             android:text="Wind Speed"
             android:layout_width="wrap_content"

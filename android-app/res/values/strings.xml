@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Tunnelk: Virtual Wind Tunnel</string>
+    <string name="set_tunnel_conditions">Set Tunnel Conditions</string>
+    <string name="set_airfoil_shape">Set Airfoil Shape</string>
+    <string name="rotate_shape">Rotate Shape</string>
+    <string name="draw_shape">Draw Shape</string>
 </resources>

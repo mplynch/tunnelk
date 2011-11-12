@@ -5,16 +5,6 @@
     android:layout_height="wrap_content"
     >
     <TableRow>
-        <TextView
-            android:id="@+id/setAirfoilShapeLabel"
-            android:text="Set Airfoil Shape"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:layout_span="3"
-        />
-    </TableRow>
-    <TableRow>
 	    <Button
 	        android:id="@+id/shape1Button"
 	        android:layout_width="wrap_content"
