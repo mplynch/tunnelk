@@ -30,6 +30,9 @@
         <activity android:name="RotateShapeActivity"
                   android:label="@string/app_name">
         </activity>
+        <activity android:name="DrawShapeActivity"
+                  android:label="@string/app_name">
+        </activity>
         <service android:name="LocalService"></service>
     </application>
 </manifest> 
