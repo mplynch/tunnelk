@@ -45,9 +45,10 @@
     />
     <ScrollView
         android:id="@+id/solverTextScroll"
-        android:layout_toRightOf="@id/setTunnelConditions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/setTunnelConditions"
+        android:layout_alignParentRight="true"
         >
 	    <TextView
 	        android:id="@+id/solverOutput"
