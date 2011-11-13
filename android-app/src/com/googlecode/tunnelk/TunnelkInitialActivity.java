@@ -30,9 +30,9 @@ public class TunnelkInitialActivity extends Activity
         setContentView(R.layout.main);
         final TextView tv = (TextView) findViewById(R.id.solverOutput);
 
-        final Handler mHandler = new Handler();
+        mHandler = new Handler();
 
-        final Runnable readFileTask = new Runnable() {
+        readFileTask = new Runnable() {
             public void run() {
                File outputDir = getDir("output",Context.MODE_WORLD_READABLE);
                File solverFile = new File(outputDir,"2dflowsolver_output.txt");
@@ -53,16 +53,10 @@ public class TunnelkInitialActivity extends Activity
                mHandler.postAtTime(this,SystemClock.uptimeMillis()+5000);
             }
         };
-
-        final Button simulateButton = (Button) findViewById(R.id.simulate);
-        simulateButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                doBindService();
-                mHandler.removeCallbacks(readFileTask);
-                mHandler.postDelayed(readFileTask, 5000);
-            }
-        });
     }
+
+    private Handler mHandler;
+    private Runnable readFileTask;
 
     public void setTunnelConditionsClicked(View v){
         Intent intent = new Intent();
@@ -80,6 +74,12 @@ public class TunnelkInitialActivity extends Activity
         Intent intent = new Intent();
         intent.setClass(this,RotateShapeActivity.class);
         startActivity(intent);
+    }
+
+    public void simulateClicked(View v){
+        doBindService();
+        mHandler.removeCallbacks(readFileTask);
+        mHandler.postDelayed(readFileTask, 5000);
     }
 
     @SuppressWarnings("unused")

@@ -41,6 +41,7 @@
         android:layout_alignLeft="@id/rotateShape"
         android:layout_alignRight="@id/rotateShape"
         android:text="Simulate"
+        android:onClick="simulateClicked"
     />
     <ScrollView
         android:id="@+id/solverTextScroll"
