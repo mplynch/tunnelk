@@ -2,47 +2,49 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/mainLayout"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="fill_parent"
     >
-    <LinearLayout
+    <Button
+        android:id="@+id/setTunnelConditions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:id="@+id/mainButtonLayout"
-        >
-	    <Button
-	        android:id="@+id/setTunnelConditions"
-	        android:layout_width="fill_parent"
-	        android:layout_height="wrap_content"
-	        android:text="Set Tunnel Conditions"
-	        android:onClick="setTunnelConditionsClicked"
-	    />
-	    <Button
-	        android:id="@+id/setAirfoilShape"
-	        android:layout_width="fill_parent"
-	        android:layout_height="wrap_content"
-	        android:layout_below="@id/setTunnelConditions"
-	        android:text="Set Airfoil Shape"
-	        android:onClick="setAirfoilShapeClicked"
-	    />
-	    <Button
-	        android:id="@+id/rotateShape"
-	        android:layout_width="fill_parent"
-	        android:layout_height="wrap_content"
-	        android:layout_below="@id/setAirfoilShape"
-	        android:text="Rotate Shape"
-	        android:onClick="rotateShapeClicked"
-	    />
-		<Button
-	        android:id="@+id/simulate"
-	        android:layout_width="fill_parent"
-	        android:layout_height="wrap_content"
-	        android:text="Simulate"
-	    />
-    </LinearLayout>
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="Set Tunnel Conditions"
+        android:onClick="setTunnelConditionsClicked"
+    />
+    <Button
+        android:id="@+id/setAirfoilShape"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/setTunnelConditions"
+        android:layout_alignLeft="@id/setTunnelConditions"
+        android:layout_alignRight="@id/setTunnelConditions"
+        android:text="Set Airfoil Shape"
+        android:onClick="setAirfoilShapeClicked"
+    />
+    <Button
+        android:id="@+id/rotateShape"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/setAirfoilShape"
+        android:layout_alignLeft="@id/setAirfoilShape"
+        android:layout_alignRight="@id/setAirfoilShape"
+        android:text="Rotate Shape"
+        android:onClick="rotateShapeClicked"
+    />
+	<Button
+        android:id="@+id/simulate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rotateShape"
+        android:layout_alignLeft="@id/rotateShape"
+        android:layout_alignRight="@id/rotateShape"
+        android:text="Simulate"
+    />
     <ScrollView
         android:id="@+id/solverTextScroll"
-        android:layout_toRightOf="@id/mainButtonLayout"
+        android:layout_toRightOf="@id/setTunnelConditions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         >
