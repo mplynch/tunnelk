@@ -11,23 +11,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
         />
-	    <Button
-	        android:id="@+id/windSpeedLowButton"
+        <Spinner
+	        android:id="@+id/windSpeedSpinner"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:text="Low"
-	    />
-	    <Button
-	        android:id="@+id/windSpeedMediumButton"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:text="Medium"
-	    />
-	    <Button
-	        android:id="@+id/windSpeedHighButton"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:text="High"
+	        android:prompt="@string/low_med_high_prompt"
 	    />
     </TableRow>
     <TableRow>
@@ -37,23 +25,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
         />
-	    <Button
-	        android:id="@+id/temperatureLowButton"
+        <Spinner
+	        android:id="@+id/temperatureSpinner"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:text="Low"
-	    />
-	    <Button
-	        android:id="@+id/temperatureMediumButton"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:text="Medium"
-	    />
-	    <Button
-	        android:id="@+id/temperatureHighButton"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:text="High"
+	        android:prompt="@string/low_med_high_prompt"
 	    />
     </TableRow>
     <TableRow>
@@ -63,23 +39,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
         />
-	    <Button
-	        android:id="@+id/humidityLowButton"
+	    <Spinner
+	        android:id="@+id/humiditySpinner"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:text="Low"
-	    />
-	    <Button
-	        android:id="@+id/humidityMediumButton"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:text="Medium"
-	    />
-	    <Button
-	        android:id="@+id/humidityHighButton"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:text="High"
+	        android:prompt="@string/low_med_high_prompt"
 	    />
     </TableRow>
     <TableRow>
