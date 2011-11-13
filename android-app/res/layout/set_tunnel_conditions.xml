@@ -7,7 +7,7 @@
     <TableRow>
         <TextView
             android:id="@+id/windSpeedLabel"
-            android:text="Wind Speed"
+            android:text="@string/wind_speed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
         />
@@ -15,13 +15,13 @@
 	        android:id="@+id/windSpeedSpinner"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:prompt="@string/low_med_high_prompt"
+	        android:prompt="@string/wind_speed"
 	    />
     </TableRow>
     <TableRow>
         <TextView
             android:id="@+id/temperatureLabel"
-            android:text="Temperature"
+            android:text="@string/temperature"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
         />
@@ -29,13 +29,13 @@
 	        android:id="@+id/temperatureSpinner"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:prompt="@string/low_med_high_prompt"
+	        android:prompt="@string/temperature"
 	    />
     </TableRow>
     <TableRow>
         <TextView
             android:id="@+id/humidityLabel"
-            android:text="Humidity"
+            android:text="@string/humidity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
         />
@@ -43,7 +43,7 @@
 	        android:id="@+id/humiditySpinner"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:prompt="@string/low_med_high_prompt"
+	        android:prompt="@string/humidity"
 	    />
     </TableRow>
     <TableRow>

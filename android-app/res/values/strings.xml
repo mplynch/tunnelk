@@ -5,7 +5,9 @@
     <string name="set_airfoil_shape">Set Airfoil Shape</string>
     <string name="rotate_shape">Rotate Shape</string>
     <string name="draw_shape">Draw Shape</string>
-    <string name="low_med_high_prompt">Choose a value</string>
+    <string name="wind_speed">Wind Speed</string>
+    <string name="temperature">Temperature</string>
+    <string name="humidity">Humidity</string>
     <string-array name="low_med_high_array">
         <item>Low</item>
         <item>Medium</item>
