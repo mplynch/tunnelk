@@ -13,7 +13,7 @@ public class SetTunnelConditionsActivity extends Activity
 {
 	private Spinner windSpeedSpinner;
 	private Spinner temperatureSpinner;
-	private Spinner humiditySpinner;
+	private Spinner pressureSpinner;
 
     /** Called when the activity is first created. */
     @Override
@@ -24,7 +24,7 @@ public class SetTunnelConditionsActivity extends Activity
 
         windSpeedSpinner = (Spinner) findViewById(R.id.windSpeedSpinner);
         temperatureSpinner = (Spinner) findViewById(R.id.temperatureSpinner);
-        humiditySpinner = (Spinner) findViewById(R.id.humiditySpinner);
+        pressureSpinner = (Spinner) findViewById(R.id.pressureSpinner);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
                 this, R.array.low_med_high_array, android.R.layout.simple_spinner_item);
@@ -32,7 +32,7 @@ public class SetTunnelConditionsActivity extends Activity
 
         windSpeedSpinner.setAdapter(adapter);
         temperatureSpinner.setAdapter(adapter);
-        humiditySpinner.setAdapter(adapter);
+        pressureSpinner.setAdapter(adapter);
 
     }
     public void nextClicked(View v){
@@ -50,7 +50,7 @@ public class SetTunnelConditionsActivity extends Activity
 
         e.putInt("@string/wind_speed", windSpeedSpinner.getSelectedItemPosition());
         e.putInt("@string/temperature", temperatureSpinner.getSelectedItemPosition());
-        e.putInt("@string/humidity", humiditySpinner.getSelectedItemPosition());
+        e.putInt("@string/pressure", pressureSpinner.getSelectedItemPosition());
 
         e.commit();
     }
@@ -63,10 +63,10 @@ public class SetTunnelConditionsActivity extends Activity
 
         int windSpeedPos = p.getInt("@string/wind_speed",1);
         int temperaturePos = p.getInt("@string/temperature",1);
-        int humidityPos = p.getInt("@string/humidity",1);
+        int pressurePos = p.getInt("@string/pressure",1);
 
         windSpeedSpinner.setSelection(windSpeedPos);
         temperatureSpinner.setSelection(temperaturePos);
-        humiditySpinner.setSelection(humidityPos);
+        pressureSpinner.setSelection(pressurePos);
     }
 }

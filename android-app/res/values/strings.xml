@@ -7,7 +7,7 @@
     <string name="draw_shape">Draw Shape</string>
     <string name="wind_speed">Wind Speed</string>
     <string name="temperature">Temperature</string>
-    <string name="humidity">Humidity</string>
+    <string name="pressure">Pressure</string>
     <string-array name="low_med_high_array">
         <item>Low</item>
         <item>Medium</item>

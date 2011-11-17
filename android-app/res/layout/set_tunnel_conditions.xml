@@ -34,16 +34,16 @@
     </TableRow>
     <TableRow>
         <TextView
-            android:id="@+id/humidityLabel"
-            android:text="@string/humidity"
+            android:id="@+id/pressureLabel"
+            android:text="@string/pressure"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
         />
 	    <Spinner
-	        android:id="@+id/humiditySpinner"
+	        android:id="@+id/pressureSpinner"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:prompt="@string/humidity"
+	        android:prompt="@string/pressure"
 	    />
     </TableRow>
     <TableRow>
