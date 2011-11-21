@@ -1180,13 +1180,10 @@ printf("\n\n GOODBYE \n\n"); CHECKPT; exit(1);
 // </tunnelk modification>
 
   //--- Generate Tecplot file with grid and solution -------------------------80
-  char tplotfile[32];
-  sprintf(tplotfile, "solution.dat");
-// <tunnelk modification>
-#if 0
+  extern const char* solution_filename;
+  char* tplotfile = (char*)solution_filename;
+  printf("\n writing out solution file: <%s>\n",tplotfile);
   tplot(tplotfile, xvec, yvec, Q, intri);
-#endif
-// </tunnelk modification>
 
   //--- Generate Plot of Pressure Coeficients on the Solid Surface -----------80
   vector< vector<double> > surf_node; // x,y coordinates of nodes on a solid surface

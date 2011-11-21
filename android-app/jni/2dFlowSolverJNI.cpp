@@ -5,8 +5,8 @@
 
 extern "C" {
    JNIEXPORT int JNICALL Java_com_googlecode_tunnelk_FlowSolver2d_init(JNIEnv* env, jobject obj, jint arg1,
-                                                                       jstring filename, jstring outputfile,
-                                                                       jlong offset, jlong length);
+                                                                       jstring meshfile, jstring outputfile,
+                                                                       jstring solfile, jlong offset, jlong length);
    JNIEXPORT jstring Java_com_googlecode_tunnelk_FlowSolver2d_getmsg(JNIEnv* env, jobject obj);
    JNIEXPORT int JNICALL Java_com_googlecode_tunnelk_FlowSolver2d_step(JNIEnv* env, jobject obj);
 };
@@ -14,15 +14,18 @@ extern "C" {
 std::string message;
 const char* mesh_filename = 0;
 const char* stdout_filename = 0;
+const char* solution_filename = 0;
 long mesh_offset = 0;
 
-JNIEXPORT int JNICALL Java_com_googlecode_tunnelk_FlowSolver2d_init(JNIEnv* env, jobject obj, jint arg,
-                                                                    jstring filename, jstring output, jlong offset, jlong length)
+JNIEXPORT int JNICALL Java_com_googlecode_tunnelk_FlowSolver2d_init(JNIEnv* env, jobject obj, jint arg1,
+                                                                    jstring meshfile, jstring outputfile,
+                                                                    jstring solfile, jlong offset, jlong length)
 {
    jboolean iscopy;
 
-   mesh_filename = env->GetStringUTFChars(filename, &iscopy);
-   stdout_filename = env->GetStringUTFChars(output, &iscopy);
+   mesh_filename = env->GetStringUTFChars(meshfile, &iscopy);
+   stdout_filename = env->GetStringUTFChars(outputfile, &iscopy);
+   solution_filename = env->GetStringUTFChars(solfile, &iscopy);
    mesh_offset = offset;
 
    extern int run();

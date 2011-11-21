@@ -4,7 +4,7 @@ CC	= g++ -O2
 
 INCLUDE_PATH   = -I./include
 
-COBJ = driver.o convert.o flowSolve.o readinput.o readmesh.o readCmplxmesh.o tristat.o fluxp.o fluxm.o dfluxp.o dfluxm.o dfluxWall.o lu_solve.o gplot.o pplot.o gradx.o grady.o fluxV.o dfluxV.o List.o
+COBJ = driver.o convert.o flowSolve.o readinput.o readmesh.o readCmplxmesh.o tristat.o fluxp.o fluxm.o dfluxp.o dfluxm.o dfluxWall.o lu_solve.o tplot.o gplot.o pplot.o gradx.o grady.o fluxV.o dfluxV.o List.o
 
 designOBJ = optimization.o designFlowSolve.o fluxm_B.o fluxp_B.o dCostdQ.o transpose.o multipliers.o reverseMode.o dCostdX.o designPplot.o
 
