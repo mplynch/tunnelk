@@ -4,7 +4,7 @@
 #include <string>
 
 extern "C" {
-   JNIEXPORT int JNICALL Java_com_googlecode_tunnelk_FlowSolver2d_init(JNIEnv* env, jobject obj, jint arg1,
+   JNIEXPORT int JNICALL Java_com_googlecode_tunnelk_FlowSolver2d_init(JNIEnv* env, jobject obj,
                                                                        jstring meshfile, jstring outputfile,
                                                                        jstring solfile, jlong offset, jlong length);
    JNIEXPORT jstring Java_com_googlecode_tunnelk_FlowSolver2d_getmsg(JNIEnv* env, jobject obj);
@@ -17,7 +17,7 @@ const char* stdout_filename = 0;
 const char* solution_filename = 0;
 long mesh_offset = 0;
 
-JNIEXPORT int JNICALL Java_com_googlecode_tunnelk_FlowSolver2d_init(JNIEnv* env, jobject obj, jint arg1,
+JNIEXPORT int JNICALL Java_com_googlecode_tunnelk_FlowSolver2d_init(JNIEnv* env, jobject obj,
                                                                     jstring meshfile, jstring outputfile,
                                                                     jstring solfile, jlong offset, jlong length)
 {

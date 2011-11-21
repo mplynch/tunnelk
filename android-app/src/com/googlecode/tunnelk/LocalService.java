@@ -78,8 +78,8 @@ public class LocalService extends Service {
                 File solutionFile = new File(outputDir,"solution.dat");
 				FlowSolver2d solver = new FlowSolver2d();
 				message = "init = "
-						+ Integer.toString(solver.init(42, apkFilePath,
-								outputFile.getAbsolutePath(), solutionFile.getAbsolutePath(),
+						+ Integer.toString(solver.init(apkFilePath,outputFile.getAbsolutePath(),
+								solutionFile.getAbsolutePath(),
 								offset,fileSize));
 				message += "\nmsg = " + solver.getmsg();
 				message += "\nstep = " + Integer.toString(solver.step());
