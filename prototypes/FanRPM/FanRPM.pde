@@ -1,25 +1,34 @@
-int counter; 
+int hallEffectCounter, tachCounter;
 int rpmValue;
 const int led = 13;
-const int hallSensor = 8;
+const int hallsensor = 8;
 
 void setup() 
 { 
-  pinMode(hallSensor, INPUT); 
+  pinMode(hallsensor, INPUT); 
   
   Serial.begin(9600);
   
-  attachInterrupt(0, rpm, CHANGE); 
+  attachInterrupt(0, hallEffectRPM, CHANGE);
+
+  attachInterrupt(1, tachRPM, CHANGE);
 }
         
-void rpm ()
+void hallEffectRPM()
 {
-  counter++;
+  hallEffectCounter++;
+}
+
+void tachRPM()
+{
+  tachCounter++;
 }
 
 void loop () 
 {
-  counter = 0;
+  hallEffectCounter = 0;
+  
+  tachCounter = 0;
   
   interrupts();
   
@@ -27,9 +36,19 @@ void loop ()
   
   noInterrupts();
   
-  rpmValue = ((counter * 60) / 2);
+  rpmValue = ((hallEffectCounter * 60) / 2);
+
+  Serial.print ("Hall effect sensor RPM: ");
   
   Serial.print (rpmValue, DEC);
   
-  Serial.print (" rpm\r\n");
+  Serial.print(", ");
+  
+  rpmValue = ((tachCounter * 60) / 4);
+
+  Serial.print ("Fan tach RPM: ");
+  
+  Serial.print (rpmValue, DEC);
+  
+  Serial.println();
 }
