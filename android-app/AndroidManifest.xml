@@ -34,7 +34,8 @@
                   android:label="@string/draw_shape">
         </activity>
         <activity android:name="ShowResultsActivity"
-                  android:label="@string/show_results">
+                  android:label="@string/show_results"
+                  android:screenOrientation="landscape">
         </activity>
         <service android:name="LocalService"></service>
     </application>
