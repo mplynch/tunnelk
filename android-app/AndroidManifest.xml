@@ -33,6 +33,9 @@
         <activity android:name="DrawShapeActivity"
                   android:label="@string/draw_shape">
         </activity>
+        <activity android:name="ShowResultsActivity"
+                  android:label="@string/show_results">
+        </activity>
         <service android:name="LocalService"></service>
     </application>
 </manifest> 

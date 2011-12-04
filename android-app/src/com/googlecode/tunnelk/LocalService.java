@@ -90,6 +90,7 @@ public class LocalService extends Service {
 				message += "\noffset = " + Long.toString(offset);
 
 				showSolverCompletedNotification(message);
+				showResults();
 			}
 		};
 
@@ -172,4 +173,11 @@ public class LocalService extends Service {
 		// Send the notification.
 		mNM.notify(NOTIFICATION, notification);
 	}
+
+	public void showResults(){
+        Intent intent = new Intent();
+        intent.setClass(this,ShowResultsActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
 }
