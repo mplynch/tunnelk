@@ -26,9 +26,9 @@ int_input.push_back(1);
 //viscosity 0       // 1 for viscous, 0 for inviscid
 int_input.push_back(0);
 //maxInIt   100     // maximum number of inner itterations for flow solver
-int_input.push_back(100);
+int_input.push_back(1);
 //maxOutIt  200     // maximum number of outer itterations for flow solver
-int_input.push_back(200);
+int_input.push_back(50);
 //maxOutS   1000    // maximum number of outer itterations for Winslow Smoother
 int_input.push_back(1000);
 //AdFlag    0       // Adaptation Flag: 0-none, 1-pressure, 2-velocity, 3-mach
