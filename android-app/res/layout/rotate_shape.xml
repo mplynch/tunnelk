@@ -11,6 +11,7 @@
 	    android:layout_centerVertical="true"
 	    android:layout_alignParentLeft="true"
 	    android:text="&lt;&lt;"
+	    android:onClick="rotateCCWClicked"
 	/>
 	<Button
 	    android:id="@+id/rotateCWButton"
@@ -19,6 +20,7 @@
 	    android:layout_centerVertical="true"
 	    android:layout_alignParentRight="true"
 	    android:text="&gt;&gt;"
+	    android:onClick="rotateCWClicked"
 	/>
 	<Button
 	    android:id="@+id/rotateShapeSimButton"
