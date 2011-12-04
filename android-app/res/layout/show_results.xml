@@ -63,6 +63,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:text="@string/new_sim"
+        android:onClick="newSimClicked"
     />
     <ImageView
         android:id="@+id/resultsImageView"
