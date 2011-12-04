@@ -5,43 +5,49 @@
     android:layout_height="wrap_content"
     >
     <TableRow>
-	    <Button
+	    <ImageButton
 	        android:id="@+id/shape1Button"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:text="Shape1"
+	        android:layout_width="75dp"
+	        android:layout_height="75dp"
+	        android:src="@drawable/airfoil"
+	        android:scaleType="fitXY"
 	    />
-	    <Button
+	    <ImageButton
 	        android:id="@+id/shape2Button"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:text="Shape2"
+	        android:layout_width="75dp"
+	        android:layout_height="75dp"
+	        android:src="@drawable/square"
+	        android:scaleType="fitXY"
 	    />
-	    <Button
+	    <ImageButton
 	        android:id="@+id/shape3Button"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:text="Shape3"
+	        android:layout_width="75dp"
+	        android:layout_height="75dp"
+	        android:src="@drawable/trapezoid"
+	        android:scaleType="fitXY"
 	    />
     </TableRow>
    <TableRow>
-	    <Button
+	    <ImageButton
 	        android:id="@+id/shape4Button"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:text="Shape4"
+	        android:layout_width="75dp"
+	        android:layout_height="75dp"
+	        android:src="@drawable/circle"
+	        android:scaleType="fitXY"
 	    />
-	    <Button
+	    <ImageButton
 	        android:id="@+id/shape5Button"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:text="Shape5"
+	        android:layout_width="75dp"
+	        android:layout_height="75dp"
+	        android:src="@drawable/ellipse"
+	        android:scaleType="fitXY"
 	    />
-	    <Button
+	    <ImageButton
 	        android:id="@+id/shape6Button"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:text="Shape6"
+	        android:layout_width="75dp"
+	        android:layout_height="75dp"
+	        android:src="@drawable/gear"
+	        android:scaleType="fitXY"
 	    />
     </TableRow>
     <TableRow>
