@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:text="Set Tunnel Conditions"
+        android:text="@string/set_tunnel_conditions"
         android:onClick="setTunnelConditionsClicked"
     />
     <Button
@@ -20,7 +20,7 @@
         android:layout_below="@id/setTunnelConditions"
         android:layout_alignLeft="@id/setTunnelConditions"
         android:layout_alignRight="@id/setTunnelConditions"
-        android:text="Set Airfoil Shape"
+        android:text="@string/set_airfoil_shape"
         android:onClick="setAirfoilShapeClicked"
     />
     <Button
@@ -30,7 +30,7 @@
         android:layout_below="@id/setAirfoilShape"
         android:layout_alignLeft="@id/setAirfoilShape"
         android:layout_alignRight="@id/setAirfoilShape"
-        android:text="Rotate Shape"
+        android:text="@string/rotate_shape"
         android:onClick="rotateShapeClicked"
     />
 	<Button

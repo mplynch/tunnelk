@@ -110,7 +110,7 @@ public class LocalService extends Service {
 		mNM.cancel(NOTIFICATION);
 
 		// Tell the user we stopped.
-		Toast.makeText(this, "Throw me down on a stop!", Toast.LENGTH_SHORT)
+		Toast.makeText(this, getText(R.string.solver_stopped), Toast.LENGTH_SHORT)
 				.show();
 	}
 
@@ -129,7 +129,7 @@ public class LocalService extends Service {
 	private void showNotification() {
 		// In this sample, we'll use the same text for the ticker and the
 		// expanded notification
-		CharSequence text = "Throw me down, we started."; // getText(R.string.local_service_started);
+		CharSequence text = getText(R.string.solver_started);
 
 		// Set the icon, scrolling text and timestamp
 		Notification notification = new Notification(R.drawable.stat_sample,
@@ -141,7 +141,7 @@ public class LocalService extends Service {
 				new Intent(this, TunnelkInitialActivity.class), 0);
 
 		// Set the info for the views that show in the notification panel.
-		notification.setLatestEventInfo(this, "Testing 1, 2, 3", text,
+		notification.setLatestEventInfo(this, text, text,
 				contentIntent);
 
 		// Send the notification.
@@ -154,7 +154,7 @@ public class LocalService extends Service {
 	private void showSolverCompletedNotification(String message) {
 		// In this sample, we'll use the same text for the ticker and the
 		// expanded notification
-		CharSequence text = "Solver Completed."; // getText(R.string.local_service_started);
+		CharSequence text = getText(R.string.solver_completed);
 
 		// Set the icon, scrolling text and timestamp
 		Notification notification = new Notification(R.drawable.stat_sample,
@@ -166,7 +166,7 @@ public class LocalService extends Service {
 				new Intent(this, TunnelkInitialActivity.class), 0);
 
 		// Set the info for the views that show in the notification panel.
-		notification.setLatestEventInfo(this, message, text,
+		notification.setLatestEventInfo(this, text, text,
 				contentIntent);
 
 		// Send the notification.

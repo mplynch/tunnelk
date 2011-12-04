@@ -8,6 +8,9 @@
     <string name="wind_speed">Wind Speed</string>
     <string name="temperature">Temperature</string>
     <string name="pressure">Pressure</string>
+    <string name="solver_started">Solver Started</string>
+    <string name="solver_completed">Solver Completed</string>
+    <string name="solver_stopped">Solver Stopped</string>
     <string-array name="low_med_high_array">
         <item>Low</item>
         <item>Medium</item>
