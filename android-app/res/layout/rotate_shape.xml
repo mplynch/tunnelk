@@ -1,21 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/rotateShapeLayout"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="fill_parent"
     >
-    <TableRow>
-	    <Button
-	        android:id="@+id/rotateCCWButton"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:text="&lt;&lt;"
-	    />
-	    <Button
-	        android:id="@+id/rotateCWButton"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:text="&gt;&gt;"
-	    />
-    </TableRow>
-</TableLayout>
+	<Button
+	    android:id="@+id/rotateCCWButton"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_centerVertical="true"
+	    android:layout_alignParentLeft="true"
+	    android:text="&lt;&lt;"
+	/>
+	<Button
+	    android:id="@+id/rotateCWButton"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_centerVertical="true"
+	    android:layout_alignParentRight="true"
+	    android:text="&gt;&gt;"
+	/>
+	<Button
+	    android:id="@+id/rotateShapeSimButton"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentBottom="true"
+	    android:layout_centerHorizontal="true"
+	    android:text="Simulate &gt;&gt;"
+	    android:onClick="simulateClicked"
+	/>
+	<ImageView
+        android:id="@+id/rotateShapeImageView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_toRightOf="@id/rotateCCWButton"
+        android:layout_toLeftOf="@id/rotateCWButton"
+        android:layout_above="@id/rotateShapeSimButton"
+        android:src="@drawable/airfoil"
+        android:scaleType="center"
+    />
+</RelativeLayout>
