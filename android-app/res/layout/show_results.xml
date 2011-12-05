@@ -71,9 +71,10 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/tweetResults"
         android:layout_toLeftOf="@id/machNumber"
+        android:layout_alignParentTop="true"
         android:layout_above="@id/newSim"
         android:src="@drawable/visualization_mockup"
-        android:scaleType="fitXY"
+        android:scaleType="fitCenter"
     />
 
 </RelativeLayout>
