@@ -26,7 +26,7 @@ public class TunnelkInitialActivity extends Activity
     {
         super.onCreate(savedInstanceState);
         
-        setContentView(R.layout.main);
+        setContentView(R.layout.tunnelk);
         final TextView tv = (TextView) findViewById(R.id.solverOutput);
 
         mHandler = new Handler();
