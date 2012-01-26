@@ -22,6 +22,8 @@ Using Apache Ant 1.8 or newer
 
   $ android update project --subprojects --path /path/to/tunnelk/android-app
 
+- For Windows builds, use build.win.xml rather than build.xml contained in the android-app directory.
+
 - Press the big red button
 
   $ cd /path/to/tunnelk/android-app
