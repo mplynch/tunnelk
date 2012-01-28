@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Tunnelk: Virtual Wind Tunnel</string>
+    <string name="app_name">Tunnel-K</string>
     <string name="set_tunnel_conditions">Set Tunnel Conditions</string>
     <string name="set_airfoil_shape">Set Airfoil Shape</string>
     <string name="rotate_shape">Rotate Shape</string>
@@ -21,4 +21,11 @@
         <item>Medium</item>
         <item>High</item>
     </string-array>
+    <string name="splash">Splash</string>
+    <string name="touch_to_start">Touch To Start</string>
+    <string name="fan_speed">Fan Speed</string>
+    <string name="physical_tunnel_hmi">Physical Tunnel HMI</string>
+    <string name="physical">Run the wind tunnel</string>
+    <string name="virtual">Simulate the wind tunnel</string>
+    <string name="choose_tunnel_type">What would you like to do?</string>
 </resources>

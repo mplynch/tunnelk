@@ -15,6 +15,8 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.SystemClock;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +28,11 @@ public class TunnelkInitialActivity extends Activity
     {
         super.onCreate(savedInstanceState);
         
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, 
+                                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         setContentView(R.layout.tunnelk);
         final TextView tv = (TextView) findViewById(R.id.solverOutput);
 
