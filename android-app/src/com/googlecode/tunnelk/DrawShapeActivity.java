@@ -1,6 +1,5 @@
 package com.googlecode.tunnelk;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.*;
 import android.os.Bundle;
@@ -11,7 +10,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
-public class DrawShapeActivity extends Activity {
+public class DrawShapeActivity extends OptionsMenuActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -1,6 +1,5 @@
 package com.googlecode.tunnelk;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,7 +10,7 @@ import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
-public class SetTunnelConditionsActivity extends Activity
+public class SetTunnelConditionsActivity extends OptionsMenuActivity
 {
 	private Spinner windSpeedSpinner;
 	private Spinner temperatureSpinner;

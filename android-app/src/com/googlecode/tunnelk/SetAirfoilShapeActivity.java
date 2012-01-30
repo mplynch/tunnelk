@@ -1,13 +1,12 @@
 package com.googlecode.tunnelk;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
-public class SetAirfoilShapeActivity extends Activity
+public class SetAirfoilShapeActivity extends OptionsMenuActivity
 {
     /** Called when the activity is first created. */
     @Override

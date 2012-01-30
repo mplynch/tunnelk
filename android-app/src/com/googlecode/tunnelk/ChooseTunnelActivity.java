@@ -1,6 +1,5 @@
 package com.googlecode.tunnelk;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,7 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class ChooseTunnelActivity extends Activity implements
+public class ChooseTunnelActivity extends OptionsMenuActivity implements
 		OnItemClickListener {
 	private final String TAG = "ChooseTunnelActivity";
 

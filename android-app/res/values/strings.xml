@@ -28,4 +28,6 @@
     <string name="physical">Run the wind tunnel</string>
     <string name="virtual">Simulate the wind tunnel</string>
     <string name="choose_tunnel_type">What would you like to do?</string>
+    <string name="virtual_home">Virtual Tunnel</string>
+    <string name="physical_home">Physical Tunnel</string>
 </resources>

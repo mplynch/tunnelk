@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
-import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -20,7 +19,7 @@ import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class TunnelkInitialActivity extends Activity
+public class TunnelkInitialActivity extends OptionsMenuActivity
 {
     /** Called when the activity is first created. */
     @Override

@@ -1,13 +1,12 @@
 package com.googlecode.tunnelk;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-public class PhysicalTunnelHMIActivity extends Activity implements SeekBar.OnSeekBarChangeListener {	
+public class PhysicalTunnelHMIActivity extends OptionsMenuActivity implements SeekBar.OnSeekBarChangeListener {	
 	/** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState)
