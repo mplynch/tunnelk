@@ -64,7 +64,9 @@
             android:label="@string/show_results"
             android:screenOrientation="landscape" >
         </activity>
-
+        <activity
+            android:name="OptionsMenuActivity" >
+        </activity>
         <service android:name="LocalService" >
         </service>
     </application>
