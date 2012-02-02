@@ -30,4 +30,5 @@
     <string name="choose_tunnel_type">What would you like to do?</string>
     <string name="virtual_home">Virtual Tunnel</string>
     <string name="physical_home">Physical Tunnel</string>
+    <string name="start_over">Start Over</string>
 </resources>

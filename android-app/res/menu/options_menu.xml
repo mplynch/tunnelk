@@ -1,6 +1,7 @@
     <menu xmlns:android="http://schemas.android.com/apk/res/android">
-        <item android:id="@+id/virtual_home"
+        <item android:id="@+id/start_over" android:title="@string/start_over"></item><item android:id="@+id/virtual_home"
           android:title="@string/virtual_home" />
         <item android:id="@+id/physical_home"
           android:title="@string/physical_home" />
+        
     </menu>
