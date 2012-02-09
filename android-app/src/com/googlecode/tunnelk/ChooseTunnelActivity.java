@@ -28,17 +28,13 @@ public class ChooseTunnelActivity extends OptionsMenuActivity implements
 		String[] tunnelTypes = { getResources().getString(R.string.physical),
 				getResources().getString(R.string.virtual) };
 
-		Log.d(TAG, "onCreate - setContentView");
 		setContentView(R.layout.choose_tunnel_type);
-		
-		Log.d(TAG, "onCreate - findViewById");
+
 		ListView listView = (ListView) findViewById(R.id.listViewTunnelType);
 
-		Log.d(TAG, "onCreate - setAdapter");
 		listView.setAdapter(new ArrayAdapter<String>(this,
 				android.R.layout.simple_list_item_1, tunnelTypes));
 
-		Log.d(TAG, "onCreate - setOnItemClickListener");
 		listView.setOnItemClickListener(this);
 	}
 

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tunnelk="http://schemas.android.com/apk/res/com.googlecode.tunnelk"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/textViewSetFanSpeedLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="@string/set_fan_speed" />
+
+    <SeekBar
+        android:id="@+id/seekBarFanSpeed"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewSetFanSpeedLabel"
+        android:layout_centerHorizontal="true"
+        android:max="100" />
+
+    <TextView
+        android:id="@+id/textViewFanSpeedPercent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/seekBarFanSpeed"
+        android:layout_centerHorizontal="true"
+        android:text="0%" />
+
+</RelativeLayout>

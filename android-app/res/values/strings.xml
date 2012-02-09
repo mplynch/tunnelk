@@ -24,6 +24,7 @@
     <string name="splash">Splash</string>
     <string name="touch_to_start">Touch To Start</string>
     <string name="fan_speed">Fan Speed</string>
+    <string name="set_fan_speed">Set Fan Speed</string>
     <string name="physical_tunnel_hmi">Physical Tunnel HMI</string>
     <string name="physical">Run the wind tunnel</string>
     <string name="virtual">Simulate the wind tunnel</string>
