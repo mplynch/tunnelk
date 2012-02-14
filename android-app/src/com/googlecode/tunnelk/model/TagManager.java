@@ -21,13 +21,23 @@ public class TagManager {
 	}
 
 	/**
-	 * Adds the specified tag to this TagManager, enabling observers to receive
-	 * notification when the tag is changed.
+	 * Adds the specified tag to this TagManager
 	 * 
 	 * @param tag a tag to be added
 	 */
 	public void addTag(Tag tag) {
 		tags.put(tag.getName(), tag);
+	}
+	
+	/**
+	 * Adds all tags in the specified collection to this TagManager
+	 * 
+	 * @param newTags the collection of tags
+	 */
+	public void addTags(Collection<Tag> newTags){
+		for (Tag tag : newTags){
+			tags.put(tag.getName(), tag);
+		}
 	}
 
 	/**

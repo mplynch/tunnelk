@@ -3,52 +3,40 @@ package com.googlegode.tunnelk.views;
 import java.util.Observable;
 import java.util.Observer;
 
-import com.googlecode.tunnelk.R;
-import com.googlecode.tunnelk.model.Tag;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.widget.RelativeLayout;
 
-public class TagLayout extends RelativeLayout implements Observer {
+import com.googlecode.tunnelk.model.Tag;
 
-	private Tag tag;
-	
-	public TagLayout(Context context) {
+public abstract class TagLayout extends RelativeLayout implements Observer {
+	protected Tag tag;
+
+	public TagLayout(Context context, Tag tag){
 		super(context);
-	}
-
-	public void setTag(Tag tag) {
-		if (this.tag != null)
-			this.tag.deleteObserver(this);
-
-		this.tag = tag;
 		
-		LayoutInflater li = (LayoutInflater) getContext().getSystemService(
-				Context.LAYOUT_INFLATER_SERVICE); 
-
-		switch (tag.getType()) {
-		/* TODO: Fill in each case with code to make use of the corresponding
-		 * layout. */
-		case TemperatureSetPoint:
-			break;
-		case Temperature:
-			break;
-		case FanSpeedSetPoint:
-			li.inflate(R.layout.tag_layout_seek_bar, this, true);
-			break;
-		case FanSpeed:
-			break;
-		case Humidity:
-			break;
-		default:
-			break;
-		}
+		this.tag = tag;
 
 		this.tag.addObserver(this);
+		
+		this.initialize();
 	}
+	
+	/**
+	 * Convenience method.  Inflates the layout with the specified id.
+	 * @param resource the id of the layout
+	 */
+	protected void inflateLayout(int resource){
+		LayoutInflater li = (LayoutInflater) getContext().getSystemService(
+				Context.LAYOUT_INFLATER_SERVICE);
+		
+		li.inflate(resource, this, true);
+	}
+	
+	/**
+	 * Inflates views, initializes widgets, and sets up event handlers
+	 */
+	protected abstract void initialize();
 
-	public void update(Observable observable, Object data) {
-		// TODO: Update the displayed value of the Tag.
-	}
+	public abstract void update(Observable observable, Object data);
 }

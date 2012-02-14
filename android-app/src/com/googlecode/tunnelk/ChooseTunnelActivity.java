@@ -2,7 +2,6 @@ package com.googlecode.tunnelk;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -14,7 +13,6 @@ import android.widget.TextView;
 
 public class ChooseTunnelActivity extends OptionsMenuActivity implements
 		OnItemClickListener {
-	private final String TAG = "ChooseTunnelActivity";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

@@ -1,24 +1,28 @@
 package com.googlecode.tunnelk.model;
 
-public class TagCommunicator {
-	public void getTagValues(){
-		
-	}
+import java.util.Collection;
+
+public interface TagCommunicator {
+	/**
+	 * Gets the values of all tags from the controller.  You must call 
+	 * getTagData before attempting to retrieve tag values.
+	 */
+	public void getTagValues();
 	
-	public void requestTags(){
-		TagManager manager = TagManager.getInstance();
-		Tag tag;
-		
-		tag = new Tag("inletTemp1", "A0", 72, TagType.Temperature);
-		manager.addTag(tag);
-		
-		tag = new Tag("inletTemp2", "A1", 70, TagType.Temperature);
-		manager.addTag(tag);
-		
-		tag = new Tag("fanSpeedSetPoint", "A2", 0, TagType.FanSpeedSetPoint);
-	}
+	/**
+	 * Returns a collection of all tags used by the controller.
+	 */
+	public Collection<Tag> getTagData();
 	
-	public void updateTagValue(Tag tag){
-		
-	}
+	/**
+	 * Updates the value of the specified tag on the controller.
+	 * @param tag the tag to update
+	 */
+	public void update(Tag tag);
+	
+	/**
+	 * Updates the values of the specified tags on the controller.
+	 * @param tag a collection of tags to update
+	 */
+	public void update(Collection<Tag> tag);
 }
