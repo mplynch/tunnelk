@@ -41,6 +41,8 @@ public class HardCodedTagCommunicator implements TagCommunicator {
 		tag = new Tag("Fan On/Off", "", 0, TagType.Relay, false);
 		tags.add(tag);
 		
+		tags.add(new JTag());
+		
 		return tags;
 	}
 

@@ -77,5 +77,6 @@
         <service android:name="LocalService" >
         </service>
     </application>
-
+    
+    <uses-permission android:name="android.permission.INTERNET" /> 
 </manifest>
