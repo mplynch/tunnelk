@@ -25,8 +25,6 @@ public class SplashActivity extends Activity {
 	public void splashClicked(View v)
 	{
         Intent intent = new Intent();
-        //intent.setClass(this,TunnelkInitialActivity.class);
-        //intent.setClass(this,PhysicalTunnelHMIActivity.class);
         intent.setClass(this,ChooseTunnelActivity.class);
         startActivity(intent);
 	}
