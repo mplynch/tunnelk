@@ -25,7 +25,7 @@ public class ShowResultsActivity extends OptionsMenuActivity
 
     public void newSimClicked(View v){
         Intent intent = new Intent();
-        intent.setClass(this,TunnelkInitialActivity.class);
+        intent.setClass(this,VirtualTunnelActivity.class);
         startActivity(intent);
     }
 }

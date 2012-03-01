@@ -19,7 +19,7 @@ import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class TunnelkInitialActivity extends OptionsMenuActivity
+public class VirtualTunnelActivity extends OptionsMenuActivity
 {
     /** Called when the activity is first created. */
     @Override
@@ -100,7 +100,7 @@ public class TunnelkInitialActivity extends OptionsMenuActivity
             mBoundService = ((LocalService.LocalBinder)service).getService();
 
             // Tell the user about this for our demo.
-            Toast.makeText(TunnelkInitialActivity.this, "onServiceConnected",
+            Toast.makeText(VirtualTunnelActivity.this, "onServiceConnected",
                     Toast.LENGTH_SHORT).show();
         }
 
@@ -110,7 +110,7 @@ public class TunnelkInitialActivity extends OptionsMenuActivity
             // Because it is running in our same process, we should never
             // see this happen.
             mBoundService = null;
-            Toast.makeText(TunnelkInitialActivity.this, "onServiceDisconnected",
+            Toast.makeText(VirtualTunnelActivity.this, "onServiceDisconnected",
                     Toast.LENGTH_SHORT).show();
         }
     };
@@ -122,7 +122,7 @@ public class TunnelkInitialActivity extends OptionsMenuActivity
         // class name because we want a specific service implementation that
         // we know will be running in our own process (and thus won't be
         // supporting component replacement by other applications).
-        bindService(new Intent(TunnelkInitialActivity.this, 
+        bindService(new Intent(VirtualTunnelActivity.this, 
                 LocalService.class), mConnection, Context.BIND_AUTO_CREATE);
         mIsBound = true;
     }

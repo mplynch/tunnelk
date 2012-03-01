@@ -139,7 +139,7 @@ public class LocalService extends Service {
 		// The PendingIntent to launch our activity if the user selects this
 		// notification
 		PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
-				new Intent(this, TunnelkInitialActivity.class), 0);
+				new Intent(this, VirtualTunnelActivity.class), 0);
 
 		// Set the info for the views that show in the notification panel.
 		notification.setLatestEventInfo(this, text, text,
@@ -164,7 +164,7 @@ public class LocalService extends Service {
 		// The PendingIntent to launch our activity if the user selects this
 		// notification
 		PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
-				new Intent(this, TunnelkInitialActivity.class), 0);
+				new Intent(this, VirtualTunnelActivity.class), 0);
 
 		// Set the info for the views that show in the notification panel.
 		notification.setLatestEventInfo(this, text, text,

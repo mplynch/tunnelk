@@ -18,13 +18,15 @@
         android:targetSdkVersion="10" >
     </uses-sdk>
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:icon="@drawable/plane"
         android:label="@string/app_name" >
         <activity
             android:name="SplashActivity"
             android:label="@string/app_name"
-            android:screenOrientation="landscape">
+            android:screenOrientation="landscape" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -34,49 +36,56 @@
         <activity
             android:name="ChooseTunnelActivity"
             android:label="@string/choose_tunnel_type"
-            android:screenOrientation="landscape">
+            android:screenOrientation="landscape" >
         </activity>
         <activity
-            android:name="TunnelkInitialActivity"
-            android:label="@string/app_name" 
-            android:screenOrientation="landscape">
+            android:name=".VirtualTunnelActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="landscape" >
         </activity>
         <activity
             android:name="PhysicalTunnelHMIActivity"
             android:label="@string/physical_tunnel_hmi"
-            android:screenOrientation="landscape">
+            android:screenOrientation="landscape" >
+        </activity>
+        <activity
+            android:name="TimeHistoryPlotActivity"
+            android:screenOrientation="landscape" >
         </activity>
         <activity
             android:name="SetTunnelConditionsActivity"
             android:label="@string/set_tunnel_conditions"
-            android:screenOrientation="landscape">
+            android:screenOrientation="landscape" >
         </activity>
         <activity
             android:name="SetAirfoilShapeActivity"
             android:label="@string/set_airfoil_shape"
-            android:screenOrientation="landscape">
+            android:screenOrientation="landscape" >
         </activity>
         <activity
             android:name="RotateShapeActivity"
             android:label="@string/rotate_shape"
-            android:screenOrientation="landscape">
+            android:screenOrientation="landscape" >
         </activity>
         <activity
             android:name="DrawShapeActivity"
             android:label="@string/draw_shape"
-            android:screenOrientation="landscape">
+            android:screenOrientation="landscape" >
         </activity>
         <activity
             android:name="ShowResultsActivity"
             android:label="@string/show_results"
-            android:screenOrientation="landscape">
+            android:screenOrientation="landscape" >
         </activity>
         <activity
-            android:name="OptionsMenuActivity" >
+            android:name="ChooseTagsActivity"
+            android:screenOrientation="landscape" >
         </activity>
+        <activity android:name="OptionsMenuActivity" >
+        </activity>
+
         <service android:name="LocalService" >
         </service>
     </application>
-    
-    <uses-permission android:name="android.permission.INTERNET" /> 
+
 </manifest>

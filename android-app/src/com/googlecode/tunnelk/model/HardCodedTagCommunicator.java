@@ -8,24 +8,20 @@ import java.util.*;
 public class HardCodedTagCommunicator implements TagCommunicator {
 	private ArrayList<Tag> tags;
 	
-	private int i;
-	
 	public void getTagValues(){
-		if (i > 100)
-			i = 0;
+		Random r = new Random(Calendar.getInstance().getTimeInMillis());
 		
 		for (Tag tag : tags){
-			if (tag.isReadOnly())
-				tag.setValue(i);
+			if (tag.isReadOnly()){
+				tag.setValue(tag.getValue() + r.nextInt(6) - 3);
+			}
 		}
-		
-		i++;
 	}
 		
 	public Collection<Tag> getTagData() {
 		Tag tag;
 		
-		i = 0;
+		int i = 0;
 		
 		tags = new ArrayList<Tag>();
 		

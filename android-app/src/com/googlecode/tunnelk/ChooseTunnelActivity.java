@@ -44,13 +44,13 @@ public class ChooseTunnelActivity extends OptionsMenuActivity implements
 
 		if (selection.equals(this.getResources().getString(R.string.physical))) {
 			intent.setClass(this, PhysicalTunnelHMIActivity.class);
-			this.startActivity(intent);
+			startActivity(intent);
 		}
 
 		else if (selection.equals(this.getResources().getString(
 				R.string.virtual))) {
-			intent.setClass(this, TunnelkInitialActivity.class);
-			this.startActivity(intent);
+			intent.setClass(this, VirtualTunnelActivity.class);
+			startActivity(intent);
 		}
 	}
 }

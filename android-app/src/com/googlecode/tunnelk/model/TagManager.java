@@ -1,5 +1,6 @@
 package com.googlecode.tunnelk.model;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 
@@ -23,19 +24,21 @@ public class TagManager {
 	/**
 	 * Adds the specified tag to this TagManager
 	 * 
-	 * @param tag a tag to be added
+	 * @param tag
+	 *            a tag to be added
 	 */
 	public void addTag(Tag tag) {
 		tags.put(tag.getName(), tag);
 	}
-	
+
 	/**
 	 * Adds all tags in the specified collection to this TagManager
 	 * 
-	 * @param newTags the collection of tags
+	 * @param newTags
+	 *            the collection of tags
 	 */
-	public void addTags(Collection<Tag> newTags){
-		for (Tag tag : newTags){
+	public void addTags(Collection<Tag> newTags) {
+		for (Tag tag : newTags) {
 			tags.put(tag.getName(), tag);
 		}
 	}
@@ -43,19 +46,20 @@ public class TagManager {
 	/**
 	 * Gets the tag with the specified name
 	 * 
-	 * @param name the name of the tag to retrieve
+	 * @param name
+	 *            the name of the tag to retrieve
 	 * @return the tag with the specified name
 	 */
 	public Tag getTag(String name) {
 		return tags.get(name);
 	}
-	
+
 	/**
 	 * Returns a collection of all Tags stored in this TagManager.
 	 * 
-	 * @return 
+	 * @return the collection of tags
 	 */
-	public Collection<Tag> getAllTags(){
+	public Collection<Tag> getAllTags() {
 		return tags.values();
 	}
 
@@ -85,10 +89,20 @@ public class TagManager {
 	/**
 	 * Removes the tag with the specified name from this TagManager.
 	 * 
-	 * @param name the name of the tag to remove
+	 * @param name
+	 *            the name of the tag to remove
 	 * @return the tag that was removed
 	 */
 	public Tag removeTag(String name) {
 		return tags.remove(name);
+	}
+
+	/**
+	 * Returns the number of tags in the tag manager
+	 * 
+	 * @return the number of tags
+	 */
+	public int size() {
+		return tags.size();
 	}
 }

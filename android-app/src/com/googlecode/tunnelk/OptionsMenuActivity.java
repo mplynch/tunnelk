@@ -33,7 +33,7 @@ public class OptionsMenuActivity extends Activity {
 			return true;
 
 		case R.id.virtual_home:
-			intent.setClass(this, TunnelkInitialActivity.class);
+			intent.setClass(this, VirtualTunnelActivity.class);
 			startActivity(intent);
 			return true;
 

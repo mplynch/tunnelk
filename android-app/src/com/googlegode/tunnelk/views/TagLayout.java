@@ -17,7 +17,8 @@ public abstract class TagLayout extends RelativeLayout implements Observer {
 		
 		this.tag = tag;
 
-		this.tag.addObserver(this);
+		if (tag != null)
+			this.tag.addObserver(this);
 		
 		this.initialize();
 	}

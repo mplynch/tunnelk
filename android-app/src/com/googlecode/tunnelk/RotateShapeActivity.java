@@ -32,7 +32,7 @@ public class RotateShapeActivity extends OptionsMenuActivity
 
     public void simulateClicked(View v){
         Intent intent = new Intent();
-        intent.setClass(this,TunnelkInitialActivity.class);
+        intent.setClass(this,VirtualTunnelActivity.class);
         startActivity(intent);
     }
 

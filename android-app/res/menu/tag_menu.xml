@@ -1,0 +1,7 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item android:id="@+id/trend" android:title="@string/trend" /><item
+        android:id="@+id/add_to_existing_trend"
+        android:title="@string/add_to_existing_trend">
+    </item>
+    
+</menu>
