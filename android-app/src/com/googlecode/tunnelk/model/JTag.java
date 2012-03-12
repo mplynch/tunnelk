@@ -15,7 +15,7 @@ import org.apache.http.message.BasicNameValuePair;
 public class JTag extends Tag {
 
 	public JTag() {
-		super("Light On/Off", "", 1, TagType.Relay, false);
+		super("Motor On/Off", "", 1, TagType.Relay, false);
 	}
 
 	public void setValue(int newValue) {
@@ -32,7 +32,7 @@ public class JTag extends Tag {
 		public void run() {
 			try {
 				HttpClient httpclient = new DefaultHttpClient();
-				HttpPost httppost = new HttpPost("http://192.168.1.37/lightswitch");
+				HttpPost httppost = new HttpPost("http://192.168.2.50/lightswitch");
 				try {
 					List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 					nameValuePairs.add(new BasicNameValuePair("lightswitch", Integer.toString(value)));

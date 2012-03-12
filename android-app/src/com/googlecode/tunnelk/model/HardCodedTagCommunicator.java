@@ -13,7 +13,8 @@ public class HardCodedTagCommunicator implements TagCommunicator {
 		
 		for (Tag tag : tags){
 			if (tag.isReadOnly()){
-				tag.setValue(tag.getValue() + r.nextInt(6) - 3);
+				tag.setValue(0);
+				//tag.setValue(tag.getValue() + r.nextInt(6) - 3);		
 			}
 		}
 	}
@@ -25,19 +26,24 @@ public class HardCodedTagCommunicator implements TagCommunicator {
 		
 		tags = new ArrayList<Tag>();
 		
-		tag = new Tag("Inlet Temperature 1", "F", 72, TagType.Temperature, true);
+//		tag = new Tag("Inlet Temperature 1", "F", 72, TagType.Temperature, true);
+//		tags.add(tag);
+//		
+//		tag = new Tag("Inlet Temperature 2", "F", 70, TagType.Temperature, true);
+//		tags.add(tag);
+//		
+//		tag = new Tag("Fan Speed", "%", 50, TagType.FanSpeedSetPoint, false);
+//		tags.add(tag);
+//		
+//		tag = new Tag("Fan On/Off", "", 0, TagType.Relay, false);
+//		tags.add(tag);
+		
+//		tags.add(new JTag());
+		tag = new MTag();
 		tags.add(tag);
 		
-		tag = new Tag("Inlet Temperature 2", "F", 70, TagType.Temperature, true);
+		tag = new JTag();
 		tags.add(tag);
-		
-		tag = new Tag("Fan Speed", "%", 50, TagType.FanSpeedSetPoint, false);
-		tags.add(tag);
-		
-		tag = new Tag("Fan On/Off", "", 0, TagType.Relay, false);
-		tags.add(tag);
-		
-		tags.add(new JTag());
 		
 		return tags;
 	}

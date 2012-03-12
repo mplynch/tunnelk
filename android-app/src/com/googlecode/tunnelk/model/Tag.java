@@ -15,7 +15,7 @@ public class Tag extends Observable {
 
 	private String units;
 
-	private int value;
+	protected int value;
 	
 	private TagHistorySeries history;
 	

@@ -51,7 +51,7 @@ public class PhysicalTunnelHMIActivity extends OptionsMenuActivity {
 		// setContentView(layout);
 
 		Timer timer = new Timer();
-		timer.scheduleAtFixedRate(new UpdateTagsTask(comm), 0, 1000);
+		timer.scheduleAtFixedRate(new UpdateTagsTask(comm), 0, 5000);
 	}
 
 	@Override
