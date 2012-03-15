@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
-public class SetAirfoilShapeActivity extends OptionsMenuActivity
+public class SetAirfoilShapeActivity extends TunnelKActivity
 {
     /** Called when the activity is first created. */
     @Override

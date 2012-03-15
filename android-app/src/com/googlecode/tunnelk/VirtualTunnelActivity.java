@@ -19,7 +19,7 @@ import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class VirtualTunnelActivity extends OptionsMenuActivity
+public class VirtualTunnelActivity extends TunnelKActivity
 {
     /** Called when the activity is first created. */
     @Override

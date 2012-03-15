@@ -10,7 +10,7 @@ import android.view.WindowManager;
 
 import com.googlegode.tunnelk.views.*;
 
-public class TimeHistoryPlotActivity extends OptionsMenuActivity implements
+public class TimeHistoryPlotActivity extends TunnelKActivity implements
 		View.OnClickListener {
 	private TagTimeHistoryPlot plot;
 

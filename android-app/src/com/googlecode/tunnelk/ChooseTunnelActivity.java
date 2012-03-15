@@ -11,7 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class ChooseTunnelActivity extends OptionsMenuActivity implements
+public class ChooseTunnelActivity extends TunnelKActivity implements
 		OnItemClickListener {
 
 	@Override

@@ -16,7 +16,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
-public class PhysicalTunnelHMIActivity extends OptionsMenuActivity {
+public class PhysicalTunnelHMIActivity extends TunnelKActivity {
 	private final int chooseTagsRequestCode = 1;
 	private final int showPlotRequestCode = 2;
 

@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
-public class ShowResultsActivity extends OptionsMenuActivity
+public class ShowResultsActivity extends TunnelKActivity
 {
     /** Called when the activity is first created. */
     @Override

@@ -81,7 +81,7 @@
             android:name="ChooseTagsActivity"
             android:screenOrientation="landscape" >
         </activity>
-        <activity android:name="OptionsMenuActivity" >
+        <activity android:name=".TunnelKActivity" >
         </activity>
 
         <service android:name="LocalService" >

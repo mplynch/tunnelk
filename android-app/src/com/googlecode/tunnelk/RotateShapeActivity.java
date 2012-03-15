@@ -10,7 +10,7 @@ import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 
-public class RotateShapeActivity extends OptionsMenuActivity
+public class RotateShapeActivity extends TunnelKActivity
 {
 	float rotation=0;
 	ImageView shape;

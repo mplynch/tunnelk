@@ -10,7 +10,7 @@ import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
-public class SetTunnelConditionsActivity extends OptionsMenuActivity
+public class SetTunnelConditionsActivity extends TunnelKActivity
 {
 	private Spinner windSpeedSpinner;
 	private Spinner temperatureSpinner;

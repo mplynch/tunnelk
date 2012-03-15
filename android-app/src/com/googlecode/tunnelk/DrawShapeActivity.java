@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
-public class DrawShapeActivity extends OptionsMenuActivity {
+public class DrawShapeActivity extends TunnelKActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
