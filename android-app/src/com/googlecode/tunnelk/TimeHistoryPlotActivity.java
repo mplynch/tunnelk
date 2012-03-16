@@ -12,6 +12,11 @@ import com.googlegode.tunnelk.views.*;
 
 public class TimeHistoryPlotActivity extends TunnelKActivity implements
 		View.OnClickListener {
+	@Override
+	protected boolean getDefaultOptionsMenuEnabled() {
+		return false;
+	}
+
 	private TagTimeHistoryPlot plot;
 
 	protected void onCreate(Bundle savedInstanceState) {

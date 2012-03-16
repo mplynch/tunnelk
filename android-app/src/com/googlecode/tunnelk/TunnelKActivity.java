@@ -2,6 +2,7 @@ package com.googlecode.tunnelk;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.Menu;
@@ -60,6 +61,9 @@ public class TunnelKActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		//  Make the volume buttons adjust the music volume
+		setVolumeControlStream(AudioManager.STREAM_MUSIC);
 	}
 
 	@Override

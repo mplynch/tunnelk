@@ -3,12 +3,9 @@ package com.googlecode.tunnelk;
 import java.util.Collection;
 import java.util.ArrayList;
 
-import com.googlecode.tunnelk.model.HardCodedTagCommunicator;
 import com.googlecode.tunnelk.model.Tag;
-import com.googlecode.tunnelk.model.TagCommunicator;
 import com.googlecode.tunnelk.model.TagManager;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -17,7 +14,12 @@ import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-public class ChooseTagsActivity extends Activity {
+public class ChooseTagsActivity extends TunnelKActivity {
+	@Override
+	protected boolean getDefaultOptionsMenuEnabled() {
+		return false;
+	}
+
 	private ArrayAdapter<Tag> adapter;
 
 	private ListView listView;
