@@ -11,8 +11,6 @@ import com.googlegode.tunnelk.views.TagLayoutFactory;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.LinearLayout;
 
 public class PhysicalTunnelHMIActivity extends TunnelKActivity {

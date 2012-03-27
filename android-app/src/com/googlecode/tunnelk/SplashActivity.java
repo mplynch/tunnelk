@@ -3,15 +3,8 @@ package com.googlecode.tunnelk;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 
 public class SplashActivity extends TunnelKActivity {
-	@Override
-	protected int getNarrationResourceId() {
-		return R.raw.welcome;
-	}
-
 	@Override
 	protected boolean getNarrationOnStartEnabled() {
 		return false;
@@ -31,7 +24,7 @@ public class SplashActivity extends TunnelKActivity {
 	}
 
 	public void splashClicked(View v) {
-		this.narrate();
+		this.narrate(R.raw.welcome);
 
 		Intent intent = new Intent();
 		intent.setClass(this, ChooseTunnelActivity.class);

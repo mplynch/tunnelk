@@ -1,6 +1,9 @@
 package com.googlecode.tunnelk.model;
 
-import java.util.*;
+import java.util.ArrayList;
+//import java.util.Calendar;
+import java.util.Collection;
+//import java.util.Random;
 
 /**
  * A TagCommunicator implemented using hard-coded tag data.
@@ -9,7 +12,7 @@ public class HardCodedTagCommunicator implements TagCommunicator {
 	private ArrayList<Tag> tags;
 	
 	public void getTagValues(){
-		Random r = new Random(Calendar.getInstance().getTimeInMillis());
+//		Random r = new Random(Calendar.getInstance().getTimeInMillis());
 		
 		for (Tag tag : tags){
 			if (tag.isReadOnly()){
@@ -22,7 +25,7 @@ public class HardCodedTagCommunicator implements TagCommunicator {
 	public Collection<Tag> getTagData() {
 		Tag tag;
 		
-		int i = 0;
+//		int i = 0;
 		
 		tags = new ArrayList<Tag>();
 		

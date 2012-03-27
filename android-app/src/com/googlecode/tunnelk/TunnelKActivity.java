@@ -1,6 +1,6 @@
 package com.googlecode.tunnelk;
 
-import java.util.Timer;
+import java.util.Date;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -12,19 +12,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 public class TunnelKActivity extends Activity {
-	private Timer timer;
-
-	/**
-	 * Returns the resource ID of the sound resource to play as narration for
-	 * this activity.
-	 * 
-	 * @return the resource ID or 0 if no narration should take place
-	 */
-	protected int getNarrationResourceId() {
-		return 0;
-	}
+	protected Date lastInteraction;
 
 	/**
 	 * Returns whether or not the default options menu should be displayed in
@@ -50,10 +41,14 @@ public class TunnelKActivity extends Activity {
 		return false;
 	}
 
-	@Override
-	public void onUserInteraction() {
-		// TODO Auto-generated method stub
-		super.onUserInteraction();
+	/**
+	 * Returns the resource ID of the default sound resource to play as
+	 * narration for this activity.
+	 * 
+	 * @return the resource ID or 0 if no narration should take place
+	 */
+	protected int getNarrationResourceId() {
+		return 0;
 	}
 
 	/**
@@ -61,13 +56,51 @@ public class TunnelKActivity extends Activity {
 	 * getNarrationResourceId() method.
 	 */
 	protected void narrate() {
-		int id = getNarrationResourceId();
+		int resourceId = getNarrationResourceId();
 
-		if (id == 0)
+		if (resourceId == 0)
 			return;
 
-		MediaPlayer mediaPlayer = MediaPlayer.create(this, id);
-		mediaPlayer.start();
+		narrate(resourceId);
+	}
+
+	/**
+	 * Plays the audio narration file with the specified resourceId.
+	 * 
+	 * @param resouceId
+	 *            the id
+	 */
+	protected void narrate(int resourceId) {
+		MediaPlayer mediaPlayer = MediaPlayer.create(this, resourceId);
+
+		if (mediaPlayer != null)
+			mediaPlayer.start();
+	}
+
+	/**
+	 * Shows a toast on this activity with the specified message.
+	 * 
+	 * @param message
+	 *            the message
+	 */
+	public void showToast(final String message, final int duration) {
+		final TunnelKActivity activity = this;
+		
+		runOnUiThread(new Runnable() {
+			public void run() {
+				Toast toast = Toast.makeText(activity, message, duration);
+				toast.show();
+			}
+		});
+	}
+
+	/**
+	 * Starts the splash screen activity for the application.
+	 */
+	public void startSplashActivity() {
+		Intent intent = new Intent();
+		intent.setClass(this, SplashActivity.class);
+		startActivity(intent);
 	}
 
 	@Override
@@ -131,20 +164,21 @@ public class TunnelKActivity extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
+		TunnelKApplication.getInstance().setCurrentActivity(this);
 	}
 
 	@Override
 	protected void onStart() {
 		super.onStart();
 
-		/*
-		 * TODO: Decide whether to put then narration stuff in onStart() or
-		 * onResume().
-		 * 
-		 * See http://developer.android.com/reference/android/app/Activity.html#
-		 * ActivityLifecycle
-		 */
 		if (getNarrationOnStartEnabled())
 			narrate();
+	}
+
+	@Override
+	public void onUserInteraction() {
+		super.onUserInteraction();
+
+		TunnelKApplication.getInstance().recordInteraction();
 	}
 }
