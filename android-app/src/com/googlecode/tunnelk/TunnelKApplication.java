@@ -15,12 +15,7 @@ public class TunnelKApplication extends Application {
 	/**
 	 * The time to wait before starting splash screen, in milliseconds.
 	 */
-	public final int timeoutPeriod = 30000;
-
-	/**
-	 * The intent used to start the application's splash screen.
-	 */
-	public static final String SPLASH_INTENT = "com.googlecode.tunnelk.intent.action.START_SPLASH_SCREEN";
+	public final int timeoutPeriod = 120000;
 
 	private static TunnelKApplication instance;
 

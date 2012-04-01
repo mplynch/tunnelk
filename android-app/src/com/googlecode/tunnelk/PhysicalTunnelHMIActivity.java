@@ -15,35 +15,33 @@ import android.widget.LinearLayout;
 
 public class PhysicalTunnelHMIActivity extends TunnelKActivity {
 	private final int chooseTagsRequestCode = 1;
+
 	private final int showPlotRequestCode = 2;
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+	private boolean viewGenerated = false;
 
-		setContentView(R.layout.physical_tunnel_hmi);
+	public void generateViews() {
+		final PhysicalTunnelHMIActivity activity = this;
 
-		// LinearLayout layout = new LinearLayout(this);
-		LinearLayout layout = (LinearLayout) findViewById(R.id.linearLayoutHMIWidgets);
-		layout.setOrientation(LinearLayout.VERTICAL);
+		runOnUiThread(new Runnable() {
+			public void run() {
+				Collection<Tag> tags = TagManager.getInstance().getAllTags();
 
-		TagCommunicator comm = new HardCodedTagCommunicator();
+				LinearLayout layout = (LinearLayout) findViewById(R.id.linearLayoutHMIWidgets);
 
-		Collection<Tag> tags = comm.getTagData();
+				TagManager.getInstance().addTags(tags);
 
-		TagManager.getInstance().addTags(tags);
+				for (Tag tag : tags) {
+					TagLayout tagLayout = TagLayoutFactory
+							.create(activity, tag);
 
-		for (Tag tag : tags) {
-			TagLayout tagLayout = TagLayoutFactory.create(this, tag);
-
-			if (tagLayout != null)
-				layout.addView(tagLayout);
-		}
-
-		// setContentView(layout);
-
-		Timer timer = new Timer();
-		timer.scheduleAtFixedRate(new UpdateTagsTask(comm), 0, 5000);
+					if (tagLayout != null)
+						layout.addView(tagLayout);
+				}
+				
+				activity.viewGenerated = true;
+			}
+		});
 	}
 
 	@Override
@@ -58,13 +56,28 @@ public class PhysicalTunnelHMIActivity extends TunnelKActivity {
 			Intent intent = new Intent(this, TimeHistoryPlotActivity.class);
 			intent.putExtra(getResources().getString(R.string.trending_tags),
 					tagNames);
-			//startActivity(intent);
+			// startActivity(intent);
 			startActivityForResult(intent, showPlotRequestCode);
 		}
-		
-		else if (requestCode == showPlotRequestCode){
-			
+
+		else if (requestCode == showPlotRequestCode) {
+
 		}
+	}
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+
+		setContentView(R.layout.physical_tunnel_hmi);
+
+		LinearLayout layout = (LinearLayout) findViewById(R.id.linearLayoutHMIWidgets);
+		layout.setOrientation(LinearLayout.VERTICAL);
+
+		TagCommunicator comm = new JSONTagCommunicator();
+
+		Timer timer = new Timer();
+		timer.scheduleAtFixedRate(new UpdateTagsTask(this, comm), 0, 5000);
 	}
 
 	public void onTrendGraphClick(View v) {
@@ -74,19 +87,28 @@ public class PhysicalTunnelHMIActivity extends TunnelKActivity {
 		Intent intent = new Intent(this, ChooseTagsActivity.class);
 		startActivityForResult(intent, chooseTagsRequestCode);
 	}
-
+	
 	private static final class UpdateTagsTask extends TimerTask {
+		private PhysicalTunnelHMIActivity activity;
+		
 		private TagCommunicator comm;
 
-		public UpdateTagsTask(TagCommunicator comm) {
+		public UpdateTagsTask(PhysicalTunnelHMIActivity activity,
+				TagCommunicator comm) {
 			super();
 
 			this.comm = comm;
+			
+			this.activity = activity;
 		}
 
 		@Override
 		public void run() {
 			comm.getTagValues();
+			
+			if (!activity.viewGenerated) {
+				activity.generateViews();
+			}
 		}
 	}
 }

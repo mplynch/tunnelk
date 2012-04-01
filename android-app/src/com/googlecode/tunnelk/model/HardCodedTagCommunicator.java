@@ -11,18 +11,7 @@ import java.util.Collection;
 public class HardCodedTagCommunicator implements TagCommunicator {
 	private ArrayList<Tag> tags;
 	
-	public void getTagValues(){
-//		Random r = new Random(Calendar.getInstance().getTimeInMillis());
-		
-		for (Tag tag : tags){
-			if (tag.isReadOnly()){
-				tag.setValue(0);
-				//tag.setValue(tag.getValue() + r.nextInt(6) - 3);		
-			}
-		}
-	}
-		
-	public Collection<Tag> getTagData() {
+	public HardCodedTagCommunicator() {
 		Tag tag;
 		
 //		int i = 0;
@@ -47,8 +36,17 @@ public class HardCodedTagCommunicator implements TagCommunicator {
 		
 		tag = new JTag();
 		tags.add(tag);
+	}
+	
+	public void getTagValues(){
+//		Random r = new Random(Calendar.getInstance().getTimeInMillis());
 		
-		return tags;
+		for (Tag tag : tags){
+			if (tag.isReadOnly()){
+				tag.setValue(0);
+				//tag.setValue(tag.getValue() + r.nextInt(6) - 3);		
+			}
+		}
 	}
 
 	public void update(Tag tag) {

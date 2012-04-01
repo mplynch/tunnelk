@@ -6,7 +6,7 @@ import java.util.Observable;
 
 public class Tag extends Observable {
 	private int initialValue;
-	
+
 	private boolean readOnly;
 
 	private String name;
@@ -18,7 +18,14 @@ public class Tag extends Observable {
 	protected int value;
 	
 	private TagHistorySeries history;
-	
+
+	/**
+	 * Creates a new Tag instance.
+	 */
+	public Tag() {
+		
+	}
+
 	/**
 	 * Creates a new Tag instance.
 	 * 
@@ -39,11 +46,9 @@ public class Tag extends Observable {
 		
 		this.readOnly = readOnly;
 		
-		this.history = new TagHistorySeries(this.name);
-
 		initialize();
 	}
-	
+
 	/**
 	 * Gets the tag history series for this tag
 	 * @return the series
@@ -60,7 +65,7 @@ public class Tag extends Observable {
 	public int getInitialValue() {
 		return initialValue;
 	}
-
+	
 	/**
 	 * Gets the name of this tag
 	 * 
@@ -69,7 +74,7 @@ public class Tag extends Observable {
 	public String getName() {
 		return name;
 	}
-
+	
 	/**
 	 * Gets the type for this Tag.
 	 * 
@@ -78,7 +83,7 @@ public class Tag extends Observable {
 	public TagType getType() {
 		return type;
 	}
-
+	
 	/**
 	 * Gets the unit of measure of this tag
 	 * 
@@ -87,7 +92,7 @@ public class Tag extends Observable {
 	public String getUnits() {
 		return units;
 	}
-
+	
 	/**
 	 * Gets the value of this tag
 	 * 
@@ -113,6 +118,46 @@ public class Tag extends Observable {
 	}
 
 	/**
+	 * Sets the initial value of this tag.
+	 * @param initialValue the initialValue to set
+	 */
+	public void setInitialValue(int initialValue) {
+		this.initialValue = initialValue;
+	}
+
+	/**
+	 * Sets the name of this tag.
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	/**
+	 * Sets whether this tag is read-only.
+	 * @param readOnly the readOnly to set
+	 */
+	public void setReadOnly(boolean readOnly) {
+		this.readOnly = readOnly;
+	}
+
+	/**
+	 * Sets the type of this tag.
+	 * @param type the type to set
+	 */
+	public void setType(TagType type) {
+		this.type = type;
+	}
+
+	/**
+	 * Sets the units of this tag.
+	 * @param units the units to set
+	 */
+	public void setUnits(String units) {
+		this.units = units;
+	}
+
+	/**
 	 * Sets the value of this Tag, causing Observers to be notified only if the
 	 * specified value differs from the Tag's current value.
 	 * 
@@ -120,6 +165,9 @@ public class Tag extends Observable {
 	 */
 	public void setValue(int newValue) {
 		Date timestamp = Calendar.getInstance().getTime();
+		
+		if (history == null)
+			this.history = new TagHistorySeries("TempName");
 		
 		history.addEntry(timestamp, newValue);
 		
