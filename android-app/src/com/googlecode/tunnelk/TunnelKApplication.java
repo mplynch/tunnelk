@@ -3,8 +3,6 @@ package com.googlecode.tunnelk;
 import java.util.Calendar;
 
 import android.app.Application;
-import android.content.Intent;
-import android.widget.Toast;
 
 public class TunnelKApplication extends Application {
 	/**

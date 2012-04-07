@@ -104,7 +104,7 @@ public class PhysicalTunnelHMIActivity extends TunnelKActivity {
 
 		@Override
 		public void run() {
-			comm.getTagValues();
+			comm.exchangeTags();
 			
 			if (!activity.viewGenerated) {
 				activity.generateViews();

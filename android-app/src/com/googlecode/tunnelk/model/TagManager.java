@@ -2,13 +2,15 @@ package com.googlecode.tunnelk.model;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  * Manages the Tags used in the app. This class makes use of the Singleton
  * design pattern. Call getInstance() to get the singleton instance of the
  * class.
  */
-public class TagManager {
+public class TagManager implements Observer {
 	private static TagManager instance;
 
 	private HashMap<String, Tag> tags;
@@ -27,6 +29,8 @@ public class TagManager {
 	 *            a tag to be added
 	 */
 	public void addTag(Tag tag) {
+		tag.addObserver(this);
+
 		tags.put(tag.getName(), tag);
 	}
 
@@ -38,7 +42,7 @@ public class TagManager {
 	 */
 	public void addTags(Collection<Tag> newTags) {
 		for (Tag tag : newTags) {
-			tags.put(tag.getName(), tag);
+			this.addTag(tag);
 		}
 	}
 
@@ -103,5 +107,9 @@ public class TagManager {
 	 */
 	public int size() {
 		return tags.size();
+	}
+
+	public void update(Observable observer, Object data) {
+		
 	}
 }
