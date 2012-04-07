@@ -19,6 +19,8 @@ public class PhysicalTunnelHMIActivity extends TunnelKActivity {
 	private final int showPlotRequestCode = 2;
 
 	private boolean viewGenerated = false;
+	
+	private Timer timer;
 
 	public void generateViews() {
 		final PhysicalTunnelHMIActivity activity = this;
@@ -73,10 +75,22 @@ public class PhysicalTunnelHMIActivity extends TunnelKActivity {
 
 		LinearLayout layout = (LinearLayout) findViewById(R.id.linearLayoutHMIWidgets);
 		layout.setOrientation(LinearLayout.VERTICAL);
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		
+		timer.cancel();
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
 
 		TagCommunicator comm = new JSONTagCommunicator();
-
-		Timer timer = new Timer();
+		
+		timer = new Timer();
 		timer.scheduleAtFixedRate(new UpdateTagsTask(this, comm), 0, 5000);
 	}
 

@@ -55,6 +55,8 @@ public class JSONTagCommunicator implements TagCommunicator {
 					nameValuePairs.add(new BasicNameValuePair(tag.getName(),
 							Integer.toString(tag.getValue())));
 				}
+				
+				updateQueue.clear();
 			}
 
 			URI uri = URIUtils.createURI(method, host, -1, path,
