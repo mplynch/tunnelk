@@ -1,30 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/relativeLayoutHMI"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     android:layout_alignParentLeft="true"
-    android:layout_alignParentTop="true" >
+    android:layout_alignParentTop="true"
+    android:orientation="vertical" >
 
-    <LinearLayout
-        android:id="@+id/linearLayoutHMIWidgets"
-        android:layout_width="match_parent"
+    <ScrollView
+        android:id="@+id/scrollViewHMI"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="54dp"
-        android:layout_marginTop="22dp"
-        android:orientation="vertical" >
-    </LinearLayout>
-    
+        android:layout_weight="1" >
+
+        <LinearLayout
+            android:id="@+id/linearLayoutHMIWidgets"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+        </LinearLayout>
+    </ScrollView>
+
     <RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/relativeLayoutMenuBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/linearLayoutWidgets"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentBottom="true" >
+        android:layout_weight="0" >
 
         <Button
             android:id="@+id/buttonTrendGraph"
@@ -32,9 +33,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:text="@string/view_trend_graph"
-            android:onClick="onTrendGraphClick" />
-
+            android:onClick="onTrendGraphClick"
+            android:text="@string/view_trend_graph" />
     </RelativeLayout>
 
-</RelativeLayout>
+</LinearLayout>
