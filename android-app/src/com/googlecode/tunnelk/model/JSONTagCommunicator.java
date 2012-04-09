@@ -27,8 +27,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 public class JSONTagCommunicator implements TagCommunicator {
 	private final String method = "http";
-	private final String host = "tunnelksim.appspot.com";
-	private final String path = "/command/ExchangeTags";
+	private final String host = "192.168.2.50";
+	private final String path = "/alldata";
 
 	private boolean updatingTags;
 
