@@ -10,7 +10,7 @@ import android.view.View;
 
 import com.googlecode.tunnelk.model.JSONTagCommunicator;
 import com.googlecode.tunnelk.model.TagCommunicator;
-import com.googlegode.tunnelk.views.*;
+import com.googlecode.tunnelk.views.*;
 
 public class TimeHistoryPlotActivity extends TunnelKActivity implements
 		View.OnClickListener {
