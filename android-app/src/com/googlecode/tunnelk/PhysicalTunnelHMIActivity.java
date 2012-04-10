@@ -5,8 +5,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import com.googlecode.tunnelk.model.*;
-import com.googlegode.tunnelk.views.TagLayout;
-import com.googlegode.tunnelk.views.TagLayoutFactory;
+import com.googlecode.tunnelk.views.TagLayout;
+import com.googlecode.tunnelk.views.TagLayoutFactory;
 
 import android.content.Intent;
 import android.os.Bundle;

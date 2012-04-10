@@ -1,4 +1,4 @@
-package com.googlegode.tunnelk.views;
+package com.googlecode.tunnelk.views;
 
 import java.util.Observable;
 
