@@ -15,11 +15,6 @@ public class SetAirfoilShapeActivity extends TunnelKActivity
         setContentView(R.layout.set_airfoil_shape);
 
     }
-    public void drawShapeClicked(View v){
-        Intent intent = new Intent();
-        intent.setClass(this,DrawShapeActivity.class);
-        startActivity(intent);
-    }
     public void nextClicked(View v){
         Intent intent = new Intent();
         intent.setClass(this,RotateShapeActivity.class);
