@@ -28,6 +28,8 @@ public class TagLayoutFactory {
 			return (new TagReadOnlyText(context, tag));
 		case Relay:
 			return (new TagOnOffSwitch(context, tag));
+		case LED:
+			return (new TagOnOffSwitch(context, tag));
 		default:
 		}
 

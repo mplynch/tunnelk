@@ -5,5 +5,6 @@ public enum TagType {
 	FanSpeedSetPoint,
 	FanSpeed,
 	Humidity,
-	Relay
+	Relay,
+	LED
 }

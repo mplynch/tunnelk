@@ -91,7 +91,7 @@ public class PhysicalTunnelHMIActivity extends TunnelKActivity {
 		TagCommunicator comm = new JSONTagCommunicator();
 		
 		timer = new Timer();
-		timer.scheduleAtFixedRate(new UpdateTagsTask(this, comm), 0, 5000);
+		timer.scheduleAtFixedRate(new UpdateTagsTask(this, comm), 0, 1000);
 	}
 
 	public void onTrendGraphClick(View v) {

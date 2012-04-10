@@ -12,6 +12,7 @@ import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URIUtils;
 import org.apache.http.client.utils.URLEncodedUtils;
@@ -32,12 +33,12 @@ public class JSONTagCommunicator implements TagCommunicator {
 
 	private boolean updatingTags;
 
-	private LinkedList<Tag> updateQueue;
+	private LinkedList<Tag> tagQueue;
 
 	public JSONTagCommunicator() {
 		updatingTags = false;
 
-		updateQueue = new LinkedList<Tag>();
+		tagQueue = new LinkedList<Tag>();
 	}
 
 	public synchronized void exchangeTags() {
@@ -50,19 +51,18 @@ public class JSONTagCommunicator implements TagCommunicator {
 
 			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 
-			if (!updateQueue.isEmpty()) {
-				for (Tag tag : updateQueue) {
+			HttpPost request = new HttpPost("http://192.168.2.50/alldata");
+
+			if (!tagQueue.isEmpty()) {
+				for (Tag tag : tagQueue) {
 					nameValuePairs.add(new BasicNameValuePair(tag.getName(),
 							Integer.toString(tag.getValue())));
 				}
+
+				tagQueue.clear();
 				
-				updateQueue.clear();
+				request.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 			}
-
-			URI uri = URIUtils.createURI(method, host, -1, path,
-					URLEncodedUtils.format(nameValuePairs, "UTF-8"), null);
-
-			HttpPost request = new HttpPost(uri);
 
 			updatingTags = true;
 
@@ -86,7 +86,8 @@ public class JSONTagCommunicator implements TagCommunicator {
 						manager.addTag(tag);
 					}
 
-					tag.setValue(responseTag.getValue());
+					if (!tagQueue.contains(tag))
+						tag.setValue(responseTag.getValue());
 				}
 			} catch (ClientProtocolException e) {
 				System.out.println(e.toString());
@@ -102,17 +103,17 @@ public class JSONTagCommunicator implements TagCommunicator {
 
 	public synchronized void update(Observable observable, Object data) {
 		// Check for a circular change notification
-		if (updatingTags)
-			return;
+		 if (updatingTags)
+		 return;
 
 		// Check for bad input
 		if (observable.getClass() != Tag.class)
 			return;
 
 		// Ensure a tag is only queued once
-		if (updateQueue.contains(observable))
+		if (tagQueue.contains(observable))
 			return;
 
-		updateQueue.add((Tag) observable);
+		tagQueue.add((Tag) observable);
 	}
 }
