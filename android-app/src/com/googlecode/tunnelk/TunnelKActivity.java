@@ -150,6 +150,11 @@ public class TunnelKActivity extends Activity {
 			intent.setClass(this, PhysicalTunnelHMIActivity.class);
 			startActivity(intent);
 			return true;
+			
+		case R.id.settings:
+			intent.setClass(this, SettingsActivity.class);
+			startActivityForResult(intent, 0);
+			return true;
 		}
 
 		return super.onOptionsItemSelected(item);

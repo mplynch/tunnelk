@@ -3,5 +3,6 @@
           android:title="@string/virtual_home" />
         <item android:id="@+id/physical_home"
           android:title="@string/physical_home" />
+        <item android:id="@+id/settings" android:title="@string/settings"></item>
         
     </menu>

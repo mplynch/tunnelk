@@ -35,6 +35,11 @@
             </intent-filter>
         </activity>
         <activity
+            android:name="SettingsActivity"
+            android:label="@string/settings"
+            android:screenOrientation="landscape" >
+        </activity>
+        <activity
             android:name="ChooseTunnelActivity"
             android:label="@string/choose_tunnel_type"
             android:screenOrientation="landscape" >

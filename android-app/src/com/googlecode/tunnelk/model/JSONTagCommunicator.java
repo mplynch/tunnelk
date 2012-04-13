@@ -1,8 +1,7 @@
 package com.googlecode.tunnelk.model;
 
 import java.io.IOException;
-import java.net.URI;
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Observable;
@@ -14,8 +13,6 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.utils.URIUtils;
-import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
@@ -27,21 +24,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * A TagCommunicator implemented using a JSON-based web service.
  */
 public class JSONTagCommunicator implements TagCommunicator {
-	private final String method = "http";
-	private final String host = "192.168.2.50";
-	private final String path = "/alldata";
-
-	private boolean updatingTags;
-
-	private LinkedList<Tag> tagQueue;
-
-	public JSONTagCommunicator() {
-		updatingTags = false;
-
-		tagQueue = new LinkedList<Tag>();
+	private String url;
+	
+	public JSONTagCommunicator(String url) {
+		this.url = url;
 	}
-
-	public synchronized void exchangeTags() {
+	
+	public void exchangeTags() {
 		try {
 			ObjectMapper mapper = new ObjectMapper();
 
@@ -49,22 +38,28 @@ public class JSONTagCommunicator implements TagCommunicator {
 
 			HttpClient httpclient = new DefaultHttpClient();
 
-			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+			LinkedList<NameValuePair> tagQueue = new LinkedList<NameValuePair>();
 
-			HttpPost request = new HttpPost("http://192.168.2.50/alldata");
+			Collection<Tag> tags = manager.getAllTags();
 
-			if (!tagQueue.isEmpty()) {
-				for (Tag tag : tagQueue) {
-					nameValuePairs.add(new BasicNameValuePair(tag.getName(),
-							Integer.toString(tag.getValue())));
+			HttpPost request = new HttpPost(url);
+			//HttpPost request = new HttpPost("http://192.168.2.50/alldata");
+//			HttpPost request = new HttpPost(
+//					"http://tunnelksim.appspot.com/command/ExchangeTags");
+
+			for (Tag tag : tags) {
+				synchronized (tag) {
+					if (tag.isChangedLocally()) {
+						tagQueue.add(new BasicNameValuePair(tag.getName(),
+								Integer.toString(tag.getValue())));
+
+						tag.setChangedLocally(false);
+					}
 				}
-
-				tagQueue.clear();
-				
-				request.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 			}
 
-			updatingTags = true;
+			if (!tagQueue.isEmpty())
+				request.setEntity(new UrlEncodedFormEntity(tagQueue));
 
 			try {
 				HttpResponse response = httpclient.execute(request);
@@ -73,11 +68,11 @@ public class JSONTagCommunicator implements TagCommunicator {
 
 				String content = EntityUtils.toString(entity);
 
-				List<Tag> tags = mapper.readValue(content,
+				List<Tag> responseTags = mapper.readValue(content,
 						new TypeReference<List<Tag>>() {
 						});
 
-				for (Tag responseTag : tags) {
+				for (Tag responseTag : responseTags) {
 					Tag tag = manager.getTag(responseTag.getName());
 
 					if (tag == null) {
@@ -86,8 +81,12 @@ public class JSONTagCommunicator implements TagCommunicator {
 						manager.addTag(tag);
 					}
 
-					if (!tagQueue.contains(tag))
+					// Check to ensure the tag hasn't been changed locally
+					if (!tag.isChangedLocally()) {
+						tag.deleteObserver(this);
 						tag.setValue(responseTag.getValue());
+						tag.addObserver(this);
+					}
 				}
 			} catch (ClientProtocolException e) {
 				System.out.println(e.toString());
@@ -97,23 +96,17 @@ public class JSONTagCommunicator implements TagCommunicator {
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
-
-		updatingTags = false;
 	}
 
-	public synchronized void update(Observable observable, Object data) {
-		// Check for a circular change notification
-		 if (updatingTags)
-		 return;
+	public void update(Observable observable, Object data) {
+		Tag tag = (Tag) observable;
 
-		// Check for bad input
-		if (observable.getClass() != Tag.class)
-			return;
+		synchronized (tag) {
+			// Check for bad input
+			if (observable.getClass() != Tag.class)
+				return;
 
-		// Ensure a tag is only queued once
-		if (tagQueue.contains(observable))
-			return;
-
-		tagQueue.add((Tag) observable);
+			tag.setChangedLocally(true);
+		}
 	}
 }

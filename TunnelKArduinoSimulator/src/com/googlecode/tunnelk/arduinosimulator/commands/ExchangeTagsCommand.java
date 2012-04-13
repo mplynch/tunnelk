@@ -6,6 +6,7 @@ import java.util.Calendar;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Random;
+import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +21,8 @@ import com.googlecode.tunnelk.arduinosimulator.model.Tag;
 import static com.google.appengine.api.datastore.FetchOptions.Builder.*;
 
 public class ExchangeTagsCommand implements Command {
+	private static final Logger log = Logger.getLogger(ExchangeTagsCommand.class.getName());
+	
 	@Override
 	public void execute(CommandContext context) {
 		HashMap<String, Tag> tagsMap = new HashMap<String, Tag>();
@@ -66,7 +69,7 @@ public class ExchangeTagsCommand implements Command {
 
 		@SuppressWarnings("unchecked")
 		Enumeration<String> parameters = request.getParameterNames();
-
+		
 		while (parameters.hasMoreElements()) {
 			String name = parameters.nextElement();
 
@@ -83,6 +86,8 @@ public class ExchangeTagsCommand implements Command {
 			tag.setValue(value);
 
 			datastore.put(tag.toEntity());
+			
+			log.info("Received tag: " + tag.getName() + " = " + tag.getValue());
 		}
 
 		try {

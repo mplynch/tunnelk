@@ -5,6 +5,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 
@@ -51,11 +52,16 @@ public class TimeHistoryPlotActivity extends TunnelKActivity implements
 	@Override
 	protected void onResume() {
 		super.onResume();
+		
+		SharedPreferences p = this.getSharedPreferences("TunnelkPrefs", 0);
 
-		TagCommunicator comm = new JSONTagCommunicator();
+		String url = p.getString("@string/controller_address",
+				getResources().getString(R.string.default_controller_address));
+		
+		TagCommunicator comm = new JSONTagCommunicator(url);
 
 		timer = new Timer();
-		timer.scheduleAtFixedRate(new UpdateTagsTask(comm), 0, 5000);
+		timer.scheduleAtFixedRate(new UpdateTagsTask(comm), 0, 1000);
 	}
 
 	private static final class UpdateTagsTask extends TimerTask {

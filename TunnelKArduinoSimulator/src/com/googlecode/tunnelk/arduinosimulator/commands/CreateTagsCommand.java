@@ -1,7 +1,6 @@
 package com.googlecode.tunnelk.arduinosimulator.commands;
 
 import java.io.IOException;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 
@@ -10,8 +9,6 @@ import org.bibeault.frontman.*;
 import com.google.appengine.api.datastore.*;
 import com.googlecode.tunnelk.arduinosimulator.model.Tag;
 import com.googlecode.tunnelk.arduinosimulator.model.TagType;
-
-import static com.google.appengine.api.datastore.FetchOptions.Builder.*;
 
 public class CreateTagsCommand implements Command {
 	@Override

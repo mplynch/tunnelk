@@ -9,6 +9,7 @@ import com.googlecode.tunnelk.views.TagLayout;
 import com.googlecode.tunnelk.views.TagLayoutFactory;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -87,8 +88,13 @@ public class PhysicalTunnelHMIActivity extends TunnelKActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
+		
+		SharedPreferences p = this.getSharedPreferences("TunnelkPrefs", 0);
 
-		TagCommunicator comm = new JSONTagCommunicator();
+		String url = p.getString("@string/controller_address",
+				getResources().getString(R.string.default_controller_address));
+		
+		TagCommunicator comm = new JSONTagCommunicator(url);
 		
 		timer = new Timer();
 		timer.scheduleAtFixedRate(new UpdateTagsTask(this, comm), 0, 1000);
