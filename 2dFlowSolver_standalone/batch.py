@@ -6,6 +6,8 @@ for mesh in ["camber.mesh","circle.mesh","diamond.mesh","naca0012.mesh","pig.mes
    for mach_number in ["0.6","0.8","1.0"]:
       for density in ["1.0","0.75","0.5"]:
          print "Simulating", mesh, "at mach", mach_number, "and density", density
+
+         #setup input file
          f = open("input.in","w")
          f.write("Adaptation Code Input File\n")
          f.write("\n")
@@ -32,7 +34,21 @@ for mesh in ["camber.mesh","circle.mesh","diamond.mesh","naca0012.mesh","pig.mes
          f.write("Dthresh   0.00001 // Derefinement threshold (if < 0, Dthresh = Af_mean - C_D*Af_sdev)\n")
          f.write("alpha     0.0     // Angle of Attack (in degrees) for the smoother (rotation angle)\n")
          f.close()
+
+         #run case
          system("./solve.exe "+mesh)
-         filename = mesh[:mesh.find(".")]+"_m"+str(mach_number)+"_d"+str(density)+".dat"
-         print "Writing result to", filename
-         system("mv solution.dat "+filename)
+
+         #generate images
+         system("tec360 -p screenshot.mcr")
+
+         #move output files
+         base_filename = mesh[:mesh.find(".")]+"_m"+str(mach_number)+"_d"+str(density)
+         solution_filename = base_filename+".dat"
+         density_filename = base_filename+"_density.jpg"
+         mach_filename = base_filename+"_mach.jpg"
+         pressure_filename = base_filename+"_pressure.jpg"
+         print "Writing result to", solution_filename
+         system("mv solution.dat "+solution_filename)
+         system("mv density.jpg "+density_filename)
+         system("mv mach.jpg "+mach_filename)
+         system("mv pressure.jpg "+pressure_filename)
