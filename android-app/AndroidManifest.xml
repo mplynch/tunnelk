@@ -78,6 +78,14 @@
             android:label="@string/show_results"
             android:screenOrientation="landscape" >
         </activity>
+        <activity android:name=".PrepareRequestTokenActivity" android:launchMode="singleTask">>
+			<intent-filter>
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+				<data android:scheme="x-oauthflow-twitter" android:host="callback" />
+			</intent-filter>
+		</activity>
         <activity
             android:name="ChooseTagsActivity"
             android:screenOrientation="landscape" >

@@ -8,5 +8,10 @@
 	<classpathentry kind="lib" path="libs/jackson/jackson-annotations-2.0.0.jar"/>
 	<classpathentry kind="lib" path="libs/jackson/jackson-core-2.0.0.jar"/>
 	<classpathentry kind="lib" path="libs/jackson/jackson-databind-2.0.0.jar"/>
+	<classpathentry kind="lib" path="libs/twitter4j-core-android-2.2.5.jar"/>
+	<classpathentry kind="lib" path="libs/twitter4j-media-support-android-2.2.5.jar"/>
+	<classpathentry kind="lib" path="/home/brian/code/tunnelk/android-app/libs/httpclient-4.0.1.jar"/>
+	<classpathentry kind="lib" path="/home/brian/code/tunnelk/android-app/libs/signpost-commonshttp4-1.2.1.1.jar"/>
+	<classpathentry kind="lib" path="/home/brian/code/tunnelk/android-app/libs/signpost-core-1.2.1.1.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
