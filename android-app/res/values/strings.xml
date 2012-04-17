@@ -7,8 +7,8 @@
     <string name="show_results">Show Results</string>
     <string name="draw_shape">Draw Shape</string>
     <string name="wind_speed">Wind Speed</string>
-    <string name="temperature">Temperature</string>
     <string name="pressure">Pressure</string>
+    <string name="altitude">Altitude</string>
     <string name="mach_number">Mach Number</string>
     <string name="tweet_results">Tweet Results</string>
     <string name="email_results">Email Results</string>

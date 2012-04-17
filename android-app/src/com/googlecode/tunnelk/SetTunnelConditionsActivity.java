@@ -13,8 +13,7 @@ import android.widget.Spinner;
 public class SetTunnelConditionsActivity extends TunnelKActivity
 {
 	private Spinner windSpeedSpinner;
-	private Spinner temperatureSpinner;
-	private Spinner pressureSpinner;
+	private Spinner altitudeSpinner;
 
     /** Called when the activity is first created. */
     @Override
@@ -30,16 +29,14 @@ public class SetTunnelConditionsActivity extends TunnelKActivity
         setContentView(R.layout.set_tunnel_conditions);
 
         windSpeedSpinner = (Spinner) findViewById(R.id.windSpeedSpinner);
-        temperatureSpinner = (Spinner) findViewById(R.id.temperatureSpinner);
-        pressureSpinner = (Spinner) findViewById(R.id.pressureSpinner);
+        altitudeSpinner = (Spinner) findViewById(R.id.altitudeSpinner);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
                 this, R.array.low_med_high_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         windSpeedSpinner.setAdapter(adapter);
-        temperatureSpinner.setAdapter(adapter);
-        pressureSpinner.setAdapter(adapter);
+        altitudeSpinner.setAdapter(adapter);
 
     }
     public void nextClicked(View v){
@@ -56,8 +53,7 @@ public class SetTunnelConditionsActivity extends TunnelKActivity
         SharedPreferences.Editor e = p.edit();
 
         e.putInt("@string/wind_speed", windSpeedSpinner.getSelectedItemPosition());
-        e.putInt("@string/temperature", temperatureSpinner.getSelectedItemPosition());
-        e.putInt("@string/pressure", pressureSpinner.getSelectedItemPosition());
+        e.putInt("@string/altitude", altitudeSpinner.getSelectedItemPosition());
 
         e.commit();
     }
@@ -69,11 +65,9 @@ public class SetTunnelConditionsActivity extends TunnelKActivity
         SharedPreferences p = context.getSharedPreferences("TunnelkPrefs", 0);
 
         int windSpeedPos = p.getInt("@string/wind_speed",1);
-        int temperaturePos = p.getInt("@string/temperature",1);
-        int pressurePos = p.getInt("@string/pressure",1);
+        int altitudePos = p.getInt("@string/altitude",1);
 
         windSpeedSpinner.setSelection(windSpeedPos);
-        temperatureSpinner.setSelection(temperaturePos);
-        pressureSpinner.setSelection(pressurePos);
+        altitudeSpinner.setSelection(altitudePos);
     }
 }
