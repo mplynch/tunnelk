@@ -4,21 +4,20 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@android:drawable/list_selector_background">
-
+    
     <TextView
         android:id="@+id/tagLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:text="Tag Label" />
+        android:text="Tag Name"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
         android:id="@+id/tagValueLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
         android:layout_below="@+id/tagLabel"
-        android:layout_centerHorizontal="true"
-        android:text="0" />
+        android:text="Tag Value" />
 
 </RelativeLayout>

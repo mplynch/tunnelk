@@ -1,18 +1,24 @@
 package com.googlecode.tunnelk;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import com.googlecode.tunnelk.model.*;
 import com.googlecode.tunnelk.views.TagLayout;
+import com.googlecode.tunnelk.views.TagLayoutAdapter;
 import com.googlecode.tunnelk.views.TagLayoutFactory;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 
 public class PhysicalTunnelHMIActivity extends TunnelKActivity {
 	private final int chooseTagsRequestCode = 1;
@@ -20,7 +26,7 @@ public class PhysicalTunnelHMIActivity extends TunnelKActivity {
 	private final int showPlotRequestCode = 2;
 
 	private boolean viewGenerated = false;
-	
+
 	private Timer timer;
 
 	public void generateViews() {
@@ -28,20 +34,31 @@ public class PhysicalTunnelHMIActivity extends TunnelKActivity {
 
 		runOnUiThread(new Runnable() {
 			public void run() {
-				Collection<Tag> tags = TagManager.getInstance().getAllTags();
-
-				LinearLayout layout = (LinearLayout) findViewById(R.id.linearLayoutHMIWidgets);
-
-				TagManager.getInstance().addTags(tags);
-
-				for (Tag tag : tags) {
-					TagLayout tagLayout = TagLayoutFactory
-							.create(activity, tag);
-
-					if (tagLayout != null)
-						layout.addView(tagLayout);
-				}
+				List<Tag> allTags = new ArrayList<Tag>(TagManager.getInstance().getAllTags());
+				ArrayList<Tag> tags = new ArrayList<Tag>();
 				
+				for (Tag tag : allTags) {
+					if ((tag.getType() == TagType.LED) || (tag.getType() == TagType.Relay))
+						continue;
+					
+					tags.add(tag);
+				}
+
+				ListView listViewTagsList = (ListView) findViewById(R.id.listViewTagsList);
+				listViewTagsList.setAdapter(new TagLayoutAdapter(activity, R.id.tagLabel, tags));
+				// LinearLayout layout = (LinearLayout)
+				// findViewById(R.id.linearLayoutHMIWidgets);
+
+				// TagManager.getInstance().addTags(tags);
+
+				// for (Tag tag : tags) {
+				// TagLayout tagLayout = TagLayoutFactory
+				// .create(activity, tag);
+				//
+				// if (tagLayout != null)
+				// layout.addView(tagLayout);
+				// }
+
 				activity.viewGenerated = true;
 			}
 		});
@@ -74,30 +91,40 @@ public class PhysicalTunnelHMIActivity extends TunnelKActivity {
 
 		setContentView(R.layout.physical_tunnel_hmi);
 
-		LinearLayout layout = (LinearLayout) findViewById(R.id.linearLayoutHMIWidgets);
+		// LinearLayout layout = (LinearLayout)
+		// findViewById(R.id.linearLayoutHMIWidgets);
+		LinearLayout layout = (LinearLayout) findViewById(R.id.linearLayoutHMI);
 		layout.setOrientation(LinearLayout.VERTICAL);
 	}
 
 	@Override
 	protected void onPause() {
 		super.onPause();
-		
+
 		timer.cancel();
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
-		
+
 		SharedPreferences p = this.getSharedPreferences("TunnelkPrefs", 0);
 
-		String url = p.getString("@string/controller_address",
-				getResources().getString(R.string.default_controller_address));
-		
+		String url = p.getString("@string/controller_address", getResources()
+				.getString(R.string.default_controller_address));
+
 		TagCommunicator comm = new JSONTagCommunicator(url);
-		
+
 		timer = new Timer();
 		timer.scheduleAtFixedRate(new UpdateTagsTask(this, comm), 0, 1000);
+	}
+	
+	public void buttonGraph_onClick() {
+		
+	}
+	
+	public void toggleButtonLED_onClick() {
+		
 	}
 
 	public void onTrendGraphClick(View v) {
@@ -107,10 +134,10 @@ public class PhysicalTunnelHMIActivity extends TunnelKActivity {
 		Intent intent = new Intent(this, ChooseTagsActivity.class);
 		startActivityForResult(intent, chooseTagsRequestCode);
 	}
-	
+
 	private static final class UpdateTagsTask extends TimerTask {
 		private PhysicalTunnelHMIActivity activity;
-		
+
 		private TagCommunicator comm;
 
 		public UpdateTagsTask(PhysicalTunnelHMIActivity activity,
@@ -118,14 +145,14 @@ public class PhysicalTunnelHMIActivity extends TunnelKActivity {
 			super();
 
 			this.comm = comm;
-			
+
 			this.activity = activity;
 		}
 
 		@Override
 		public void run() {
 			comm.exchangeTags();
-			
+
 			if (!activity.viewGenerated) {
 				activity.generateViews();
 			}
