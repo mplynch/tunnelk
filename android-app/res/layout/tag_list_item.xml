@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="left|center"
+    android:paddingBottom="5dp"
+    android:paddingLeft="5dp"
+    android:paddingTop="5dp" >
+
+    <TextView
+        android:id="@+id/textViewTagName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tag Name"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/textViewTagValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textViewTagName"
+        android:text="Tag Value" />
+
+    <ToggleButton
+        android:id="@+id/toggleButtonLED"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="6dip"
+        android:layout_toLeftOf="@+id/buttonGraph"
+        android:background="@drawable/led_off"
+        android:textOff=""
+        android:textOn=""
+        android:onClick="toggleButtonLED_onClick" />
+
+    <Button
+        android:id="@+id/buttonGraph"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/graph_icon"
+        android:onClick="buttonGraph_onClick" />
+
+</RelativeLayout>
