@@ -21,7 +21,6 @@
         android:layout_marginRight="6dip"
         android:layout_toLeftOf="@+id/buttonGraph"
         android:background="@drawable/led_off"
-        android:onClick="toggleButtonLED_onClick"
         android:textOff=""
         android:textOn="" />
 
@@ -30,7 +29,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:background="@drawable/graph_icon"
-        android:onClick="buttonGraph_onClick" />
+        android:background="@drawable/graph_icon" />
 
 </RelativeLayout>
