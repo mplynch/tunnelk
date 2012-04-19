@@ -66,12 +66,30 @@ public class TagLayoutAdapter extends ArrayAdapter<Tag> implements
 					toggleButtonLED.setVisibility(View.INVISIBLE);
 					
 					if (ledTag != null) {
+						Drawable background;
+						
 						toggleButtonLED.setTag(ledTag);
 
 						toggleButtonLED.setChecked(ledTag.getValue() == 1);
+						
+						if (toggleButtonLED.isChecked()) {
+							tag.setValue(1);
+
+							background = getContext().getResources().getDrawable(
+									R.drawable.led_on);
+						}
+
+						else {
+							tag.setValue(0);
+
+							background = getContext().getResources().getDrawable(
+									R.drawable.led_off);
+						}
 
 						toggleButtonLED.setOnCheckedChangeListener(this);
-
+						
+						toggleButtonLED.setBackgroundDrawable(background);
+						
 						toggleButtonLED.setVisibility(View.VISIBLE);
 					}
 				}
