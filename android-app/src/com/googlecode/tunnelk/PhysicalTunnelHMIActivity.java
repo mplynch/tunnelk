@@ -23,6 +23,8 @@ public class PhysicalTunnelHMIActivity extends TunnelKActivity {
 	private boolean viewGenerated = false;
 
 	private Timer timer;
+	
+	private TagCommunicator comm;
 
 	public void generateViews() {
 		final PhysicalTunnelHMIActivity activity = this;
@@ -83,8 +85,23 @@ public class PhysicalTunnelHMIActivity extends TunnelKActivity {
 	@Override
 	protected void onPause() {
 		super.onPause();
-
+		
 		timer.cancel();
+		
+		List<Tag> tags = new ArrayList<Tag>(TagManager.getInstance().getAllTags());
+		
+		for (Tag tag : tags) {
+			tag.initialize();
+		}
+
+		Thread thread = new Thread(new Runnable() {
+			public void run() {
+				comm.exchangeTags();
+			}
+		});
+		
+		thread.start();
+
 	}
 
 	@Override
@@ -96,7 +113,7 @@ public class PhysicalTunnelHMIActivity extends TunnelKActivity {
 		String url = p.getString("@string/controller_address", getResources()
 				.getString(R.string.default_controller_address));
 
-		TagCommunicator comm = new JSONTagCommunicator(url);
+		comm = new JSONTagCommunicator(url);
 
 		timer = new Timer();
 		timer.scheduleAtFixedRate(new UpdateTagsTask(this, comm), 0, 1000);

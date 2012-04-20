@@ -1,6 +1,8 @@
 package com.googlecode.tunnelk;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -10,12 +12,16 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.googlecode.tunnelk.model.JSONTagCommunicator;
+import com.googlecode.tunnelk.model.Tag;
 import com.googlecode.tunnelk.model.TagCommunicator;
+import com.googlecode.tunnelk.model.TagManager;
 import com.googlecode.tunnelk.views.*;
 
 public class TimeHistoryPlotActivity extends TunnelKActivity implements
 		View.OnClickListener {
 	private Timer timer;
+	
+	private TagCommunicator comm;
 
 	@Override
 	protected boolean getDefaultOptionsMenuEnabled() {
@@ -47,6 +53,20 @@ public class TimeHistoryPlotActivity extends TunnelKActivity implements
 		super.onPause();
 
 		timer.cancel();
+		
+		List<Tag> tags = new ArrayList<Tag>(TagManager.getInstance().getAllTags());
+		
+		for (Tag tag : tags) {
+			tag.initialize();
+		}
+
+		Thread thread = new Thread(new Runnable() {
+			public void run() {
+				comm.exchangeTags();
+			}
+		});
+		
+		thread.start();
 	}
 
 	@Override
@@ -58,7 +78,7 @@ public class TimeHistoryPlotActivity extends TunnelKActivity implements
 		String url = p.getString("@string/controller_address",
 				getResources().getString(R.string.default_controller_address));
 		
-		TagCommunicator comm = new JSONTagCommunicator(url);
+		comm = new JSONTagCommunicator(url);
 
 		timer = new Timer();
 		timer.scheduleAtFixedRate(new UpdateTagsTask(comm), 0, 1000);
