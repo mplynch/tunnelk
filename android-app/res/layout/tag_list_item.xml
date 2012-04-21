@@ -19,16 +19,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="6dip"
-        android:layout_toLeftOf="@+id/buttonGraph"
+        android:layout_toLeftOf="@+id/toggleButtonGraph"
         android:background="@drawable/led_off"
         android:textOff=""
         android:textOn="" />
 
-    <Button
-        android:id="@+id/buttonGraph"
+    <ToggleButton
+        android:id="@+id/toggleButtonGraph"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:background="@drawable/graph_icon" />
+        android:background="@drawable/graph_off"
+        android:textOff=""
+        android:textOn="" />
 
 </RelativeLayout>

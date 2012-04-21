@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -28,7 +29,7 @@ public class TagTimeHistoryPlot extends RelativeLayout implements Observer,
 	
 	private XYPlot plot;
 
-	public TagTimeHistoryPlot(Context context, Collection<String> tagNames) {
+	public TagTimeHistoryPlot(Context context, Collection<Tag> tags) {
 		super(context);
 
 		LayoutInflater li = (LayoutInflater) getContext().getSystemService(
@@ -52,14 +53,10 @@ public class TagTimeHistoryPlot extends RelativeLayout implements Observer,
 		long time = Calendar.getInstance().getTimeInMillis();
 		plot.setDomainBoundaries(time - 60000, time, BoundaryMode.FIXED);
 		
-		TagManager manager = TagManager.getInstance();
-
-		for (String name : tagNames) {
-			Tag tag = manager.getTag(name);
-
-			if (tag == null)
+		for (Tag tag : tags) {
+			if (!tag.isGraphToggled())
 				continue;
-
+			
 			int color = ColorRotator.getNextColor();
 
 			LineAndPointFormatter historyFormat = new LineAndPointFormatter(

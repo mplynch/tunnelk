@@ -21,7 +21,7 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 public class TagLayoutAdapter extends ArrayAdapter<Tag> implements
-		OnClickListener, OnCheckedChangeListener {
+		OnCheckedChangeListener {
 	private List<Tag> tags;
 
 	public TagLayoutAdapter(Context context, int textViewResourceId,
@@ -64,42 +64,42 @@ public class TagLayoutAdapter extends ArrayAdapter<Tag> implements
 
 				if (toggleButtonLED != null) {
 					toggleButtonLED.setVisibility(View.INVISIBLE);
-					
+
 					if (ledTag != null) {
 						Drawable background;
-						
+
 						toggleButtonLED.setTag(ledTag);
 
 						toggleButtonLED.setChecked(ledTag.getValue() == 1);
-						
+
 						if (toggleButtonLED.isChecked()) {
 							tag.setValue(1);
 
-							background = getContext().getResources().getDrawable(
-									R.drawable.led_on);
+							background = getContext().getResources()
+									.getDrawable(R.drawable.led_on);
 						}
 
 						else {
 							tag.setValue(0);
 
-							background = getContext().getResources().getDrawable(
-									R.drawable.led_off);
+							background = getContext().getResources()
+									.getDrawable(R.drawable.led_off);
 						}
 
 						toggleButtonLED.setOnCheckedChangeListener(this);
-						
+
 						toggleButtonLED.setBackgroundDrawable(background);
-						
+
 						toggleButtonLED.setVisibility(View.VISIBLE);
 					}
 				}
 
-				Button buttonGraph = (Button) v.findViewById(R.id.buttonGraph);
+				ToggleButton buttonGraph = (ToggleButton) v.findViewById(R.id.toggleButtonGraph);
 
 				if (buttonGraph != null) {
 					buttonGraph.setTag(tag);
 
-					buttonGraph.setOnClickListener(this);
+					buttonGraph.setOnCheckedChangeListener(this);
 				}
 			}
 		}
@@ -107,13 +107,11 @@ public class TagLayoutAdapter extends ArrayAdapter<Tag> implements
 		return v;
 	}
 
-	public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+	private void toggleLED(ToggleButton button) {
 		Drawable background;
-		Tag tag = (Tag) buttonView.getTag();
+		Tag tag = (Tag) button.getTag();
 
-		ToggleButton toggleButtonLED = (ToggleButton) buttonView;
-
-		if (toggleButtonLED.isChecked()) {
+		if (button.isChecked()) {
 			tag.setValue(1);
 
 			background = getContext().getResources().getDrawable(
@@ -127,11 +125,39 @@ public class TagLayoutAdapter extends ArrayAdapter<Tag> implements
 					R.drawable.led_off);
 		}
 
-		toggleButtonLED.setBackgroundDrawable(background);
+		button.setBackgroundDrawable(background);
 	}
 
-	public void onClick(View v) {
-		Tag tag = (Tag) v.getTag();
+	private void toggleGraph(ToggleButton button) {
+		Drawable background;
+		Tag tag = (Tag) button.getTag();
 
+		if (button.isChecked()) {
+			background = getContext().getResources().getDrawable(
+					R.drawable.graph_on);
+			
+			tag.setGraphToggled(true);
+		}
+
+		else {
+			background = getContext().getResources().getDrawable(
+					R.drawable.graph_off);
+			
+			tag.setGraphToggled(false);
+		}
+
+		button.setBackgroundDrawable(background);
+	}
+
+	public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+		int id = buttonView.getId();
+
+		if (id == R.id.toggleButtonLED) {
+			this.toggleLED((ToggleButton) buttonView);
+		}
+
+		else if (id == R.id.toggleButtonGraph) {
+			this.toggleGraph((ToggleButton) buttonView);
+		}
 	}
 }

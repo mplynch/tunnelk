@@ -11,6 +11,8 @@ public class Tag extends Observable {
 
 	private boolean changedLocally;
 
+	private boolean graphToggled;
+	
 	private boolean readOnly;
 
 	private String name;
@@ -129,6 +131,17 @@ public class Tag extends Observable {
 	}
 
 	/**
+	 * Returns whether or not this tag is set to be shown in a trend
+	 * graph. 
+	 * 
+	 * @return true or false
+	 */
+	@JsonIgnore
+	public boolean isGraphToggled() {
+		return graphToggled;
+	}
+
+	/**
 	 * Returns whether or not this tag is read-only
 	 * 
 	 * @return true or false
@@ -144,6 +157,16 @@ public class Tag extends Observable {
 	@JsonIgnore
 	public void setChangedLocally(boolean value) {
 		changedLocally = value;
+	}
+
+	/**
+	 * @param Sets whether or not this tag has been set to be shown in a trend
+	 * graph.
+	 * @param true or false
+	 */
+	@JsonIgnore
+	public void setGraphToggled(boolean graphToggled) {
+		this.graphToggled = graphToggled;
 	}
 
 	/**

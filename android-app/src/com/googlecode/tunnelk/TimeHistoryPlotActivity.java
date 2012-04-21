@@ -22,6 +22,8 @@ public class TimeHistoryPlotActivity extends TunnelKActivity implements
 	private Timer timer;
 	
 	private TagCommunicator comm;
+	
+	private boolean skipInit = false;
 
 	@Override
 	protected boolean getDefaultOptionsMenuEnabled() {
@@ -33,10 +35,7 @@ public class TimeHistoryPlotActivity extends TunnelKActivity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		Intent sender = getIntent();
-		String[] names = sender.getStringArrayExtra(getResources().getString(
-				R.string.trending_tags));
-		plot = TagLayoutFactory.createPlot(this, Arrays.asList(names));
+		plot = TagLayoutFactory.createPlot(this);
 
 		plot.setClickListener(this);
 
@@ -44,6 +43,8 @@ public class TimeHistoryPlotActivity extends TunnelKActivity implements
 	}
 
 	public void onClick(View v) {
+		skipInit = true;
+		
 		setResult(RESULT_OK);
 		finish();
 	}
@@ -54,24 +55,37 @@ public class TimeHistoryPlotActivity extends TunnelKActivity implements
 
 		timer.cancel();
 		
-		List<Tag> tags = new ArrayList<Tag>(TagManager.getInstance().getAllTags());
-		
-		for (Tag tag : tags) {
-			tag.initialize();
-		}
+		if (!skipInit) {
+			List<Tag> tags = new ArrayList<Tag>(TagManager.getInstance()
+					.getAllTags());
 
-		Thread thread = new Thread(new Runnable() {
-			public void run() {
-				comm.exchangeTags();
+			for (Tag tag : tags) {
+				tag.initialize();
 			}
-		});
-		
-		thread.start();
+
+			Thread thread = new Thread(new Runnable() {
+				public void run() {
+					comm.exchangeTags();
+				}
+			});
+
+			thread.start();
+			
+			while (thread.isAlive())
+				try {
+					Thread.sleep(1);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		}
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
+		
+		skipInit = false;
 		
 		SharedPreferences p = this.getSharedPreferences("TunnelkPrefs", 0);
 

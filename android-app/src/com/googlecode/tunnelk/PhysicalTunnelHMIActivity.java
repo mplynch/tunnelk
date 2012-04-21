@@ -22,8 +22,10 @@ public class PhysicalTunnelHMIActivity extends TunnelKActivity {
 
 	private boolean viewGenerated = false;
 
+	private boolean skipInit = false;
+
 	private Timer timer;
-	
+
 	private TagCommunicator comm;
 
 	public void generateViews() {
@@ -31,18 +33,21 @@ public class PhysicalTunnelHMIActivity extends TunnelKActivity {
 
 		runOnUiThread(new Runnable() {
 			public void run() {
-				List<Tag> allTags = new ArrayList<Tag>(TagManager.getInstance().getAllTags());
+				List<Tag> allTags = new ArrayList<Tag>(TagManager.getInstance()
+						.getAllTags());
 				ArrayList<Tag> tags = new ArrayList<Tag>();
-				
+
 				for (Tag tag : allTags) {
-					if ((tag.getType() == TagType.LED) || (tag.getType() == TagType.Relay))
+					if ((tag.getType() == TagType.LED)
+							|| (tag.getType() == TagType.Relay))
 						continue;
-					
+
 					tags.add(tag);
 				}
 
 				ListView listViewTagsList = (ListView) findViewById(R.id.listViewTagsList);
-				listViewTagsList.setAdapter(new TagLayoutAdapter(activity, R.id.tagLabel, tags));
+				listViewTagsList.setAdapter(new TagLayoutAdapter(activity,
+						R.id.tagLabel, tags));
 
 				activity.viewGenerated = true;
 			}
@@ -85,28 +90,40 @@ public class PhysicalTunnelHMIActivity extends TunnelKActivity {
 	@Override
 	protected void onPause() {
 		super.onPause();
-		
+
 		timer.cancel();
-		
-		List<Tag> tags = new ArrayList<Tag>(TagManager.getInstance().getAllTags());
-		
-		for (Tag tag : tags) {
-			tag.initialize();
-		}
 
-		Thread thread = new Thread(new Runnable() {
-			public void run() {
-				comm.exchangeTags();
+		if (!skipInit) {
+			List<Tag> tags = new ArrayList<Tag>(TagManager.getInstance()
+					.getAllTags());
+
+			for (Tag tag : tags) {
+				tag.initialize();
 			}
-		});
-		
-		thread.start();
 
+			Thread thread = new Thread(new Runnable() {
+				public void run() {
+					comm.exchangeTags();
+				}
+			});
+
+			thread.start();
+			
+			while (thread.isAlive())
+				try {
+					Thread.sleep(1);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		}
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
+		
+		skipInit = false;
 
 		SharedPreferences p = this.getSharedPreferences("TunnelkPrefs", 0);
 
@@ -120,11 +137,13 @@ public class PhysicalTunnelHMIActivity extends TunnelKActivity {
 	}
 
 	public void onTrendGraphClick(View v) {
-		if (v.getId() != R.id.buttonTrendGraph)
-			return;
+		if (v.getId() == R.id.buttonTrendGraph) {
+			skipInit = true;
+			
+			Intent intent = new Intent(this, TimeHistoryPlotActivity.class);
 
-		Intent intent = new Intent(this, ChooseTagsActivity.class);
-		startActivityForResult(intent, chooseTagsRequestCode);
+			startActivity(intent);
+		}
 	}
 
 	private static final class UpdateTagsTask extends TimerTask {

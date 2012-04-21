@@ -5,6 +5,7 @@ import java.util.Collection;
 import android.content.Context;
 
 import com.googlecode.tunnelk.model.Tag;
+import com.googlecode.tunnelk.model.TagManager;
 
 public class TagLayoutFactory {
 	/**
@@ -35,18 +36,16 @@ public class TagLayoutFactory {
 	}
 
 	/**
-	 * Creates an X-Y plot displaying the value of the specified tags over 
-	 * time.  The tags are observed for changes, and the plot is automatically
+	 * Creates an X-Y plot displaying the value of the tags whose graph flag is
+	 * set. The tags are observed for changes, and the plot is automatically
 	 * updated with any new data.
 	 * 
 	 * @param context
 	 *            the context on which to create the plot
-	 * @param tagNames
-	 *            a collection containing the names of the tags to display
 	 * @return the new plot layout
 	 */
-	public static TagTimeHistoryPlot createPlot(Context context,
-			Collection<String> tagNames) {
-		return (new TagTimeHistoryPlot(context, tagNames));
+	public static TagTimeHistoryPlot createPlot(Context context) {
+		return (new TagTimeHistoryPlot(context, TagManager.getInstance()
+				.getAllTags()));
 	}
 }
