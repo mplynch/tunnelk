@@ -1,6 +1,8 @@
 package com.googlecode.tunnelk;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
@@ -10,7 +12,7 @@ import android.widget.ImageView;
 
 public class RotateShapeActivity extends TunnelKActivity
 {
-	float rotation=0;
+	int rotation=0;
 	ImageView shape;
 
     /** Called when the activity is first created. */
@@ -30,17 +32,19 @@ public class RotateShapeActivity extends TunnelKActivity
     }
 
     public void rotateCCWClicked(View v){
-        rotateShape(-10);
+        if(rotation>=0)
+            rotateShape(-5);
     }
 
     public void rotateCWClicked(View v){
-        rotateShape(10);
+        if(rotation<=20)
+            rotateShape(5);
     }
 
-    public void rotateShape(float value){
+    public void rotateShape(int value){
         RotateAnimation anim = new RotateAnimation(rotation, rotation + value,
                 Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,0.5f);
-        rotation = (rotation + value) % 360;
+        rotation = rotation + value;
 
         anim.setInterpolator(new LinearInterpolator());
         anim.setDuration(1000);
@@ -48,5 +52,27 @@ public class RotateShapeActivity extends TunnelKActivity
 
         anim.setFillAfter(true);
         shape.startAnimation(anim);
+    }
+    @Override
+    public void onPause() {
+        super.onPause();
+        Context context = getApplicationContext();
+        SharedPreferences p = context.getSharedPreferences("TunnelkPrefs", 0);
+        SharedPreferences.Editor e = p.edit();
+
+        e.putInt("@string/angle_of_attack", rotation);
+
+        e.commit();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Context context = getApplicationContext();
+        SharedPreferences p = context.getSharedPreferences("TunnelkPrefs", 0);
+
+        rotation = p.getInt("@string/angle_of_attack",0);
+        rotateShape(0);
+
     }
 }

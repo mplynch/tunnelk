@@ -10,6 +10,7 @@
     <string name="pressure">Pressure</string>
     <string name="altitude">Altitude</string>
     <string name="mach_number">Mach Number</string>
+    <string name="angle_of_attack">Angle of Attack</string>
     <string name="tweet_results">Tweet Results</string>
     <string name="email_results">Email Results</string>
     <string name="new_sim">New Sim &gt;&gt;</string>
