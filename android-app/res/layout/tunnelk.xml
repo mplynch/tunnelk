@@ -50,31 +50,28 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:text="Wind Speed: High"
-        android:textColor="#FF0000"
     />
     <TextView
-        android:id="@+id/temperatureDisplay"
+        android:id="@+id/altitudeDisplay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/windSpeedDisplay"
         android:layout_alignParentRight="true"
-        android:text="Temperature: Medium"
-        android:textColor="#FFFF00"
+        android:text="Altitude: Medium"
     />
     <TextView
-        android:id="@+id/pressureDisplay"
+        android:id="@+id/angleOfAttackDisplay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/temperatureDisplay"
+        android:layout_below="@id/altitudeDisplay"
         android:layout_alignParentRight="true"
-        android:text="Pressure: Low"
-        android:textColor="#00FF00"
+        android:text="Angle of Attack: 0"
     />
 	<ImageView
         android:id="@+id/displayShapeImageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/pressureDisplay"
+        android:layout_below="@id/angleOfAttackDisplay"
         android:layout_alignParentRight="true"
         android:layout_toRightOf="@id/setTunnelConditions"
         android:src="@drawable/airfoil"

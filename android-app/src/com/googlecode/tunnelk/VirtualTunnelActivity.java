@@ -9,16 +9,22 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.SystemClock;
 import android.view.View;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class VirtualTunnelActivity extends TunnelKActivity
 {
+	private TextView windSpeedTextView;
+	private TextView altitudeTextView;
+	private TextView angleOfAttackTextView;
+
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -27,6 +33,10 @@ public class VirtualTunnelActivity extends TunnelKActivity
 
         setContentView(R.layout.tunnelk);
         final TextView tv = (TextView) findViewById(R.id.solverOutput);
+
+        windSpeedTextView = (TextView) findViewById(R.id.windSpeedDisplay);
+        altitudeTextView = (TextView) findViewById(R.id.altitudeDisplay);
+        angleOfAttackTextView = (TextView) findViewById(R.id.angleOfAttackDisplay);
 
         mHandler = new Handler();
 
@@ -133,5 +143,31 @@ public class VirtualTunnelActivity extends TunnelKActivity
         super.onDestroy();
         doUnbindService();
     }
-    
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Context context = getApplicationContext();
+        SharedPreferences p = context.getSharedPreferences("TunnelkPrefs", 0);
+
+        int windSpeedPos = p.getInt("@string/wind_speed",1);
+        int altitudePos = p.getInt("@string/altitude",1);
+        int anglePos = p.getInt("@string/angle_of_attack",0);
+
+        if(windSpeedPos==0)
+            windSpeedTextView.setText("Wind Speed: Low");
+        if(windSpeedPos==1)
+            windSpeedTextView.setText("Wind Speed: Medium");
+        if(windSpeedPos==2)
+            windSpeedTextView.setText("Wind Speed: High");
+
+        if(altitudePos==0)
+            altitudeTextView.setText("Altitude: Low");
+        if(altitudePos==1)
+            altitudeTextView.setText("Altitude: Medium");
+        if(altitudePos==2)
+            altitudeTextView.setText("Altitude: High");
+
+        angleOfAttackTextView.setText("Angle of Attack: "+anglePos);
+    }
 }
