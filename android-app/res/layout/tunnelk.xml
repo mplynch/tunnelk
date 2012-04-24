@@ -75,7 +75,7 @@
         android:layout_alignParentRight="true"
         android:layout_toRightOf="@id/setTunnelConditions"
         android:src="@drawable/airfoil"
-        android:scaleType="center"
+        android:scaleType="fitCenter"
     />
     <ScrollView
         android:id="@+id/solverTextScroll"

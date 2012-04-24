@@ -38,7 +38,7 @@
         android:layout_toRightOf="@id/rotateCCWButton"
         android:layout_toLeftOf="@id/rotateCWButton"
         android:layout_above="@id/rotateShapeSimButton"
-        android:src="@drawable/airfoil"
-        android:scaleType="center"
+        android:src="@drawable/camber"
+        android:scaleType="fitCenter"
     />
 </RelativeLayout>

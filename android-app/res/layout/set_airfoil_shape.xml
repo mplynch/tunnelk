@@ -6,59 +6,54 @@
     >
     <TableRow>
 	    <ImageButton
-	        android:id="@+id/shape1Button"
-	        android:layout_width="75dp"
-	        android:layout_height="75dp"
-	        android:src="@drawable/airfoil"
+	        android:id="@+id/camberButton"
+	        android:layout_width="150dp"
+	        android:layout_height="125dp"
+	        android:src="@drawable/camber"
 	        android:scaleType="fitXY"
+	        android:onClick="buttonClicked"
 	    />
 	    <ImageButton
-	        android:id="@+id/shape2Button"
-	        android:layout_width="75dp"
-	        android:layout_height="75dp"
-	        android:src="@drawable/square"
+	        android:id="@+id/circleButton"
+	        android:layout_width="150dp"
+	        android:layout_height="125dp"
+	        android:src="@drawable/circle"
 	        android:scaleType="fitXY"
+	        android:onClick="buttonClicked"
 	    />
 	    <ImageButton
-	        android:id="@+id/shape3Button"
-	        android:layout_width="75dp"
-	        android:layout_height="75dp"
-	        android:src="@drawable/trapezoid"
+	        android:id="@+id/diamondButton"
+	        android:layout_width="150dp"
+	        android:layout_height="125dp"
+	        android:src="@drawable/diamond"
 	        android:scaleType="fitXY"
+	        android:onClick="buttonClicked"
 	    />
     </TableRow>
    <TableRow>
 	    <ImageButton
-	        android:id="@+id/shape4Button"
-	        android:layout_width="75dp"
-	        android:layout_height="75dp"
-	        android:src="@drawable/circle"
+	        android:id="@+id/nacaAirfoilButton"
+	        android:layout_width="150dp"
+	        android:layout_height="125dp"
+	        android:src="@drawable/naca_airfoil"
 	        android:scaleType="fitXY"
+	        android:onClick="buttonClicked"
 	    />
 	    <ImageButton
-	        android:id="@+id/shape5Button"
-	        android:layout_width="75dp"
-	        android:layout_height="75dp"
-	        android:src="@drawable/ellipse"
+	        android:id="@+id/pigButton"
+	        android:layout_width="150dp"
+	        android:layout_height="125dp"
+	        android:src="@drawable/pig"
 	        android:scaleType="fitXY"
+	        android:onClick="buttonClicked"
 	    />
 	    <ImageButton
-	        android:id="@+id/shape6Button"
-	        android:layout_width="75dp"
-	        android:layout_height="75dp"
-	        android:src="@drawable/gear"
+	        android:id="@+id/priusButton"
+	        android:layout_width="150dp"
+	        android:layout_height="125dp"
+	        android:src="@drawable/prius"
 	        android:scaleType="fitXY"
+	        android:onClick="buttonClicked"
 	    />
-    </TableRow>
-    <TableRow>
-        <Button
-            android:id="@+id/setAirfoilShapeNextButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_span="3"
-            android:onClick="nextClicked"
-            android:text="Next &gt;&gt;"
-        />
     </TableRow>
 </TableLayout>

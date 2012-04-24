@@ -74,5 +74,18 @@ public class RotateShapeActivity extends TunnelKActivity
         rotation = p.getInt("@string/angle_of_attack",0);
         rotateShape(0);
 
+        String shapeString = p.getString("@string/tunnel_shape", "camber");
+        if(shapeString.equals("camber"))
+            shape.setImageDrawable(getResources().getDrawable(R.drawable.camber));
+        if(shapeString.equals("circle"))
+            shape.setImageDrawable(getResources().getDrawable(R.drawable.circle));
+        if(shapeString.equals("diamond"))
+            shape.setImageDrawable(getResources().getDrawable(R.drawable.diamond));
+        if(shapeString.equals("naca_airfoil"))
+            shape.setImageDrawable(getResources().getDrawable(R.drawable.naca_airfoil));
+        if(shapeString.equals("pig"))
+            shape.setImageDrawable(getResources().getDrawable(R.drawable.pig));
+        if(shapeString.equals("prius"))
+            shape.setImageDrawable(getResources().getDrawable(R.drawable.prius));
     }
 }
