@@ -49,7 +49,7 @@ for mesh in ["camber.mesh","circle.mesh","diamond.mesh","naca0012.mesh","pig.mes
             mach_filename = base_filename+"_mach.jpg"
             pressure_filename = base_filename+"_pressure.jpg"
             print "Writing result to", solution_filename
-            system("mv solution.dat "+solution_filename)
-            system("mv density.jpg "+density_filename)
-            system("mv mach.jpg "+mach_filename)
-            system("mv pressure.jpg "+pressure_filename)
+            system("mv solution.dat results/"+solution_filename)
+            system("mv density.jpg results/"+density_filename)
+            system("mv mach.jpg results/"+mach_filename)
+            system("mv pressure.jpg results/"+pressure_filename)
