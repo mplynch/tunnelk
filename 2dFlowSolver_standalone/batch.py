@@ -6,7 +6,7 @@ import re
 liftRe = re.compile("Total lift = ([-0-9.]+)")
 dragRe = re.compile("Total drag = ([-0-9.]+)")
 
-for mesh in ["camber.mesh","circle.mesh","diamond.mesh","naca0012.mesh","pig.mesh","prius.mesh"]:
+for mesh in ["camber.mesh","circle.mesh","diamond.mesh","naca_airfoil.mesh","pig.mesh","prius.mesh"]:
    for mach_number in ["0.6","0.8","1.0"]:
       for density in ["1.0","0.75","0.5"]:
          for angle_of_attack in ["-5.0","0.0","5.0","10.0","15.0","20.0","25.0"]:
