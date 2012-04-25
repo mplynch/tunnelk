@@ -88,9 +88,13 @@ public class VirtualTunnelActivity extends TunnelKActivity
     }
 
     public void simulateClicked(View v){
-        doBindService();
-        mHandler.removeCallbacks(readFileTask);
-        mHandler.postDelayed(readFileTask, 5000);
+        //doBindService();
+        //mHandler.removeCallbacks(readFileTask);
+        //mHandler.postDelayed(readFileTask, 5000);
+
+        Intent intent = new Intent();
+        intent.setClass(this,ShowResultsActivity.class);
+        startActivity(intent);
     }
 
     @SuppressWarnings("unused")
