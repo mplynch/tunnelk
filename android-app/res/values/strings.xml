@@ -9,6 +9,7 @@
     <string name="wind_speed">Wind Speed</string>
     <string name="pressure">Pressure</string>
     <string name="altitude">Altitude</string>
+    <string name="density">Density</string>
     <string name="mach_number">Mach Number</string>
     <string name="angle_of_attack">Angle of Attack</string>
     <string name="tunnel_shape">Tunnel Shape</string>

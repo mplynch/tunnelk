@@ -14,39 +14,13 @@
         android:onClick="tweetClicked"
     />
     <Button
-        android:id="@+id/emailResults"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tweetResults"
-        android:layout_alignLeft="@id/tweetResults"
-        android:layout_alignRight="@id/tweetResults"
-        android:text="@string/email_results"
-    />
-    <TextView
-        android:id="@+id/liftDisplay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:text="Lift: 1.895"
-        android:textColor="#00FF00"
-    />
-    <TextView
-        android:id="@+id/dragDisplay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@id/liftDisplay"
-        android:text="Drag: 0.643"
-        android:textColor="#FF0000"
-    />
-    <Button
         android:id="@+id/machNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_below="@id/dragDisplay"
+        android:layout_alignParentTop="true"
         android:text="@string/mach_number"
+        android:onClick="machClicked"
     />
     <Button
         android:id="@+id/pressure"
@@ -56,6 +30,17 @@
         android:layout_alignParentRight="true"
         android:layout_below="@id/machNumber"
         android:text="@string/pressure"
+        android:onClick="pressureClicked"
+    />
+    <Button
+        android:id="@+id/density"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/machNumber"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/pressure"
+        android:text="@string/density"
+        android:onClick="densityClicked"
     />
     <Button
         android:id="@+id/newSim"
@@ -74,7 +59,6 @@
         android:layout_toLeftOf="@id/machNumber"
         android:layout_alignParentTop="true"
         android:layout_above="@id/newSim"
-        android:src="@drawable/visualization_mockup"
         android:scaleType="fitCenter"
     />
 
