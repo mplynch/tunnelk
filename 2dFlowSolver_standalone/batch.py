@@ -1,6 +1,10 @@
 #!/usr/bin/env python
 
 from os import system
+import re
+
+liftRe = re.compile("Total lift = ([-0-9.]+)")
+dragRe = re.compile("Total drag = ([-0-9.]+)")
 
 for mesh in ["camber.mesh","circle.mesh","diamond.mesh","naca0012.mesh","pig.mesh","prius.mesh"]:
    for mach_number in ["0.6","0.8","1.0"]:
@@ -37,10 +41,22 @@ for mesh in ["camber.mesh","circle.mesh","diamond.mesh","naca0012.mesh","pig.mes
             f.close()
 
             #run case
-            system("./solve.exe "+mesh)
+            system("./solve.exe "+mesh+" > solver.out")
 
             #generate images
             system("tec360 -p screenshot.mcr")
+
+            #attach lift & drag to images
+            output = "".join([line for line in open("solver.out").readlines()])
+            liftSearch = liftRe.search(output)
+            dragSearch = dragRe.search(output)
+            print liftSearch, dragSearch
+            if liftSearch and dragSearch:
+               lift = liftSearch.group(1)
+               drag = dragSearch.group(1)
+               liftDrag = "Lift: "+lift+" Drag: "+drag
+               for filename in ["density.jpg","mach.jpg","pressure.jpg"]:
+                  system("convert "+filename+" -background White -pointsize 24 label:'"+liftDrag+"' -gravity Center -append "+filename)
 
             #move output files
             base_filename = mesh[:mesh.find(".")]+"_m"+mach_number+"_d"+density+"_a"+angle_of_attack
