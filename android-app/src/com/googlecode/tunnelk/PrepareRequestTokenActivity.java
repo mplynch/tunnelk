@@ -117,8 +117,9 @@ public class PrepareRequestTokenActivity extends Activity {
 
 		private void executeAfterAccessTokenRetrieval() {
 			String msg = getIntent().getExtras().getString("tweet_msg");
+			String filename = getIntent().getExtras().getString("tweet_filename");
 			try {
-				TwitterUtils.sendTweet(prefs, msg);
+				TwitterUtils.sendTweet(prefs, msg, filename);
 			} catch (Exception e) {
 				Log.e(TAG, "OAuth - Error sending to Twitter", e);
 			}

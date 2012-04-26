@@ -21,6 +21,8 @@ public class ShowResultsActivity extends TunnelKActivity
 	private SharedPreferences prefs;
 	private final Handler mTwitterHandler = new Handler();
 	private String outputType = "mach";
+	private String filename;
+	private String tweetMsg;
 	ImageView resultsImage;
 
     final Runnable mUpdateTwitterNotification = new Runnable() {
@@ -59,21 +61,18 @@ public class ShowResultsActivity extends TunnelKActivity
             sendTweet();
         } else {
 		    Intent i = new Intent(getApplicationContext(), PrepareRequestTokenActivity.class);
-		    i.putExtra("tweet_msg",getTweetMsg());
+		    i.putExtra("tweet_msg",tweetMsg);
+		    i.putExtra("tweet_filename", filename);
 		    startActivity(i);
         }
     }
-
-	private String getTweetMsg() {
-		return "Tweeting from Android App at " + new Date().toLocaleString();
-	}
 
     public void sendTweet() {
         Thread t = new Thread() {
             public void run() {
 
                 try {
-                    TwitterUtils.sendTweet(prefs,getTweetMsg());
+                    TwitterUtils.sendTweet(prefs,tweetMsg,filename);
                     mTwitterHandler.post(mUpdateTwitterNotification);
                 } catch (Exception ex) {
                     ex.printStackTrace();
@@ -104,7 +103,6 @@ public class ShowResultsActivity extends TunnelKActivity
         super.onResume();
         Context context = getApplicationContext();
         SharedPreferences p = context.getSharedPreferences("TunnelkPrefs", 0);
-        String filename;
         String[] machArray = {"m0.6","m0.8","m1.0"};
         String[] densityArray = {"d1.0","d0.75","d0.5"};
 
@@ -120,6 +118,23 @@ public class ShowResultsActivity extends TunnelKActivity
         filename+="_";
         filename+=outputType;
         filename+=".jpg";
+
+        tweetMsg = "TunnelK results from "+new Date().toLocaleString()+":\n";
+        if(windSpeedPos==0)
+            tweetMsg += "Wind Speed = Low\n";
+        else if(windSpeedPos==1)
+            tweetMsg += "Wind Speed = Medium\n";
+        else if(windSpeedPos==2)
+            tweetMsg += "Wind Speed = High\n";
+
+        if(altitudePos==0)
+            tweetMsg += "Altitude = Low\n";
+        else if(altitudePos==1)
+            tweetMsg += "Altitude = Medium\n";
+        else if(altitudePos==2)
+            tweetMsg += "Altitude = High\n";
+
+        tweetMsg += "Angle of Attack: "+anglePos+"\n";
 
         Bitmap bitmap = BitmapFactory.decodeFile(Environment.getExternalStorageDirectory()+"/results/"+filename);
         if(bitmap!=null)
