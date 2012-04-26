@@ -14,6 +14,7 @@ import android.preference.PreferenceManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import java.util.Date;
 
 public class ShowResultsActivity extends TunnelKActivity
@@ -42,6 +43,7 @@ public class ShowResultsActivity extends TunnelKActivity
         setContentView(R.layout.show_results);
 
         resultsImage = (ImageView) findViewById(R.id.resultsImageView);
+        onResume();
 
     }
 
